@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Time Logger' target in the 'Time Logger' project
+//
+
+#ifdef __OBJC__
+	#import <Cocoa/Cocoa.h>
+#endif
