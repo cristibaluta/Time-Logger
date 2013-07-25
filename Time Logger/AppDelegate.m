@@ -16,7 +16,92 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	// Insert code here to initialize your application
+	timeLogs = [[NSMutableDictionary alloc] init];
+	
+	[self refreshApps];
+	[self logTime];
+}
+
+- (void)refreshApps {
+	
+	runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
+	
+	for (NSRunningApplication *app in runningApplications) {
+		if ([app ownsMenuBar]) {
+			activeApp = app;
+			break;
+		}
+	}
+	NSLog(@"%@", timeLogs);
+	
+	[self performSelector:@selector(refreshApps) withObject:nil afterDelay:3];
+	
+	[self.appsTable reloadData];
+}
+
+- (void) logTime {
+	
+	// Get from the dictionary the currentApp time
+	NSNumber *currentTime = [timeLogs objectForKey:activeApp.bundleIdentifier];
+	
+	if (currentTime == nil) {
+		currentTime = @0;
+	}
+	
+	// Log 1 second
+	currentTime = [NSNumber numberWithInt:[currentTime intValue] + 1];
+	[timeLogs setObject:currentTime forKey:activeApp.bundleIdentifier];
+	
+	// Come back in 1 second
+	[self performSelector:@selector(logTime) withObject:nil afterDelay:1];
+}
+
+
+#pragma mark TableViewDatasource
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
+	NSLog(@"%li", (unsigned long)runningApplications.count);
+	return runningApplications.count;
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+	
+	//NSLog(@"populate row %li", rowIndex);
+	
+	NSRunningApplication *app = [runningApplications objectAtIndex:rowIndex];
+	
+	// icon
+	// localizedName
+	// bundleIdentifier
+	
+	if ([[aTableColumn identifier] isEqualToString:@"icon"]) {
+        return app.icon;
+    }
+	if ([[aTableColumn identifier] isEqualToString:@"name"]) {
+        return  app.localizedName;
+    }
+	if ([[aTableColumn identifier] isEqualToString:@"identifier"]) {
+        return app.bundleIdentifier;
+    }
+	if ([[aTableColumn identifier] isEqualToString:@"time"]) {
+		NSNumber *currentTime = [timeLogs objectForKey:app.bundleIdentifier];
+		if ([activeApp.bundleIdentifier isEqualTo:app.bundleIdentifier]) {
+			return [[currentTime description] stringByAppendingString:@"sec"];
+		}
+		else {
+			if (currentTime == nil) {
+				return @"";
+			}
+			else {
+				return [[currentTime description] stringByAppendingString:@"sec"];
+			}
+		}
+    }
+	else {
+		return [NSString stringWithFormat:@"%@ (%@)", app.localizedName, app.bundleIdentifier];
+	}
+	
+    return nil;
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "ralcr.com.Time_Logger" in the user's Application Support directory.
