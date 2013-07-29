@@ -21,13 +21,13 @@
 		28CFCCE717A582F5001511EF /* ProjectsSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCE517A582F5001511EF /* ProjectsSidebarViewController.m */; };
 		28CFCCE817A582F5001511EF /* ProjectsSidebarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCE617A582F5001511EF /* ProjectsSidebarViewController.xib */; };
 		28CFCCEC17A58F40001511EF /* AppDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCEB17A58F40001511EF /* AppDispatcher.m */; };
-		28CFCCEF17A59DB1001511EF /* NSImage+NSImage_category.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCEE17A59DB1001511EF /* NSImage+NSImage_category.m */; };
 		28CFCCF317A61D11001511EF /* ProjectTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCF117A61D11001511EF /* ProjectTimelineViewController.m */; };
 		28CFCCF417A61D11001511EF /* ProjectTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCF217A61D11001511EF /* ProjectTimelineViewController.xib */; };
 		28CFCCF817A63187001511EF /* ProjectConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCF617A63187001511EF /* ProjectConfigViewController.m */; };
 		28CFCCF917A63187001511EF /* ProjectConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCF717A63187001511EF /* ProjectConfigViewController.xib */; };
 		28CFCCFD17A63469001511EF /* ProjectReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCFB17A63468001511EF /* ProjectReportViewController.m */; };
 		28CFCCFE17A63469001511EF /* ProjectReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCFC17A63469001511EF /* ProjectReportViewController.xib */; };
+		28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCD0017A6466A001511EF /* NSDictionary+Color.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +66,6 @@
 		28CFCCE617A582F5001511EF /* ProjectsSidebarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsSidebarViewController.xib; sourceTree = "<group>"; };
 		28CFCCEA17A58F40001511EF /* AppDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDispatcher.h; sourceTree = "<group>"; };
 		28CFCCEB17A58F40001511EF /* AppDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDispatcher.m; sourceTree = "<group>"; };
-		28CFCCED17A59DB0001511EF /* NSImage+NSImage_category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+NSImage_category.h"; sourceTree = "<group>"; };
-		28CFCCEE17A59DB1001511EF /* NSImage+NSImage_category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+NSImage_category.m"; sourceTree = "<group>"; };
 		28CFCCF017A61D11001511EF /* ProjectTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTimelineViewController.h; sourceTree = "<group>"; };
 		28CFCCF117A61D11001511EF /* ProjectTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectTimelineViewController.m; sourceTree = "<group>"; };
 		28CFCCF217A61D11001511EF /* ProjectTimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectTimelineViewController.xib; sourceTree = "<group>"; };
@@ -77,6 +75,8 @@
 		28CFCCFA17A63468001511EF /* ProjectReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectReportViewController.h; sourceTree = "<group>"; };
 		28CFCCFB17A63468001511EF /* ProjectReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectReportViewController.m; sourceTree = "<group>"; };
 		28CFCCFC17A63469001511EF /* ProjectReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectReportViewController.xib; sourceTree = "<group>"; };
+		28CFCCFF17A6466A001511EF /* NSDictionary+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Color.h"; sourceTree = "<group>"; };
+		28CFCD0017A6466A001511EF /* NSDictionary+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Color.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,8 +144,8 @@
 			children = (
 				289737F817A07CAF003B18D3 /* AppDelegate.h */,
 				289737F917A07CAF003B18D3 /* AppDelegate.m */,
-				28CFCCED17A59DB0001511EF /* NSImage+NSImage_category.h */,
-				28CFCCEE17A59DB1001511EF /* NSImage+NSImage_category.m */,
+				28CFCCFF17A6466A001511EF /* NSDictionary+Color.h */,
+				28CFCD0017A6466A001511EF /* NSDictionary+Color.m */,
 				28CFCCE917A58467001511EF /* Logic */,
 				28CFCCE317A581BC001511EF /* Models */,
 				28CFCCE217A581B0001511EF /* Controllers */,
@@ -347,10 +347,10 @@
 				2897380017A07CAF003B18D3 /* Time_Logger.xcdatamodeld in Sources */,
 				28CFCCE717A582F5001511EF /* ProjectsSidebarViewController.m in Sources */,
 				28CFCCEC17A58F40001511EF /* AppDispatcher.m in Sources */,
-				28CFCCEF17A59DB1001511EF /* NSImage+NSImage_category.m in Sources */,
 				28CFCCF317A61D11001511EF /* ProjectTimelineViewController.m in Sources */,
 				28CFCCF817A63187001511EF /* ProjectConfigViewController.m in Sources */,
 				28CFCCFD17A63469001511EF /* ProjectReportViewController.m in Sources */,
+				28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
