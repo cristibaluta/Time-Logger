@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="untitled.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Project" syncable="YES">
+        <attribute name="date_created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tracking" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" inverseName="newRelationship" inverseEntity="ProjectApp" syncable="YES"/>
+    </entity>
+    <entity name="ProjectApp" syncable="YES">
+        <attribute name="app_identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="app_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="project_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="newRelationship" inverseEntity="Project" syncable="YES"/>
+        <relationship name="newRelationship1" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TimeLog" inverseName="newRelationship" inverseEntity="TimeLog" syncable="YES"/>
+    </entity>
+    <entity name="TimeLog" syncable="YES">
+        <attribute name="app_identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end_time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="start_time" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" inverseName="newRelationship1" inverseEntity="ProjectApp" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Project" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="ProjectApp" positionX="162" positionY="378" width="128" height="120"/>
+        <element name="TimeLog" positionX="448" positionY="351" width="128" height="105"/>
+    </elements>
 </model>

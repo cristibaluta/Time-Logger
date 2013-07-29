@@ -7,15 +7,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AppDispatcher.h"
+#import "ProjectsSidebarViewController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate, AppDispatcherDelegate> {
 	
 	NSArray *runningApplications;
 	NSRunningApplication *activeApp;
 	NSMutableDictionary *timeLogs;
+	
+	ProjectsSidebarViewController *projectsList;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSView *mainView;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

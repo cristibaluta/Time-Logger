@@ -16,10 +16,19 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+	
+	self.window.backgroundColor = [NSColor colorWithDeviceWhite:0.94 alpha:1];
+	
 	timeLogs = [[NSMutableDictionary alloc] init];
 	
 	[self refreshApps];
 	[self logTime];
+	
+	// Add projects list
+	
+	projectsList = [[ProjectsSidebarViewController alloc] initWithNibName:@"ProjectsSidebarViewController" bundle:[NSBundle mainBundle]];
+	projectsList.view.frame = CGRectMake(0, 0, 200, 665);
+	[self.mainView addSubview:projectsList.view];
 }
 
 - (void)refreshApps {
@@ -36,7 +45,7 @@
 	
 	[self performSelector:@selector(refreshApps) withObject:nil afterDelay:3];
 	
-	[self.appsTable reloadData];
+	//[self.appsTable reloadData];
 }
 
 - (void) logTime {
@@ -57,52 +66,6 @@
 }
 
 
-#pragma mark TableViewDatasource
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-	NSLog(@"%li", (unsigned long)runningApplications.count);
-	return runningApplications.count;
-}
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-	
-	//NSLog(@"populate row %li", rowIndex);
-	
-	NSRunningApplication *app = [runningApplications objectAtIndex:rowIndex];
-	
-	// icon
-	// localizedName
-	// bundleIdentifier
-	
-	if ([[aTableColumn identifier] isEqualToString:@"icon"]) {
-        return app.icon;
-    }
-	if ([[aTableColumn identifier] isEqualToString:@"name"]) {
-        return  app.localizedName;
-    }
-	if ([[aTableColumn identifier] isEqualToString:@"identifier"]) {
-        return app.bundleIdentifier;
-    }
-	if ([[aTableColumn identifier] isEqualToString:@"time"]) {
-		NSNumber *currentTime = [timeLogs objectForKey:app.bundleIdentifier];
-		if ([activeApp.bundleIdentifier isEqualTo:app.bundleIdentifier]) {
-			return [[currentTime description] stringByAppendingString:@"sec"];
-		}
-		else {
-			if (currentTime == nil) {
-				return @"";
-			}
-			else {
-				return [[currentTime description] stringByAppendingString:@"sec"];
-			}
-		}
-    }
-	else {
-		return [NSString stringWithFormat:@"%@ (%@)", app.localizedName, app.bundleIdentifier];
-	}
-	
-    return nil;
-}
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "ralcr.com.Time_Logger" in the user's Application Support directory.
 - (NSURL *)applicationFilesDirectory
