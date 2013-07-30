@@ -228,4 +228,13 @@
     return NSTerminateNow;
 }
 
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
+{
+    if (flag) {
+        return NO;
+    } else {
+        [self.window orderFront:self];
+        return YES;
+    }
+}
 @end
