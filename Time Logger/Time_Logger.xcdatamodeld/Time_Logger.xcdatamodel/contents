@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Project" syncable="YES">
-        <attribute name="date_created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="date_created" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="tracking" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="tracking" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" inverseName="newRelationship" inverseEntity="ProjectApp" syncable="YES"/>
     </entity>
     <entity name="ProjectApp" syncable="YES">
@@ -21,8 +21,8 @@
         <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" inverseName="newRelationship1" inverseEntity="ProjectApp" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Project" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Project" positionX="135" positionY="197" width="128" height="118"/>
         <element name="ProjectApp" positionX="162" positionY="378" width="128" height="120"/>
-        <element name="TimeLog" positionX="448" positionY="351" width="128" height="105"/>
+        <element name="TimeLog" positionX="387" positionY="354" width="128" height="105"/>
     </elements>
 </model>
