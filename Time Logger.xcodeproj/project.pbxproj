@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		280A807217A99239006ECD5C /* TimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280A807117A99239006ECD5C /* TimelineCell.m */; };
+		280A807317A9B106006ECD5C /* ProjectsSidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */; };
 		289737E717A07CAF003B18D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289737E617A07CAF003B18D3 /* Cocoa.framework */; };
 		289737F117A07CAF003B18D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 289737EF17A07CAF003B18D3 /* InfoPlist.strings */; };
 		289737F317A07CAF003B18D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 289737F217A07CAF003B18D3 /* main.m */; };
@@ -29,7 +30,6 @@
 		28CFCCFD17A63469001511EF /* ProjectReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCFB17A63468001511EF /* ProjectReportViewController.m */; };
 		28CFCCFE17A63469001511EF /* ProjectReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCFC17A63469001511EF /* ProjectReportViewController.xib */; };
 		28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCD0017A6466A001511EF /* NSDictionary+Color.m */; };
-		F27A456E17A8382D003E9543 /* ProjectsSidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -362,6 +362,7 @@
 				28CFCCFD17A63469001511EF /* ProjectReportViewController.m in Sources */,
 				28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */,
 				280A807217A99239006ECD5C /* TimelineCell.m in Sources */,
+				280A807317A9B106006ECD5C /* ProjectsSidebarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
