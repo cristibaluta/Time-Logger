@@ -23,8 +23,14 @@
 	
 	// Add projects list
 	
-	projectsList = [[ProjectsSidebarViewController alloc] initWithNibName:@"ProjectsSidebarViewController" bundle:[NSBundle mainBundle]];
-	projectsList.view.frame = CGRectMake(0, 0, 200, 665);
+
+	projectsList = [[ProjectsSidebarViewController alloc]
+                        initWithNibName:@"ProjectsSidebarViewController"
+                        bundle:[NSBundle mainBundle]
+                        managedObjectContext:self.managedObjectContext
+                        managedObjectModel:self.managedObjectModel];
+	projectsList.view.frame = CGRectMake(0, 0, 215, 700);
+
 	[self.mainView addSubview:projectsList.view];
 	
 	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimelineViewController" bundle:[NSBundle mainBundle]];
@@ -212,4 +218,13 @@
     return NSTerminateNow;
 }
 
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
+{
+    if (flag) {
+        return NO;
+    } else {
+        [self.window orderFront:self];
+        return YES;
+    }
+}
 @end

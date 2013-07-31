@@ -11,10 +11,20 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ProjectsSidebarViewController : NSViewController
+@interface ProjectsSidebarViewController : NSViewController <NSOutlineViewDataSource>
+{
+    IBOutlet NSArrayController *projectsArray;
+    IBOutlet NSOutlineView *projectsTable;
+}
 
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext *) managedContext managedObjectModel:(NSManagedObjectModel *) managedModel;
+
+- (IBAction)addProject:(id)sender;
+- (IBAction)deleteProject:(id)sender;
+- (IBAction)toggleTracking:(id)sender;
 
 @end

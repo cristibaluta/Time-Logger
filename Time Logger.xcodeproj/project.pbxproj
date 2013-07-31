@@ -29,6 +29,7 @@
 		28CFCCFD17A63469001511EF /* ProjectReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCFB17A63468001511EF /* ProjectReportViewController.m */; };
 		28CFCCFE17A63469001511EF /* ProjectReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCFC17A63469001511EF /* ProjectReportViewController.xib */; };
 		28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCD0017A6466A001511EF /* NSDictionary+Color.m */; };
+		F27A456E17A8382D003E9543 /* ProjectsSidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		28CFCCFC17A63469001511EF /* ProjectReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectReportViewController.xib; sourceTree = "<group>"; };
 		28CFCCFF17A6466A001511EF /* NSDictionary+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Color.h"; sourceTree = "<group>"; };
 		28CFCD0017A6466A001511EF /* NSDictionary+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Color.m"; sourceTree = "<group>"; };
+		F27A456C17A8382C003E9543 /* ProjectsSidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectsSidebarCell.h; sourceTree = "<group>"; };
+		F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectsSidebarCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +211,8 @@
 			children = (
 				28CFCCE417A582F5001511EF /* ProjectsSidebarViewController.h */,
 				28CFCCE517A582F5001511EF /* ProjectsSidebarViewController.m */,
+				F27A456C17A8382C003E9543 /* ProjectsSidebarCell.h */,
+				F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */,
 				28CFCCF517A63186001511EF /* ProjectConfigViewController.h */,
 				28CFCCF617A63187001511EF /* ProjectConfigViewController.m */,
 				28CFCCF017A61D11001511EF /* ProjectTimelineViewController.h */,
