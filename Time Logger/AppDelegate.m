@@ -21,31 +21,15 @@
 	
 	timeLogs = [[NSMutableDictionary alloc] init];
 	
-	[self refreshApps];
-	[self logTime];
-	
 	// Add projects list
 	
 	projectsList = [[ProjectsSidebarViewController alloc] initWithNibName:@"ProjectsSidebarViewController" bundle:[NSBundle mainBundle]];
 	projectsList.view.frame = CGRectMake(0, 0, 200, 665);
 	[self.mainView addSubview:projectsList.view];
-}
-
-- (void)refreshApps {
 	
-	runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
-	
-	for (NSRunningApplication *app in runningApplications) {
-		if ([app ownsMenuBar]) {
-			activeApp = app;
-			break;
-		}
-	}
-	NSLog(@"%@", timeLogs);
-	
-	[self performSelector:@selector(refreshApps) withObject:nil afterDelay:3];
-	
-	//[self.appsTable reloadData];
+	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimelineViewController" bundle:[NSBundle mainBundle]];
+	projectTimeline.view.frame = CGRectMake(0, 0, 200, 665);
+	[self.tabView.selectedTabViewItem.view addSubview:projectTimeline.view];
 }
 
 - (void) logTime {

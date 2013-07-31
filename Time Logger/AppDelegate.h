@@ -9,25 +9,25 @@
 #import <Cocoa/Cocoa.h>
 #import "AppDispatcher.h"
 #import "ProjectsSidebarViewController.h"
+#import "ProjectTimelineViewController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate, AppDispatcherDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, AppDispatcherDelegate> {
 	
 	NSArray *runningApplications;
 	NSRunningApplication *activeApp;
 	NSMutableDictionary *timeLogs;
 	
 	ProjectsSidebarViewController *projectsList;
+	ProjectTimelineViewController *projectTimeline;
 }
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSView *mainView;
+@property (assign) IBOutlet NSTabView *tabView;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
-@property (nonatomic, strong) IBOutlet NSTableView *appsTable;
-
 
 - (IBAction)saveAction:(id)sender;
 

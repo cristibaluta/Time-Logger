@@ -8,11 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ProjectTimelineViewController : NSViewController {
+@interface ProjectTimelineViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
 	
 	NSArray *runningApplications;
 	NSRunningApplication *activeApp;
 	NSMutableDictionary *timeLogs;
 }
+
+@property (nonatomic, strong) IBOutlet NSTableView *appsTable;
 
 @end

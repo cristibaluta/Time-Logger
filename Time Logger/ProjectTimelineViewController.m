@@ -20,7 +20,14 @@
     if (self) {
         // Initialization code here.
 		
-		
+		runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
+		NSLog(@"initWithNibName %@", runningApplications);
+		for (NSRunningApplication *app in runningApplications) {
+			if ([app ownsMenuBar]) {
+				activeApp = app;
+				break;
+			}
+		}
     }
     
     return self;
@@ -29,11 +36,9 @@
 
 
 
-
 #pragma mark TableViewDatasource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-	NSLog(@"%li", (unsigned long)runningApplications.count);
 	return runningApplications.count;
 }
 
