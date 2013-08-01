@@ -42,47 +42,68 @@
 	return runningApplications.count;
 }
 
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+//- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+//	
+//	NSLog(@"populate row %li %@", rowIndex, [aTableColumn identifier]);
+//	
+//	NSRunningApplication *app = [runningApplications objectAtIndex:rowIndex];
+//	
+//	// icon
+//	// localizedName
+//	// bundleIdentifier
+//	
+//	if ([[aTableColumn identifier] isEqualToString:@"icon"]) {
+//        return app.icon;
+//    }
+//	if ([[aTableColumn identifier] isEqualToString:@"name"]) {
+//        return  app.localizedName;
+//    }
+//	if ([[aTableColumn identifier] isEqualToString:@"identifier"]) {
+//        return app.bundleIdentifier;
+//    }
+//	if ([[aTableColumn identifier] isEqualToString:@"time"]) {
+//		NSNumber *currentTime = [timeLogs objectForKey:app.bundleIdentifier];
+//		if ([activeApp.bundleIdentifier isEqualTo:app.bundleIdentifier]) {
+//			return [[currentTime description] stringByAppendingString:@"sec"];
+//		}
+//		else {
+//			if (currentTime == nil) {
+//				return @"";
+//			}
+//			else {
+//				return [[currentTime description] stringByAppendingString:@"sec"];
+//			}
+//		}
+//    }
+//	else {
+//		return [NSString stringWithFormat:@"%@ (%@)", app.localizedName, app.bundleIdentifier];
+//	}
+//	
+//    return nil;
+//}
+
+-(NSView *) tableView:(NSTableView *)tableView
+   viewForTableColumn:(NSTableColumn *)tableColumn
+				  row:(NSInteger)row {
 	
-	//NSLog(@"populate row %li", rowIndex);
+	TimelineCell *result = [tableView makeViewWithIdentifier:@"TimelineCell" owner:self];
 	
-	NSRunningApplication *app = [runningApplications objectAtIndex:rowIndex];
-	
-	// icon
-	// localizedName
-	// bundleIdentifier
-	
-	if ([[aTableColumn identifier] isEqualToString:@"icon"]) {
-        return app.icon;
-    }
-	if ([[aTableColumn identifier] isEqualToString:@"name"]) {
-        return  app.localizedName;
-    }
-	if ([[aTableColumn identifier] isEqualToString:@"identifier"]) {
-        return app.bundleIdentifier;
-    }
-	if ([[aTableColumn identifier] isEqualToString:@"time"]) {
-		NSNumber *currentTime = [timeLogs objectForKey:app.bundleIdentifier];
-		if ([activeApp.bundleIdentifier isEqualTo:app.bundleIdentifier]) {
-			return [[currentTime description] stringByAppendingString:@"sec"];
-		}
-		else {
-			if (currentTime == nil) {
-				return @"";
-			}
-			else {
-				return [[currentTime description] stringByAppendingString:@"sec"];
-			}
-		}
-    }
-	else {
-		return [NSString stringWithFormat:@"%@ (%@)", app.localizedName, app.bundleIdentifier];
+	if (result == nil) {
+		result = [[TimelineCell alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
+		result.identifier = @"TimelineCell";
 	}
 	
-    return nil;
+	NSRunningApplication *app = [runningApplications objectAtIndex:row];
+	
+	result.imageView.image = app.icon;
+	
+	return result;
 }
 
 
-
+-(CGFloat) tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+	
+	return 100;
+}
 
 @end

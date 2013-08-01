@@ -8,13 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface TimelineCell : NSCell
+@interface TimelineCell : NSTableCellView
 
-@property (nonatomic, retain) NSImage *icon;
-@property (nonatomic, retain) NSTextView *timeBegin;
-@property (nonatomic, retain) NSTextView *timeEnd;
-@property (nonatomic, retain) NSTextView *appName;
-@property (nonatomic, retain) NSTextView *details;
+@property (nonatomic, retain) IBOutlet NSImageView *icon;
+@property (nonatomic, retain) IBOutlet NSTextField *timeBegin;
+@property (nonatomic, retain) IBOutlet NSTextField *timeEnd;
+@property (nonatomic, retain) IBOutlet NSTextField *appName;
+@property (nonatomic, retain) IBOutlet NSTextField *details;
 
 
 @end
