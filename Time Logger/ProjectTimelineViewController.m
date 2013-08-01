@@ -21,7 +21,7 @@
         // Initialization code here.
 		
 		runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
-		NSLog(@"initWithNibName %@", runningApplications);
+		NSLog(@"%@", runningApplications);
 		for (NSRunningApplication *app in runningApplications) {
 			if ([app ownsMenuBar]) {
 				activeApp = app;
@@ -96,6 +96,9 @@
 	NSRunningApplication *app = [runningApplications objectAtIndex:row];
 	
 	result.imageView.image = app.icon;
+	result.timeBegin.stringValue = @"20:14";//[app.launchDate description];
+	result.timeEnd.stringValue = @"22:38";//[app.launchDate description];
+	result.appName.stringValue = app.localizedName;
 	
 	return result;
 }

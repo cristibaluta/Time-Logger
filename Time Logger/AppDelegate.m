@@ -29,13 +29,19 @@
                         bundle:[NSBundle mainBundle]
                         managedObjectContext:self.managedObjectContext
                         managedObjectModel:self.managedObjectModel];
-	projectsList.view.frame = CGRectMake(0, 0, 215, 700);
-
-	[self.mainView addSubview:projectsList.view];
+	//projectsList.view.frame = CGRectMake(0, 0, 215, 660);
+	
+	// Add the projects sidebar in the left view of the splitview
+	[[[self.splitView subviews] objectAtIndex:0] addSubview:projectsList.view];
+	
 	
 	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimelineViewController" bundle:[NSBundle mainBundle]];
-	projectTimeline.view.frame = CGRectMake(0, 0, 200, 665);
+	//projectTimeline.view.frame = ((NSView*)self.tabView.selectedTabViewItem.view).frame;
+	projectTimeline.view.autoresizesSubviews = YES;
+	[projectTimeline.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 	[self.tabView.selectedTabViewItem.view addSubview:projectTimeline.view];
+	
+	//[self.window visualizeConstraints:projectTimeline.view.constraints];
 }
 
 - (void) logTime {

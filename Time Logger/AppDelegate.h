@@ -23,6 +23,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSView *mainView;
+@property (assign) IBOutlet NSSplitView *splitView;
 @property (assign) IBOutlet NSTabView *tabView;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
