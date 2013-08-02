@@ -30,6 +30,10 @@
 		28CFCCFD17A63469001511EF /* ProjectReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCFB17A63468001511EF /* ProjectReportViewController.m */; };
 		28CFCCFE17A63469001511EF /* ProjectReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCFC17A63469001511EF /* ProjectReportViewController.xib */; };
 		28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCD0017A6466A001511EF /* NSDictionary+Color.m */; };
+		28D4758317AB73E200C189AB /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D4758217AB73E200C189AB /* App.m */; };
+		28D4758C17AB742300C189AB /* TimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D4758B17AB742300C189AB /* TimeLog.m */; };
+		28D4758F17AB747300C189AB /* ProjectApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D4758E17AB747300C189AB /* ProjectApp.m */; };
+		28D4759517AB74D500C189AB /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D4759417AB74D500C189AB /* Project.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +85,14 @@
 		28CFCCFC17A63469001511EF /* ProjectReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectReportViewController.xib; sourceTree = "<group>"; };
 		28CFCCFF17A6466A001511EF /* NSDictionary+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Color.h"; sourceTree = "<group>"; };
 		28CFCD0017A6466A001511EF /* NSDictionary+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Color.m"; sourceTree = "<group>"; };
+		28D4758117AB73E200C189AB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		28D4758217AB73E200C189AB /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
+		28D4758A17AB742300C189AB /* TimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLog.h; sourceTree = "<group>"; };
+		28D4758B17AB742300C189AB /* TimeLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLog.m; sourceTree = "<group>"; };
+		28D4758D17AB747300C189AB /* ProjectApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectApp.h; sourceTree = "<group>"; };
+		28D4758E17AB747300C189AB /* ProjectApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectApp.m; sourceTree = "<group>"; };
+		28D4759317AB74D500C189AB /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		28D4759417AB74D500C189AB /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		F27A456C17A8382C003E9543 /* ProjectsSidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectsSidebarCell.h; sourceTree = "<group>"; };
 		F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectsSidebarCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -227,6 +239,14 @@
 			isa = PBXGroup;
 			children = (
 				289737FE17A07CAF003B18D3 /* Time_Logger.xcdatamodeld */,
+				28D4759317AB74D500C189AB /* Project.h */,
+				28D4759417AB74D500C189AB /* Project.m */,
+				28D4758117AB73E200C189AB /* App.h */,
+				28D4758217AB73E200C189AB /* App.m */,
+				28D4758D17AB747300C189AB /* ProjectApp.h */,
+				28D4758E17AB747300C189AB /* ProjectApp.m */,
+				28D4758A17AB742300C189AB /* TimeLog.h */,
+				28D4758B17AB742300C189AB /* TimeLog.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -363,6 +383,10 @@
 				28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */,
 				280A807217A99239006ECD5C /* TimelineCell.m in Sources */,
 				280A807317A9B106006ECD5C /* ProjectsSidebarCell.m in Sources */,
+				28D4758317AB73E200C189AB /* App.m in Sources */,
+				28D4758C17AB742300C189AB /* TimeLog.m in Sources */,
+				28D4758F17AB747300C189AB /* ProjectApp.m in Sources */,
+				28D4759517AB74D500C189AB /* Project.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

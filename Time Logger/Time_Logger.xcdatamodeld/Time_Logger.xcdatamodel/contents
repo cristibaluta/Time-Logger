@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Project" syncable="YES">
-        <attribute name="date_created" attributeType="Date" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="tracking" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
-        <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" inverseName="newRelationship" inverseEntity="ProjectApp" syncable="YES"/>
-    </entity>
-    <entity name="ProjectApp" syncable="YES">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="App" representedClassName="App" syncable="YES">
         <attribute name="app_identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="app_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="project_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="newRelationship" inverseEntity="Project" syncable="YES"/>
-        <relationship name="newRelationship1" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TimeLog" inverseName="newRelationship" inverseEntity="TimeLog" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
-    <entity name="TimeLog" syncable="YES">
+    <entity name="Project" representedClassName="Project" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="date_created" attributeType="Date" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tracking" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <relationship name="apps" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" inverseName="project" inverseEntity="ProjectApp" syncable="YES"/>
+    </entity>
+    <entity name="ProjectApp" representedClassName="ProjectApp" syncable="YES">
         <attribute name="app_identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="document_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="app_cache" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="App" syncable="YES"/>
+        <relationship name="project" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="apps" inverseEntity="Project" syncable="YES"/>
+        <relationship name="time_logs" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TimeLog" syncable="YES"/>
+    </entity>
+    <entity name="TimeLog" representedClassName="TimeLog" syncable="YES">
+        <attribute name="app_identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="document_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="end_time" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="start_time" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" inverseName="newRelationship1" inverseEntity="ProjectApp" syncable="YES"/>
+        <relationship name="app_cache" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="App" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Project" positionX="135" positionY="197" width="128" height="118"/>
-        <element name="ProjectApp" positionX="162" positionY="378" width="128" height="120"/>
-        <element name="TimeLog" positionX="387" positionY="354" width="128" height="105"/>
+        <element name="App" positionX="414" positionY="225" width="128" height="90"/>
+        <element name="Project" positionX="135" positionY="197" width="128" height="135"/>
+        <element name="ProjectApp" positionX="162" positionY="378" width="128" height="135"/>
+        <element name="TimeLog" positionX="540" positionY="423" width="128" height="135"/>
     </elements>
 </model>
