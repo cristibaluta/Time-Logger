@@ -11,15 +11,12 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tracking" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
-        <relationship name="apps" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" inverseName="project" inverseEntity="ProjectApp" syncable="YES"/>
+        <relationship name="apps" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" syncable="YES"/>
     </entity>
     <entity name="ProjectApp" representedClassName="ProjectApp" syncable="YES">
         <attribute name="app_identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="document_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="app_cache" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="App" syncable="YES"/>
-        <relationship name="project" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="apps" inverseEntity="Project" syncable="YES"/>
-        <relationship name="time_logs" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TimeLog" syncable="YES"/>
     </entity>
     <entity name="TimeLog" representedClassName="TimeLog" syncable="YES">
         <attribute name="app_identifier" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,12 +24,11 @@
         <attribute name="document_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="end_time" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="start_time" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="app_cache" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="App" syncable="YES"/>
     </entity>
     <elements>
-        <element name="App" positionX="414" positionY="225" width="128" height="90"/>
+        <element name="App" positionX="135" positionY="387" width="128" height="90"/>
         <element name="Project" positionX="135" positionY="197" width="128" height="135"/>
-        <element name="ProjectApp" positionX="162" positionY="378" width="128" height="135"/>
-        <element name="TimeLog" positionX="540" positionY="423" width="128" height="135"/>
+        <element name="ProjectApp" positionX="340" positionY="234" width="128" height="90"/>
+        <element name="TimeLog" positionX="340" positionY="384" width="128" height="120"/>
     </elements>
 </model>
