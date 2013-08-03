@@ -14,8 +14,8 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, AppDispatcherDelegate> {
 	
 	NSArray *runningApplications;
-	NSRunningApplication *activeApp;
-	NSMutableDictionary *timeLogs;
+	NSTimer *timer;
+	AppDispatcher *dispatcher;
 	
 	ProjectsSidebarViewController *projectsList;
 	ProjectTimelineViewController *projectTimeline;

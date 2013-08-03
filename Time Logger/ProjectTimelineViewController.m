@@ -21,13 +21,7 @@
         // Initialization code here.
 		
 		runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
-		NSLog(@"%@", runningApplications);
-		for (NSRunningApplication *app in runningApplications) {
-			if ([app ownsMenuBar]) {
-				activeApp = app;
-				break;
-			}
-		}
+		
     }
     
     return self;

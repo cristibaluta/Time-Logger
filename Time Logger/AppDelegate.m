@@ -19,11 +19,9 @@
 	
 	self.window.backgroundColor = [NSColor colorWithDeviceWhite:0.94 alpha:1];
 	
-	timeLogs = [[NSMutableDictionary alloc] init];
 	
 	// Add projects list
 	
-
 	projectsList = [[ProjectsSidebarViewController alloc]
                         initWithNibName:@"ProjectsSidebarViewController"
                         bundle:[NSBundle mainBundle]
@@ -42,24 +40,60 @@
 	[self.tabView.selectedTabViewItem.view addSubview:projectTimeline.view];
 	
 	//[self.window visualizeConstraints:projectTimeline.view.constraints];
+	
+	// Create the dispatcher
+	
+	dispatcher = [[AppDispatcher alloc] init];
+	dispatcher.delegate = self;
+	
+	// Start the timer
+	
+	//[self startTimerWithInterval:1.0];
 }
 
-- (void) logTime {
+
+#pragma mark Timer
+
+- (void) startTimerWithInterval:(float)interval {
 	
-	// Get from the dictionary the currentApp time
-	NSNumber *currentTime = [timeLogs objectForKey:activeApp.bundleIdentifier];
+	[timer invalidate];
 	
-	if (currentTime == nil) {
-		currentTime = @0;
-	}
-	
-	// Log 1 second
-	currentTime = [NSNumber numberWithInt:[currentTime intValue] + 1];
-	[timeLogs setObject:currentTime forKey:activeApp.bundleIdentifier];
-	
-	// Come back in 1 second
-	[self performSelector:@selector(logTime) withObject:nil afterDelay:1];
+	timer = [NSTimer scheduledTimerWithTimeInterval:interval
+											 target:self
+										   selector:@selector(tick)
+										   userInfo:nil
+											repeats:YES];
 }
+
+- (void) tick {
+	
+	runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
+	
+	for (NSRunningApplication *app in runningApplications) {
+		if ([app ownsMenuBar]) {
+			NSLog(@"tick: %@", app.localizedName);
+			[dispatcher logApp:app];
+			break;
+		}
+	}
+}
+
+
+#pragma mark AppDispatcher delegate
+
+- (void) didStartTrackingApp:(NSRunningApplication*)app {
+	
+	NSLog(@"start tracking %@", app.localizedName);
+}
+- (void) didStopTrackingApp:(NSRunningApplication*)app {
+	
+	NSLog(@"stop tracking %@", app.localizedName);
+}
+- (void) didBecomeIdle {
+	
+	
+}
+
 
 
 
@@ -68,7 +102,7 @@
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
-    return [appSupportURL URLByAppendingPathComponent:@"ralcr.com.Time_Logger"];
+    return [appSupportURL URLByAppendingPathComponent:@"com.ralcr.Time_Logger"];
 }
 
 // Creates if necessary and returns the managed object model for the application.
@@ -178,6 +212,11 @@
     }
 }
 
+
+
+
+#pragma mark AppDelegates
+
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     // Save changes in the application's managed object context before the application terminates.
@@ -224,6 +263,16 @@
     return NSTerminateNow;
 }
 
+- (void)applicationDidBecomeActive:(NSNotification *)aNotification {
+	[self startTimerWithInterval:1.0];
+}
+
+- (void)applicationWillResignActive:(NSNotification *)aNotification {
+	// We do not want to consume too much cpu when the app is not active. Make it 15sec
+	[self startTimerWithInterval:3.0];
+	[self tick];
+}
+
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
     if (flag) {
@@ -233,4 +282,5 @@
         return YES;
     }
 }
+
 @end

@@ -15,6 +15,7 @@
 @class AppDispatcher;
 @protocol AppDispatcherDelegate <NSObject>
 
+@required
 - (void) didStartTrackingApp:(NSRunningApplication*)app;
 - (void) didStopTrackingApp:(NSRunningApplication*)app;
 - (void) didBecomeIdle;
@@ -24,9 +25,7 @@
 
 @interface AppDispatcher : NSObject {
 	
-	NSRunningApplication *activeApp;
 	NSRunningApplication *lastApp;
-	
 	NSDate *lastUserActivity;
 }
 
