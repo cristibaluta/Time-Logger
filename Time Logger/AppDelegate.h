@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AppDispatcher.h"
+#import "TimeLog.h"
 #import "ProjectsSidebarViewController.h"
 #import "ProjectTimelineViewController.h"
 
@@ -16,6 +17,7 @@
 	NSArray *runningApplications;
 	NSTimer *timer;
 	AppDispatcher *dispatcher;
+	NSDate *lastDate;
 	
 	ProjectsSidebarViewController *projectsList;
 	ProjectTimelineViewController *projectTimeline;

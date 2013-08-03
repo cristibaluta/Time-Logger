@@ -8,14 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 #import "TimelineCell.h"
+#import "TimeLog.h"
 
 @interface ProjectTimelineViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
 	
-	NSArray *runningApplications;
-	NSRunningApplication *activeApp;
-	NSMutableDictionary *timeLogs;
+	NSArray *logs;
 }
 
+@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) IBOutlet NSTableView *appsTable;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext *) managedContext managedObjectModel:(NSManagedObjectModel *) managedModel;
+- (void)fetch;
 
 @end

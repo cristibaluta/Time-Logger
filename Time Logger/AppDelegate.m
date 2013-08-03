@@ -22,18 +22,20 @@
 	
 	// Add projects list
 	
-	projectsList = [[ProjectsSidebarViewController alloc]
-                        initWithNibName:@"ProjectsSidebarViewController"
-                        bundle:[NSBundle mainBundle]
-                        managedObjectContext:self.managedObjectContext
-                        managedObjectModel:self.managedObjectModel];
+	projectsList = [[ProjectsSidebarViewController alloc] initWithNibName:@"ProjectsSidebarViewController"
+																   bundle:[NSBundle mainBundle]
+													 managedObjectContext:self.managedObjectContext
+													   managedObjectModel:self.managedObjectModel];
 	//projectsList.view.frame = CGRectMake(0, 0, 215, 660);
 	
 	// Add the projects sidebar in the left view of the splitview
 	[[[self.splitView subviews] objectAtIndex:0] addSubview:projectsList.view];
 	
 	
-	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimelineViewController" bundle:[NSBundle mainBundle]];
+	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimelineViewController"
+																	  bundle:[NSBundle mainBundle]
+														managedObjectContext:self.managedObjectContext
+														  managedObjectModel:self.managedObjectModel];
 	//projectTimeline.view.frame = ((NSView*)self.tabView.selectedTabViewItem.view).frame;
 	projectTimeline.view.autoresizesSubviews = YES;
 	[projectTimeline.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -49,6 +51,34 @@
 	// Start the timer
 	
 	//[self startTimerWithInterval:1.0];
+	
+	
+	// Testing database
+	
+	NSManagedObjectContext *context = [self managedObjectContext];
+//	TimeLog *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"TimeLog" inManagedObjectContext:context];
+//	timelog.app_identifier = @"Test app";
+//	timelog.caption = @"Test  caption";
+//	timelog.document_name = @"document name";
+//	timelog.end_time = [NSDate date];
+//	timelog.start_time = lastDate;
+//	
+	NSError *error;
+//	if (![context save:&error]) {
+//		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+//	}
+	
+	// Read the database
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimeLog" inManagedObjectContext:context];
+	[fetchRequest setEntity:entity];
+	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+	for (NSManagedObject *info in fetchedObjects) {
+		NSLog(@"app_identifier: %@", [info valueForKey:@"app_identifier"]);
+		NSLog(@"start_time: %@", [info valueForKey:@"start_time"]);
+		NSLog(@"end_time: %@", [info valueForKey:@"end_time"]);
+	}
+	NSLog(@"FIN TESTING \n");
 }
 
 
@@ -84,10 +114,27 @@
 - (void) didStartTrackingApp:(NSRunningApplication*)app {
 	
 	NSLog(@"start tracking %@", app.localizedName);
+	lastDate = [NSDate date];
+	[projectTimeline fetch];
 }
 - (void) didStopTrackingApp:(NSRunningApplication*)app {
 	
 	NSLog(@"stop tracking %@", app.localizedName);
+	
+	// Store in the database this app and its running time
+	
+	NSManagedObjectContext *context = [self managedObjectContext];
+	TimeLog *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"TimeLog" inManagedObjectContext:context];
+	timelog.app_identifier = app.bundleIdentifier;
+	timelog.caption = app.localizedName;
+	timelog.document_name = app.localizedName;
+	timelog.end_time = [NSDate date];
+	timelog.start_time = lastDate;
+	
+	NSError *error;
+	if (![context save:&error]) {
+		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+	}
 }
 - (void) didBecomeIdle {
 	

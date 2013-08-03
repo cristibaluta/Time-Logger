@@ -8,32 +8,47 @@
 
 #import "ProjectTimelineViewController.h"
 
-@interface ProjectTimelineViewController ()
-
-@end
 
 @implementation ProjectTimelineViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext*)managedContext managedObjectModel:(NSManagedObjectModel*)managedModel {
+    
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+	if (self) {
         // Initialization code here.
-		
-		runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
-		
+		self.managedObjectContext = managedContext;
+        self.managedObjectModel = managedModel;
+		[self fetch];
     }
     
     return self;
 }
 
+- (void)fetch {
+	
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimeLog" inManagedObjectContext:self.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	NSSortDescriptor *sortByDate = [[NSSortDescriptor alloc] initWithKey:@"end_time" ascending:YES];
+	[fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
+	
+	NSError *error;
+	logs = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	
+	[self.appsTable reloadData];
+}
 
 
 
 #pragma mark TableViewDatasource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-	return runningApplications.count;
+	
+	return logs.count;
 }
 
 //- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
@@ -87,12 +102,20 @@
 		result.identifier = @"TimelineCell";
 	}
 	
-	NSRunningApplication *app = [runningApplications objectAtIndex:row];
+	TimeLog *log = [logs objectAtIndex:row];
+	//NSLog(@"adding data to cell %@", log);
+	NSDate *t1 = log.start_time;
+	NSDate *t2 = log.end_time;
+	NSString *t3 = log.caption;
 	
-	result.imageView.image = app.icon;
-	result.timeBegin.stringValue = @"20:14";//[app.launchDate description];
-	result.timeEnd.stringValue = @"22:38";//[app.launchDate description];
-	result.appName.stringValue = app.localizedName;
+	if (t1 == nil) t1 = [NSDate date];
+	if (t2 == nil) t2 = [NSDate date];
+	if (t3 == nil) t3 = @"Dummy app";
+	
+	result.imageView.image = [[NSImage alloc] init];
+	result.timeBegin.stringValue = [t1 description];
+	result.timeEnd.stringValue = [t2 description];
+	result.appName.stringValue = [t3 description];
 	
 	return result;
 }
