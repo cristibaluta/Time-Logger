@@ -120,6 +120,27 @@
 	CFRelease(windowList);
 	
 	
+	//id safari = [SBApplication applicationWithBundleIdentifier:@"com.apple.Safari"];
+//	NSLog(@"%@", safari);
+//	for (id window in safari.windows) {
+//		if (window.visible) {
+//			NSString *result = window.currentTab.URL;
+//			break;
+//		}
+//	}
+	
+//	NSError *err = nil;
+	NSDictionary *derr = nil;
+	NSURL* scriptURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"GetSafariUrl" ofType:@"scpt"]];
+	NSAppleScript *ascr = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&derr];
+	NSAppleEventDescriptor *res = [ascr executeAndReturnError:&derr];
+	
+	if (derr != nil) {
+		NSLog(@"err: %@", derr);
+	}
+	else {
+		NSLog(@"good: %@", res);
+	}
 }
 
 

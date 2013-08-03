@@ -34,6 +34,7 @@
 		28D475EF17ACE71C00C189AB /* TimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D475EE17ACE71C00C189AB /* TimeLog.m */; };
 		28D475F217ACE72D00C189AB /* ProjectApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D475F117ACE72D00C189AB /* ProjectApp.m */; };
 		28D475F517ACE73C00C189AB /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D475F417ACE73C00C189AB /* Project.m */; };
+		28D475FC17AD3AE400C189AB /* GetSafariUrl.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 28D475FB17AD3AE400C189AB /* GetSafariUrl.scpt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		28D475F117ACE72D00C189AB /* ProjectApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectApp.m; sourceTree = "<group>"; };
 		28D475F317ACE73C00C189AB /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		28D475F417ACE73C00C189AB /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
+		28D475FB17AD3AE400C189AB /* GetSafariUrl.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = GetSafariUrl.scpt; path = AppleScripts/GetSafariUrl.scpt; sourceTree = "<group>"; };
 		F27A456C17A8382C003E9543 /* ProjectsSidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectsSidebarCell.h; sourceTree = "<group>"; };
 		F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectsSidebarCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,6 +162,7 @@
 		289737EC17A07CAF003B18D3 /* Time Logger */ = {
 			isa = PBXGroup;
 			children = (
+				28D475FA17AD3ACF00C189AB /* Apple scripts */,
 				289737F817A07CAF003B18D3 /* AppDelegate.h */,
 				289737F917A07CAF003B18D3 /* AppDelegate.m */,
 				28CFCCFF17A6466A001511EF /* NSDictionary+Color.h */,
@@ -260,6 +263,14 @@
 			name = Logic;
 			sourceTree = "<group>";
 		};
+		28D475FA17AD3ACF00C189AB /* Apple scripts */ = {
+			isa = PBXGroup;
+			children = (
+				28D475FB17AD3AE400C189AB /* GetSafariUrl.scpt */,
+			);
+			name = "Apple scripts";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -338,6 +349,7 @@
 				28CFCCF417A61D11001511EF /* ProjectTimelineViewController.xib in Resources */,
 				28CFCCF917A63187001511EF /* ProjectConfigViewController.xib in Resources */,
 				28CFCCFE17A63469001511EF /* ProjectReportViewController.xib in Resources */,
+				28D475FC17AD3AE400C189AB /* GetSafariUrl.scpt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
