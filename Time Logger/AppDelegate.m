@@ -19,7 +19,6 @@
 	
 	self.window.backgroundColor = [NSColor colorWithDeviceWhite:0.94 alpha:1];
 	
-	
 	// Add projects list
 	
 	projectsList = [[ProjectsSidebarViewController alloc] initWithNibName:@"ProjectsSidebarViewController"
@@ -69,16 +68,16 @@
 //	}
 	
 	// Read the database
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimeLog" inManagedObjectContext:context];
-	[fetchRequest setEntity:entity];
-	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-	for (NSManagedObject *info in fetchedObjects) {
-		NSLog(@"app_identifier: %@", [info valueForKey:@"app_identifier"]);
-		NSLog(@"start_time: %@", [info valueForKey:@"start_time"]);
-		NSLog(@"end_time: %@", [info valueForKey:@"end_time"]);
-	}
-	NSLog(@"FIN TESTING \n");
+//	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//	NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimeLog" inManagedObjectContext:context];
+//	[fetchRequest setEntity:entity];
+//	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+//	for (NSManagedObject *info in fetchedObjects) {
+//		NSLog(@"app_identifier: %@", [info valueForKey:@"app_identifier"]);
+//		NSLog(@"start_time: %@", [info valueForKey:@"start_time"]);
+//		NSLog(@"end_time: %@", [info valueForKey:@"end_time"]);
+//	}
+//	NSLog(@"FIN TESTING \n");
 }
 
 
@@ -97,15 +96,30 @@
 
 - (void) tick {
 	
-	runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
+	// Get the current app
 	
-	for (NSRunningApplication *app in runningApplications) {
-		if ([app ownsMenuBar]) {
-			NSLog(@"tick: %@", app.localizedName);
-			[dispatcher logApp:app];
-			break;
+	NSDictionary *activeApp = [[NSWorkspace sharedWorkspace] activeApplication];
+	NSRunningApplication *app = activeApp[NSWorkspaceApplicationKey];
+	pid_t pid = app.processIdentifier;
+	[dispatcher logApp:app];
+	
+	NSLog(@"Active application is: %@ %i", activeApp, pid);
+	
+	
+	CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionAll, kCGNullWindowID);
+	for (NSMutableDictionary* entry in (__bridge NSArray*)windowList)
+	{
+		NSString* winName = [entry objectForKey:(id)kCGWindowName];
+		NSInteger ownerPID = [[entry objectForKey:(id)kCGWindowOwnerPID] integerValue];
+		NSLog(@"%@ %li", winName, (long)ownerPID);
+		
+		if (ownerPID == pid) {
+			NSLog(@"-----------------------FOUND");
 		}
 	}
+	CFRelease(windowList);
+	
+	
 }
 
 
