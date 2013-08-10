@@ -36,6 +36,25 @@
 	NSSortDescriptor *sortByDate = [[NSSortDescriptor alloc] initWithKey:@"end_time" ascending:YES];
 	[fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
 	
+	NSDate *                date;
+	NSString *              string, *timestamp;
+	NSDateFormatter *       formatter;
+	
+	timestamp = @"00:00";
+	
+	formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat: @"yyyy-MM-dd "];
+	[formatter setTimeZone: [NSTimeZone localTimeZone]];
+	
+	string = [formatter stringFromDate: [NSDate date]];
+	string = [string stringByAppendingString: timestamp];
+	
+	[formatter setDateFormat: @"yyyy-MM-dd HH:mm"];
+	date = [formatter dateFromString: string];
+	
+	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"start_time > %@", date];
+	[fetchRequest setPredicate:todaysLogs];
+	
 	NSError *error;
 	logs = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 	
@@ -107,15 +126,37 @@
 	NSDate *t1 = log.start_time;
 	NSDate *t2 = log.end_time;
 	NSString *t3 = log.caption;
+	NSString *t4 = log.document_name;
 	
 	if (t1 == nil) t1 = [NSDate date];
 	if (t2 == nil) t2 = [NSDate date];
 	if (t3 == nil) t3 = @"Dummy app";
+	if (t4 == nil) t4 = @"";
 	
-	result.imageView.image = [[NSImage alloc] init];
-	result.timeBegin.stringValue = [t1 description];
-	result.timeEnd.stringValue = [t2 description];
+	NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+	[formatter1 setDateFormat: @"HH:mm:ss"];
+	NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+	[formatter2 setDateFormat: @"HH:mm:ss"];
+	
+	result.timeBegin.stringValue = [formatter1 stringFromDate:t1];
+	result.timeEnd.stringValue = [formatter2 stringFromDate:t2];
 	result.appName.stringValue = [t3 description];
+	result.details.stringValue = [t4 description];
+	
+	// Add app icon
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"app_identifier == %@", log.app_identifier];
+	[fetchRequest setPredicate:todaysLogs];
+	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:[self managedObjectContext]];
+	[fetchRequest setEntity:a];
+	
+	NSError *error;
+	NSArray *arr = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+	
+	if (arr.count > 0) {
+		NSLog(@"%@", arr);
+		result.imageView.image = [[NSImage alloc] initWithData:((App*)[arr objectAtIndex:0]).icon];
+	}
 	
 	return result;
 }

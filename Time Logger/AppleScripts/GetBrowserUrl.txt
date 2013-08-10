@@ -1,0 +1,3 @@
+tell application id "app_identifier"
+	get URL of current tab of front window
+end tell

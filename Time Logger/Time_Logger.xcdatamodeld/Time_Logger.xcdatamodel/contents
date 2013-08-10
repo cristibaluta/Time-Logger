@@ -5,9 +5,16 @@
         <attribute name="app_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
+    <entity name="Client" representedClassName="Client" syncable="YES">
+        <attribute name="client_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="category" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="client_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date_created" attributeType="Date" syncable="YES"/>
+        <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tracking" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
@@ -27,8 +34,9 @@
     </entity>
     <elements>
         <element name="App" positionX="135" positionY="387" width="128" height="90"/>
-        <element name="Project" positionX="135" positionY="197" width="128" height="135"/>
+        <element name="Project" positionX="135" positionY="197" width="128" height="165"/>
         <element name="ProjectApp" positionX="340" positionY="234" width="128" height="90"/>
         <element name="TimeLog" positionX="340" positionY="384" width="128" height="120"/>
+        <element name="Client" positionX="234" positionY="324" width="128" height="90"/>
     </elements>
 </model>

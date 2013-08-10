@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AppDispatcher.h"
+#import "App.h"
 #import "TimeLog.h"
 #import "ProjectsSidebarViewController.h"
 #import "ProjectConfigViewController.h"

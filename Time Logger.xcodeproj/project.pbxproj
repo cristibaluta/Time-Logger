@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		280A807217A99239006ECD5C /* TimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280A807117A99239006ECD5C /* TimelineCell.m */; };
 		280A807317A9B106006ECD5C /* ProjectsSidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */; };
+		2854C27117B6719B0090BD3E /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854C27017B6719B0090BD3E /* Client.m */; };
+		2854C27B17B691CC0090BD3E /* GetAppWindowName.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2854C27A17B691CC0090BD3E /* GetAppWindowName.txt */; };
+		2854C27D17B6970B0090BD3E /* GetBrowserUrl.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2854C27C17B6970B0090BD3E /* GetBrowserUrl.txt */; };
 		289737E717A07CAF003B18D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289737E617A07CAF003B18D3 /* Cocoa.framework */; };
 		289737F117A07CAF003B18D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 289737EF17A07CAF003B18D3 /* InfoPlist.strings */; };
 		289737F317A07CAF003B18D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 289737F217A07CAF003B18D3 /* main.m */; };
@@ -50,6 +53,10 @@
 /* Begin PBXFileReference section */
 		280A807017A99239006ECD5C /* TimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineCell.h; sourceTree = "<group>"; };
 		280A807117A99239006ECD5C /* TimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineCell.m; sourceTree = "<group>"; };
+		2854C26F17B6719B0090BD3E /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		2854C27017B6719B0090BD3E /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
+		2854C27A17B691CC0090BD3E /* GetAppWindowName.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GetAppWindowName.txt; path = AppleScripts/GetAppWindowName.txt; sourceTree = "<group>"; };
+		2854C27C17B6970B0090BD3E /* GetBrowserUrl.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GetBrowserUrl.txt; path = AppleScripts/GetBrowserUrl.txt; sourceTree = "<group>"; };
 		289737E317A07CAF003B18D3 /* Time Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		289737E617A07CAF003B18D3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		289737E917A07CAF003B18D3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -242,6 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				289737FE17A07CAF003B18D3 /* Time_Logger.xcdatamodeld */,
+				2854C26F17B6719B0090BD3E /* Client.h */,
+				2854C27017B6719B0090BD3E /* Client.m */,
 				28D475E417ACE6F400C189AB /* App.h */,
 				28D475E517ACE6F400C189AB /* App.m */,
 				28D475F317ACE73C00C189AB /* Project.h */,
@@ -267,6 +276,8 @@
 			isa = PBXGroup;
 			children = (
 				28D475FB17AD3AE400C189AB /* GetSafariUrl.scpt */,
+				2854C27A17B691CC0090BD3E /* GetAppWindowName.txt */,
+				2854C27C17B6970B0090BD3E /* GetBrowserUrl.txt */,
 			);
 			name = "Apple scripts";
 			sourceTree = "<group>";
@@ -350,6 +361,8 @@
 				28CFCCF917A63187001511EF /* ProjectConfigViewController.xib in Resources */,
 				28CFCCFE17A63469001511EF /* ProjectReportViewController.xib in Resources */,
 				28D475FC17AD3AE400C189AB /* GetSafariUrl.scpt in Resources */,
+				2854C27B17B691CC0090BD3E /* GetAppWindowName.txt in Resources */,
+				2854C27D17B6970B0090BD3E /* GetBrowserUrl.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +412,7 @@
 				28D475EF17ACE71C00C189AB /* TimeLog.m in Sources */,
 				28D475F217ACE72D00C189AB /* ProjectApp.m in Sources */,
 				28D475F517ACE73C00C189AB /* Project.m in Sources */,
+				2854C27117B6719B0090BD3E /* Client.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,10 +25,7 @@
 																   bundle:[NSBundle mainBundle]
 													 managedObjectContext:self.managedObjectContext
 													   managedObjectModel:self.managedObjectModel];
-	//projectsList.view.frame = CGRectMake(0, 0, 215, 660);
-	
 	// Add the projects sidebar in the left view of the splitview
-	//[[[self.splitView subviews] objectAtIndex:0] setView:projectsList.view];
 	[self.splitView replaceSubview:[[self.splitView subviews] objectAtIndex:0] with:projectsList.view];
 	
 	
@@ -36,20 +33,12 @@
 																  bundle:[NSBundle mainBundle]
 													managedObjectContext:self.managedObjectContext
 													  managedObjectModel:self.managedObjectModel];
-	//projectTimeline.view.frame = ((NSView*)self.tabView.selectedTabViewItem.view).frame;
-	projectConfig.view.autoresizesSubviews = YES;
-	[projectConfig.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-	
 	
 	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimelineViewController"
 																	  bundle:[NSBundle mainBundle]
 														managedObjectContext:self.managedObjectContext
 														  managedObjectModel:self.managedObjectModel];
-	//projectTimeline.view.frame = ((NSView*)self.tabView.selectedTabViewItem.view).frame;
-	projectTimeline.view.autoresizesSubviews = YES;
-	[projectTimeline.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-	
-	//[self.window visualizeConstraints:projectTimeline.view.constraints];
+
 	
 	NSTabViewItem *timelineTab = [self.tabView tabViewItemAtIndex:0];
 	[timelineTab setView:projectTimeline.view];
@@ -137,19 +126,6 @@
 //	}
 //	CFRelease(windowList);
 	
-	
-//	NSError *err = nil;
-	NSDictionary *derr = nil;
-	NSURL* scriptURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"GetSafariUrl" ofType:@"scpt"]];
-	NSAppleScript *ascr = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&derr];
-	NSAppleEventDescriptor *res = [ascr executeAndReturnError:&derr];
-	
-	if (derr != nil) {
-		NSLog(@"err: %@", derr);
-	}
-	else {
-		NSLog(@"good: %@", res);
-	}
 }
 
 
@@ -163,7 +139,8 @@
 }
 - (void) didStopTrackingApp:(NSRunningApplication*)app {
 	
-	NSLog(@"stop tracking %@", app.localizedName);
+	NSLog(@"stop tracking %@ %@", app.localizedName, app.bundleIdentifier);
+	NSError *error;
 	
 	// Store in the database this app and its running time
 	
@@ -171,14 +148,67 @@
 	TimeLog *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"TimeLog" inManagedObjectContext:context];
 	timelog.app_identifier = app.bundleIdentifier;
 	timelog.caption = app.localizedName;
-	timelog.document_name = app.localizedName;
 	timelog.end_time = [NSDate date];
 	timelog.start_time = lastDate;
 	
-	NSError *error;
+	// Insert the app in database if does not exist
+	
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"app_identifier == %@", app.bundleIdentifier];
+	[fetchRequest setPredicate:todaysLogs];
+	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:context];
+	[fetchRequest setEntity:a];
+	
+	NSUInteger nr = [context countForFetchRequest:fetchRequest error:&error];
+	
+//	if (nr == 0) {
+//		NSLog(@"store app %@", app.bundleIdentifier);
+//		App *aa = [NSEntityDescription insertNewObjectForEntityForName:@"App" inManagedObjectContext:context];
+//		aa.app_identifier = app.bundleIdentifier;
+//		aa.app_name = app.localizedName;
+//		aa.icon = [app.icon TIFFRepresentation];
+//	}
+	
+	if ([app.bundleIdentifier isEqualToString:@"com.apple.Safari"]) {
+		NSDictionary *derr = nil;
+		NSURL* scriptURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"GetSafariUrl" ofType:@"scpt"]];
+		NSAppleScript *ascr = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&derr];
+		NSAppleEventDescriptor *descriptor = [ascr executeAndReturnError:&derr];
+		
+		if (derr != nil) {
+			NSLog(@"err: %@", derr);
+		}
+		else {
+			NSLog(@"good: %@", descriptor);
+			//timelog.document_name = res;
+		}
+		
+		timelog.document_name = [descriptor stringValue];
+		
+	}
+	else {
+		NSDictionary *derr = nil;
+		NSError *err;
+		NSURL *url = [[NSBundle mainBundle] URLForResource:@"GetAppWindowName" withExtension:@"txt"];
+		NSString *scrpt = [NSString stringWithContentsOfURL:url encoding:NSStringEncodingConversionAllowLossy error:&err];
+		scrpt = [scrpt stringByReplacingOccurrencesOfString:@"app_identifier" withString:app.bundleIdentifier];
+		NSAppleScript *ascr = [[NSAppleScript alloc] initWithSource:scrpt];
+		NSAppleEventDescriptor *descriptor = [ascr executeAndReturnError:&derr];
+		
+		if (derr != nil) {
+			NSLog(@"err2: %@", derr);
+			timelog.document_name = @"";
+		}
+		else {
+			NSLog(@"good2: %@", descriptor);
+			timelog.document_name = [descriptor stringValue];
+		}
+	}
+	
 	if (![context save:&error]) {
 		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
 	}
+	
 }
 - (void) didBecomeIdle {
 	

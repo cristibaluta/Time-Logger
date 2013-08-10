@@ -1,18 +1,18 @@
 //
-//  ProjectApp.m
+//  Client.m
 //  Time Logger
 //
 //  Created by Baluta Cristian on 10/08/2013.
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
-#import "ProjectApp.h"
+#import "Client.h"
 
 
-@implementation ProjectApp
+@implementation Client
 
-@dynamic app_identifier;
-@dynamic document_name;
-@dynamic project_id;
+@dynamic client_id;
+@dynamic name;
+@dynamic email;
 
 @end

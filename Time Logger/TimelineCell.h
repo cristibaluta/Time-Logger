@@ -10,7 +10,6 @@
 
 @interface TimelineCell : NSTableCellView
 
-@property (nonatomic, retain) IBOutlet NSImageView *icon;
 @property (nonatomic, retain) IBOutlet NSTextField *timeBegin;
 @property (nonatomic, retain) IBOutlet NSTextField *timeEnd;
 @property (nonatomic, retain) IBOutlet NSTextField *appName;

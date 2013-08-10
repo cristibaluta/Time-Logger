@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TimelineCell.h"
 #import "TimeLog.h"
+#import "App.h"
 
 @interface ProjectTimelineViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
 	

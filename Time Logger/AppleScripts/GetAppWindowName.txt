@@ -1,0 +1,5 @@
+tell application id "app_identifier"
+	if the (count of windows) is not 0 then
+		set window_name to name of front window
+	end if
+end tell

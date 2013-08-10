@@ -2,7 +2,7 @@
 //  ProjectApp.h
 //  Time Logger
 //
-//  Created by Baluta Cristian on 03/08/2013.
+//  Created by Baluta Cristian on 10/08/2013.
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
