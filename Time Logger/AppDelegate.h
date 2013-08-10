@@ -10,6 +10,7 @@
 #import "AppDispatcher.h"
 #import "TimeLog.h"
 #import "ProjectsSidebarViewController.h"
+#import "ProjectConfigViewController.h"
 #import "ProjectTimelineViewController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, AppDispatcherDelegate> {
@@ -20,6 +21,7 @@
 	NSDate *lastDate;
 	
 	ProjectsSidebarViewController *projectsList;
+	ProjectConfigViewController *projectConfig;
 	ProjectTimelineViewController *projectTimeline;
 }
 

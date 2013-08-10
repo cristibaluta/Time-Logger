@@ -23,10 +23,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-        self.managedObjectContext=managedContext;
-        self.managedObjectModel=managedModel;
+		self.managedObjectContext=managedContext;
+		self.managedObjectModel=managedModel;
 
-         }
+	}
     return self;
 }
 

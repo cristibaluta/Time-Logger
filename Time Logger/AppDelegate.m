@@ -28,7 +28,17 @@
 	//projectsList.view.frame = CGRectMake(0, 0, 215, 660);
 	
 	// Add the projects sidebar in the left view of the splitview
-	[[[self.splitView subviews] objectAtIndex:0] addSubview:projectsList.view];
+	//[[[self.splitView subviews] objectAtIndex:0] setView:projectsList.view];
+	[self.splitView replaceSubview:[[self.splitView subviews] objectAtIndex:0] with:projectsList.view];
+	
+	
+	projectConfig = [[ProjectConfigViewController alloc] initWithNibName:@"ProjectConfigViewController"
+																  bundle:[NSBundle mainBundle]
+													managedObjectContext:self.managedObjectContext
+													  managedObjectModel:self.managedObjectModel];
+	//projectTimeline.view.frame = ((NSView*)self.tabView.selectedTabViewItem.view).frame;
+	projectConfig.view.autoresizesSubviews = YES;
+	[projectConfig.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 	
 	
 	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimelineViewController"
@@ -38,9 +48,17 @@
 	//projectTimeline.view.frame = ((NSView*)self.tabView.selectedTabViewItem.view).frame;
 	projectTimeline.view.autoresizesSubviews = YES;
 	[projectTimeline.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-	[self.tabView.selectedTabViewItem.view addSubview:projectTimeline.view];
 	
 	//[self.window visualizeConstraints:projectTimeline.view.constraints];
+	
+	NSTabViewItem *timelineTab = [self.tabView tabViewItemAtIndex:0];
+	[timelineTab setView:projectTimeline.view];
+	
+	NSTabViewItem *graphTab = [self.tabView tabViewItemAtIndex:1];
+	[graphTab setView:projectTimeline.view];
+	
+	NSTabViewItem *configTab = [self.tabView tabViewItemAtIndex:2];
+	[configTab setView:projectConfig.view];
 	
 	// Create the dispatcher
 	
@@ -103,31 +121,22 @@
 	pid_t pid = app.processIdentifier;
 	[dispatcher logApp:app];
 	
-	NSLog(@"Active application is: %@ %i", activeApp, pid);
+	//NSLog(@"Active application is: %@ %i", activeApp, pid);
 	
 	
-	CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionAll, kCGNullWindowID);
-	for (NSMutableDictionary* entry in (__bridge NSArray*)windowList)
-	{
-		NSString* winName = [entry objectForKey:(id)kCGWindowName];
-		NSInteger ownerPID = [[entry objectForKey:(id)kCGWindowOwnerPID] integerValue];
-		NSLog(@"%@ %li", winName, (long)ownerPID);
-		
-		if (ownerPID == pid) {
-			NSLog(@"-----------------------FOUND");
-		}
-	}
-	CFRelease(windowList);
-	
-	
-	//id safari = [SBApplication applicationWithBundleIdentifier:@"com.apple.Safari"];
-//	NSLog(@"%@", safari);
-//	for (id window in safari.windows) {
-//		if (window.visible) {
-//			NSString *result = window.currentTab.URL;
-//			break;
+//	CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionAll, kCGNullWindowID);
+//	for (NSMutableDictionary* entry in (__bridge NSArray*)windowList)
+//	{
+//		NSString* winName = [entry objectForKey:(id)kCGWindowName];
+//		NSInteger ownerPID = [[entry objectForKey:(id)kCGWindowOwnerPID] integerValue];
+//		NSLog(@"%@ %li", winName, (long)ownerPID);
+//		
+//		if (ownerPID == pid) {
+//			NSLog(@"-----------------------FOUND");
 //		}
 //	}
+//	CFRelease(windowList);
+	
 	
 //	NSError *err = nil;
 	NSDictionary *derr = nil;
