@@ -8,149 +8,306 @@
 
 #import "ProjectsSidebarViewController.h"
 #import "ProjectsSidebarCell.h"
-
-@interface ProjectsSidebarViewController ()
-
-@end
+#import "SourceListItem.h"
+#import "Project.h"
 
 @implementation ProjectsSidebarViewController
 
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext *) managedContext managedObjectModel:(NSManagedObjectModel *) managedModel
+
+#pragma mark -
+#pragma mark Init/Dealloc
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil
+			   bundle:(NSBundle *)nibBundleOrNil
+ managedObjectContext:(NSManagedObjectContext *)managedContext
+   managedObjectModel:(NSManagedObjectModel *)managedModel
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
-		self.managedObjectContext=managedContext;
-		self.managedObjectModel=managedModel;
-
+		self.managedObjectContext = managedContext;
+		self.managedObjectModel = managedModel;
 	}
     return self;
 }
 
 
-- (void)loadView
-{
-    [super loadView];
-
-    NSError *error;
-    if ([projectsArray fetchWithRequest:nil merge:YES error:&error]==NO)
-    {
-        NSLog(@"Error fetching the projects array controller");
-    }
-
-
-    [projectsTable reloadData];
-
+- (void)awakeFromNib {
+	
+	sourceListItems = [[NSMutableArray alloc] init];
+	
+	// Set up the categories
+	
+	SourceListItem *libraryItem = [SourceListItem itemWithTitle:@"PROJECTS" identifier:@"projects"];
+	SourceListItem *archiveItem = [SourceListItem itemWithTitle:@"ARCHIVED PROJECTS" identifier:@"archive"];
+	SourceListItem *recreationalItem = [SourceListItem itemWithTitle:@"RECREATIONAL" identifier:@"recreational"];
+	
+	[sourceListItems addObjectsFromArray:@[libraryItem, archiveItem, recreationalItem]];
+	
+	// Add default recreational projects
+	
+	SourceListItem *i1 = [SourceListItem itemWithTitle:@"Facebook" identifier:@"facebook"];
+	[i1 setIcon:[NSImage imageNamed:@"facebook.png"]];
+	SourceListItem *i2 = [SourceListItem itemWithTitle:@"YouTube" identifier:@"youtube"];
+	[i2 setIcon:[NSImage imageNamed:@"youtube.png"]];
+	SourceListItem *i3 = [SourceListItem itemWithTitle:@"Movie Time" identifier:@"movies"];
+	[i3 setIcon:[NSImage imageNamed:@"movies.png"]];
+	SourceListItem *i4 = [SourceListItem itemWithTitle:@"Photography" identifier:@"photo"];
+	[i4 setIcon:[NSImage imageNamed:@"photo.png"]];
+	SourceListItem *i5 = [SourceListItem itemWithTitle:@"Reading Books" identifier:@"books"];
+	[i5 setIcon:[NSImage imageNamed:@"book.png"]];
+	SourceListItem *i6 = [SourceListItem itemWithTitle:@"Idle" identifier:@"idle"];
+	[i6 setIcon:[NSImage imageNamed:@"podcasts.png"]];
+	SourceListItem *i7 = [SourceListItem itemWithTitle:@"Eating" identifier:@"eat"];
+	[i7 setIcon:[NSImage imageNamed:@"podcasts.png"]];
+	SourceListItem *i8 = [SourceListItem itemWithTitle:@"Sleep" identifier:@"sleep"];
+	[i8 setIcon:[NSImage imageNamed:@"podcasts.png"]];
+	recreationalItem.children = @[i1, i2, i3, i4, i5, i6, i7, i8];
+	
+	
+	// Read all the projects
+	
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	NSSortDescriptor *sortByDate = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+	[fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
+	
+	NSError *error;
+	NSArray *projects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	NSLog(@"Projects %@", projects);
+	
+	if (!error) {
+		for (Project *project in projects) {
+			NSLog(@"Project %@ %@", project.name, project.category);
+			
+			SourceListItem *item = [sourceListItems objectAtIndex:[project.category intValue]];
+			SourceListItem *newItem = [SourceListItem itemWithTitle:project.name identifier:project.project_id];
+			[item setIcon:[NSImage imageNamed:@"music.png"]];
+			
+			NSArray *arr = item.children;
+			if (arr == nil) {
+				arr = [NSArray array];
+			}
+			item.children = [arr arrayByAddingObject:newItem];
+		}
+	}
+	
+	[sourceList reloadData];
 }
 
-// Projects Outline View START
+
+
+- (void)loadView {
+    [super loadView];
+	NSLog(@"loadView");
+}
+
 
 #pragma mark -
-#pragma mark OutlineView Data Source Delegate Methods
+#pragma mark Source List Data Source Methods
 
-- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
-{
-    return [[projectsArray arrangedObjects] objectAtIndex:index];
+- (NSUInteger)sourceList:(PXSourceList*)sourceList numberOfChildrenOfItem:(id)item {
+	// Works the same way as the NSOutlineView data source: `nil` means a parent item
+	if (item == nil) {
+		return [sourceListItems count];
+	}
+	else {
+		return [[item children] count];
+	}
 }
 
--(NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
-    if (![item isKindOfClass:[ProjectsSidebarCell class]]) {
-        ProjectsSidebarCell *cellView = [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
-        cellView.name.stringValue=[item valueForKey:@"name"];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
-
-        
-        NSString *currentTime = [dateFormatter stringFromDate:[item valueForKey:@"date_created"]];
-        
-        cellView.time.stringValue=currentTime;
-        if ([[item valueForKey:@"tracking"] intValue]==1) {
-            [cellView.tracking setState:NSOnState];
-        }
-        else
-        {
-            [cellView.tracking setState:NSOffState];
-        }
-        return cellView;
-    } else {
-        return [outlineView makeViewWithIdentifier:@"HeaderCell" owner:self];
-    }
-
+- (id)sourceList:(PXSourceList*)aSourceList child:(NSUInteger)index ofItem:(id)item {
+	//Works the same way as the NSOutlineView data source: `nil` means a parent item
+	if (item == nil) {
+		return [sourceListItems objectAtIndex:index];
+	}
+	else {
+		return [[item children] objectAtIndex:index];
+	}
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
-{
-    //Return YES for the top level item, NO for the others.
-    if (item == nil) {
-        return YES;
-    }
-    
-    return NO;
-    
+- (id)sourceList:(PXSourceList*)aSourceList objectValueForItem:(id)item {
+	return [item title];
 }
 
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
-{
-    //return [dataSource count];
-    return [[projectsArray arrangedObjects] count];
-    
+- (void)sourceList:(PXSourceList*)aSourceList setObjectValue:(id)object forItem:(id)item {
+	[item setTitle:object];
 }
 
-// Projects Outline END
+- (BOOL)sourceList:(PXSourceList*)aSourceList isItemExpandable:(id)item {
+	return [item hasChildren];
+}
+
+- (BOOL)sourceList:(PXSourceList*)aSourceList itemHasBadge:(id)item {
+	return [item hasBadge];
+}
+
+- (NSInteger)sourceList:(PXSourceList*)aSourceList badgeValueForItem:(id)item {
+	return [item badgeValue];
+}
+
+- (BOOL)sourceList:(PXSourceList*)aSourceList itemHasIcon:(id)item {
+	return [item hasIcon];
+}
+
+- (NSImage*)sourceList:(PXSourceList*)aSourceList iconForItem:(id)item {
+	return [item icon];
+}
+
+- (NSMenu*)sourceList:(PXSourceList*)aSourceList menuForEvent:(NSEvent*)theEvent item:(id)item
+{
+	NSLog(@"menuForEvent %@", theEvent);
+	if ([theEvent type] == NSRightMouseDown ||
+		([theEvent type] == NSLeftMouseDown && ([theEvent modifierFlags] & NSControlKeyMask) == NSControlKeyMask))
+	{
+		NSMenu * m = [[NSMenu alloc] init];
+		if (item != nil) {
+			[m addItemWithTitle:@"Enable tracking" action:nil keyEquivalent:@""];
+			[m addItemWithTitle:@"Disable tracking" action:nil keyEquivalent:@""];
+			[m addItemWithTitle:@"Archive" action:nil keyEquivalent:@""];
+		} else {
+			[m addItemWithTitle:@"New Project" action:nil keyEquivalent:@""];
+			[m addItemWithTitle:@"Colapse all" action:nil keyEquivalent:@""];
+		}
+		return m;
+	}
+	return nil;
+}
+
+#pragma mark -
+#pragma mark Source List Delegate Methods
+
+- (BOOL)sourceList:(PXSourceList*)aSourceList isGroupAlwaysExpanded:(id)group {
+	
+	if ([[group identifier] isEqualToString:@"archive"]) return NO;
+	return YES;
+}
+
+
+- (void)sourceListSelectionDidChange:(NSNotification *)notification {
+	
+	NSIndexSet *selectedIndexes = [sourceList selectedRowIndexes];
+	NSLog(@"sourceListSelectionDidChange %@", selectedIndexes);
+	
+	//Set the label text to represent the new selection
+	if ([selectedIndexes count] > 1) {
+		
+	}
+	else if ([selectedIndexes count] == 1) {
+		NSString *identifier = [[sourceList itemAtRow:[selectedIndexes firstIndex]] identifier];
+		NSLog(@"identifier %@", identifier);
+		
+		[self.delegate projectDidSelect:identifier];
+	}
+	else {
+		
+	}
+}
+
+
+- (void)sourceListDeleteKeyPressedOnRows:(NSNotification *)notification {
+	
+	NSIndexSet *rows = [[notification userInfo] objectForKey:@"rows"];
+	NSLog(@"Delete key pressed on rows %@", rows);
+	
+	//Do something here
+	
+}
+
+
+//-(NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
+//{
+//    if (![item isKindOfClass:[ProjectsSidebarCell class]]) {
+//        ProjectsSidebarCell *cellView = [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
+//        cellView.name.stringValue=[item valueForKey:@"name"];
+//        
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+//        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+//        [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+//
+//        
+//        NSString *currentTime = [dateFormatter stringFromDate:[item valueForKey:@"date_created"]];
+//        
+//        cellView.time.stringValue=currentTime;
+//        if ([[item valueForKey:@"tracking"] intValue]==1) {
+//            [cellView.tracking setState:NSOnState];
+//        }
+//        else
+//        {
+//            [cellView.tracking setState:NSOffState];
+//        }
+//        return cellView;
+//    } else {
+//        return [outlineView makeViewWithIdentifier:@"HeaderCell" owner:self];
+//    }
+//
+//}
+
 
 - (IBAction)addProject:(id)sender
 {
-    NSWindow *w = [projectsTable window];
+    NSWindow *w = [sourceList window];
 	BOOL endEdit = [w makeFirstResponder:w];
 	if (!endEdit)
 		return;
 	
-    //create a new object to add to NSTableView
-	NSObject *new = [projectsArray newObject];
-    [new setValue:@"New Project..." forKey:@"name"];
-    [new setValue:[NSDate date]forKey:@"date_created"];
-    [new setValue:[NSNumber numberWithInt:1] forKey:@"tracking"];
-    
-    [projectsArray addObject:new];
-    [projectsTable reloadData];
-    
-    
-	[projectsTable editColumn:0 row:[[projectsArray arrangedObjects] indexOfObject:new] withEvent:nil select:YES];
+    // Create a new object to add to NSTableView
+	
+	SourceListItem *newItem = [SourceListItem itemWithTitle:@"Blank Project" identifier:@"blank"];
+	[newItem setIcon:[NSImage imageNamed:@"music.png"]];
+	
+    [sourceListItems addObject:newItem];
+	
+    [sourceList reloadData];
+	[sourceList editColumn:0 row:[sourceListItems indexOfObject:newItem] withEvent:nil select:YES];
+	
+	
+	Project *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
+	timelog.category = 0;
+	timelog.date_created = [NSDate date];
+	timelog.name = @"Project 2";
+	timelog.project_id = @"p2";
+	timelog.tracking = [NSNumber numberWithBool:YES];
+	timelog.client_id = @"clientid1";
+	timelog.descr = @"Some description for this project....";
+	//@property (nonatomic, retain) ProjectApp *apps;
 }
 
 - (IBAction)deleteProject:(id)sender
 {
-    if ([projectsTable selectedRow]>=0) {
-        [projectsArray removeObjectAtArrangedObjectIndex:[projectsTable selectedRow]];
-        [projectsTable reloadData];
+	NSLog(@"Delete object at index %li", (long)[sourceList selectedRow]);
+    if ([sourceList selectedRow] >= 0) {
+        [sourceListItems removeObjectAtIndex:[sourceList selectedRow]];
+        [sourceList reloadData];
     }
- 
-}
-- (IBAction)toggleTracking:(id)sender
-{
-    
-    NSInteger row=[projectsTable rowForView:sender];
-    int state=[(NSButton *)sender state]==NSOnState?1:0;
-    
-    [[[projectsArray arrangedObjects] objectAtIndex:row] setValue:[NSNumber numberWithInt:state] forKey:@"tracking"];
-
-
 }
 
--(void)controlTextDidEndEditing:(NSNotification *)notification {
-    if ([[notification object] isKindOfClass:[NSTextField class]])
-     {
-         NSTextField *textField = [notification object];
-         [[[projectsArray arrangedObjects] objectAtIndex:[projectsTable selectedRow]] setValue:textField.stringValue forKey:@"name"];
-     }
+//- (IBAction)toggleTracking:(id)sender
+//{
+//    
+//    NSInteger row=[projectsTable rowForView:sender];
+//    int state=[(NSButton *)sender state]==NSOnState?1:0;
+//    
+//    [[[projectsArray arrangedObjects] objectAtIndex:row] setValue:[NSNumber numberWithInt:state] forKey:@"tracking"];
+//
+//
+//}
 
+- (void)controlTextDidEndEditing:(NSNotification *)notification {
+	
+	NSLog(@"controlTextDidEndEditing %@", notification);
+	
+	if ([[notification object] isKindOfClass:[NSTextField class]]) {
+	NSTextField *textField = [notification object];
+         //[[[projectsArray arrangedObjects] objectAtIndex:[projectsTable selectedRow]] setValue:textField.stringValue forKey:@"name"];
+	}
 }
 
 @end

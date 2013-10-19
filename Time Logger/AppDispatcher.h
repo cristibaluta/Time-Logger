@@ -17,7 +17,7 @@
 
 @required
 - (void) didStartTrackingApp:(NSRunningApplication*)app;
-- (void) didStopTrackingApp:(NSRunningApplication*)app;
+- (void) didStopTrackingApp:(NSRunningApplication*)app windowName:(NSString*)name;
 - (void) didBecomeIdle;
 
 @end
@@ -26,12 +26,13 @@
 @interface AppDispatcher : NSObject {
 	
 	NSRunningApplication *lastApp;
+	NSString *lastName;
 	NSDate *lastUserActivity;
 }
 
 @property (nonatomic, retain) id<AppDispatcherDelegate> delegate;
 
-- (void) logApp:(NSRunningApplication*)app;
+- (void) logApp:(NSRunningApplication*)app windowName:(NSString*)name;
 - (void) mouseMoved;
 - (void) keyPressed;
 

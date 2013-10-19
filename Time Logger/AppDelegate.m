@@ -25,6 +25,7 @@
 																   bundle:[NSBundle mainBundle]
 													 managedObjectContext:self.managedObjectContext
 													   managedObjectModel:self.managedObjectModel];
+	projectsList.delegate = self;
 	// Add the projects sidebar in the left view of the splitview
 	[self.splitView replaceSubview:[[self.splitView subviews] objectAtIndex:0] with:projectsList.view];
 	
@@ -107,8 +108,35 @@
 	
 	NSDictionary *activeApp = [[NSWorkspace sharedWorkspace] activeApplication];
 	NSRunningApplication *app = activeApp[NSWorkspaceApplicationKey];
-	pid_t pid = app.processIdentifier;
-	[dispatcher logApp:app];
+	//pid_t pid = app.processIdentifier;
+	NSString *document_name = @"";
+	NSString *script;
+	NSString *browsers = @"com.apple.Safari,org.mozilla.firefox,com.google.Chrome,com.operasoftware.Opera";
+	if ([browsers rangeOfString:app.bundleIdentifier].location != NSNotFound)
+	{
+		script = @"GetBrowserUrl";
+	}
+	else {
+		script = @"GetAppWindowName";
+	}
+	
+	NSDictionary *derr = nil;
+	NSError *err;
+	NSURL *url = [[NSBundle mainBundle] URLForResource:script withExtension:@"txt"];
+	NSString *scrpt = [NSString stringWithContentsOfURL:url encoding:NSStringEncodingConversionAllowLossy error:&err];
+	scrpt = [scrpt stringByReplacingOccurrencesOfString:@"app_identifier" withString:app.bundleIdentifier];
+	NSAppleScript *ascr = [[NSAppleScript alloc] initWithSource:scrpt];
+	NSAppleEventDescriptor *descriptor = [ascr executeAndReturnError:&derr];
+	
+	if (derr != nil) {
+		NSLog(@"err2: %@", derr);
+	}
+	else {
+		//NSLog(@"good2: %@", descriptor);
+		document_name = [descriptor stringValue];
+	}
+	
+	[dispatcher logApp:app windowName:document_name];
 	
 	//NSLog(@"Active application is: %@ %i", activeApp, pid);
 	
@@ -137,7 +165,8 @@
 	lastDate = [NSDate date];
 	[projectTimeline fetch];
 }
-- (void) didStopTrackingApp:(NSRunningApplication*)app {
+
+- (void) didStopTrackingApp:(NSRunningApplication*)app windowName:(NSString*)name {
 	
 	NSLog(@"stop tracking %@ %@", app.localizedName, app.bundleIdentifier);
 	NSError *error;
@@ -150,6 +179,7 @@
 	timelog.caption = app.localizedName;
 	timelog.end_time = [NSDate date];
 	timelog.start_time = lastDate;
+	timelog.document_name = name;
 	
 	// Insert the app in database if does not exist
 	
@@ -159,7 +189,7 @@
 	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:context];
 	[fetchRequest setEntity:a];
 	
-	NSUInteger nr = [context countForFetchRequest:fetchRequest error:&error];
+	//NSUInteger nr = [context countForFetchRequest:fetchRequest error:&error];
 	
 //	if (nr == 0) {
 //		NSLog(@"store app %@", app.bundleIdentifier);
@@ -169,47 +199,12 @@
 //		aa.icon = [app.icon TIFFRepresentation];
 //	}
 	
-	if ([app.bundleIdentifier isEqualToString:@"com.apple.Safari"]) {
-		NSDictionary *derr = nil;
-		NSURL* scriptURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"GetSafariUrl" ofType:@"scpt"]];
-		NSAppleScript *ascr = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&derr];
-		NSAppleEventDescriptor *descriptor = [ascr executeAndReturnError:&derr];
-		
-		if (derr != nil) {
-			NSLog(@"err: %@", derr);
-		}
-		else {
-			NSLog(@"good: %@", descriptor);
-			//timelog.document_name = res;
-		}
-		
-		timelog.document_name = [descriptor stringValue];
-		
-	}
-	else {
-		NSDictionary *derr = nil;
-		NSError *err;
-		NSURL *url = [[NSBundle mainBundle] URLForResource:@"GetAppWindowName" withExtension:@"txt"];
-		NSString *scrpt = [NSString stringWithContentsOfURL:url encoding:NSStringEncodingConversionAllowLossy error:&err];
-		scrpt = [scrpt stringByReplacingOccurrencesOfString:@"app_identifier" withString:app.bundleIdentifier];
-		NSAppleScript *ascr = [[NSAppleScript alloc] initWithSource:scrpt];
-		NSAppleEventDescriptor *descriptor = [ascr executeAndReturnError:&derr];
-		
-		if (derr != nil) {
-			NSLog(@"err2: %@", derr);
-			timelog.document_name = @"";
-		}
-		else {
-			NSLog(@"good2: %@", descriptor);
-			timelog.document_name = [descriptor stringValue];
-		}
-	}
 	
 	if (![context save:&error]) {
 		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
 	}
-	
 }
+
 - (void) didBecomeIdle {
 	
 	
@@ -217,8 +212,18 @@
 
 
 
+#pragma mark ProjectsSidebar delegate
 
-// Returns the directory the application uses to store the Core Data store file. This code uses a directory named "ralcr.com.Time_Logger" in the user's Application Support directory.
+- (void)projectDidSelect:(NSString*)project_id {
+	
+	[self.tabView selectTabViewItemAtIndex:2];
+	
+	projectConfig.textDescription.stringValue = @"Description here...";
+}
+
+
+// Returns the directory the application uses to store the Core Data store file.
+// This code uses a directory named "ralcr.com.Time_Logger" in the user's Application Support directory.
 - (NSURL *)applicationFilesDirectory
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -238,7 +243,9 @@
     return _managedObjectModel;
 }
 
-// Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
+// Returns the persistent store coordinator for the application.
+// This implementation creates and return a coordinator, having added the store for the application to it.
+// (The directory for the store is created, if necessary.)
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     if (_persistentStoreCoordinator) {
@@ -291,7 +298,8 @@
     return _persistentStoreCoordinator;
 }
 
-// Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) 
+// Returns the managed object context for the application
+// (which is already bound to the persistent store coordinator for the application.)
 - (NSManagedObjectContext *)managedObjectContext
 {
     if (_managedObjectContext) {
@@ -313,13 +321,16 @@
     return _managedObjectContext;
 }
 
-// Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
+// Returns the NSUndoManager for the application.
+// In this case, the manager returned is that of the managed object context for the application.
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window
 {
     return [[self managedObjectContext] undoManager];
 }
 
-// Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
+// Performs the save action for the application,
+// which is to send the save: message to the application's managed object context.
+// Any encountered errors are presented to the user.
 - (IBAction)saveAction:(id)sender
 {
     NSError *error = nil;
@@ -364,8 +375,8 @@
             return NSTerminateCancel;
         }
 
-        NSString *question = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"Quit without saves error question message");
-        NSString *info = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"Quit without saves error question info");
+        NSString *question = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"");
+        NSString *info = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"");
         NSString *quitButton = NSLocalizedString(@"Quit anyway", @"Quit anyway button title");
         NSString *cancelButton = NSLocalizedString(@"Cancel", @"Cancel button title");
         NSAlert *alert = [[NSAlert alloc] init];

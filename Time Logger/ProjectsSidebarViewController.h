@@ -10,21 +10,33 @@
 // Each project will have a checkmark to indicate if it's being tracked or not.
 
 #import <Cocoa/Cocoa.h>
+#import "PXSourceList.h"
 
-@interface ProjectsSidebarViewController : NSViewController <NSOutlineViewDataSource>
-{
-    IBOutlet NSArrayController *projectsArray;
-    IBOutlet NSOutlineView *projectsTable;
+@protocol ProjectsSidebarDelegate <NSObject>
+
+@required
+- (void)projectDidSelect:(NSString*)project_id;
+
+@end
+
+
+@interface ProjectsSidebarViewController : NSViewController <PXSourceListDataSource, PXSourceListDelegate> {
+	
+	IBOutlet PXSourceList *sourceList;
+	NSMutableArray *sourceListItems;
 }
 
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) id<ProjectsSidebarDelegate> delegate;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext *) managedContext managedObjectModel:(NSManagedObjectModel *) managedModel;
+- (id)initWithNibName:(NSString*)nibNameOrNil
+			   bundle:(NSBundle*)nibBundleOrNil
+ managedObjectContext:(NSManagedObjectContext*)managedContext
+   managedObjectModel:(NSManagedObjectModel*)managedModel;
 
 - (IBAction)addProject:(id)sender;
 - (IBAction)deleteProject:(id)sender;
-- (IBAction)toggleTracking:(id)sender;
 
 @end

@@ -12,12 +12,25 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ProjectConfigViewController : NSViewController
+@interface ProjectConfigViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
+{
+	NSArray *runningApplications;
+}
 
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext *) managedContext managedObjectModel:(NSManagedObjectModel *) managedModel;
+@property (strong, nonatomic) IBOutlet NSTextField *textDescription;
+@property (strong, nonatomic) IBOutlet NSTextField *textClientName;
+@property (strong, nonatomic) IBOutlet NSTextField *textClientEmail;
+@property (strong, nonatomic) IBOutlet NSTableView *tableView;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil
+			   bundle:(NSBundle *)nibBundleOrNil
+ managedObjectContext:(NSManagedObjectContext *)managedContext
+   managedObjectModel:(NSManagedObjectModel *)managedModel;
+
+- (void)save;
 
 @end

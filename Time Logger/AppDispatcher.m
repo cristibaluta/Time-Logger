@@ -11,23 +11,26 @@
 @implementation AppDispatcher
 
 
-- (void) logApp:(NSRunningApplication*)app {
+- (void) logApp:(NSRunningApplication*)app windowName:(NSString*)name {
 	
-	if (lastApp != nil && ! [app isEqual:lastApp]) {
+	if (lastApp != nil && (! [app isEqual:lastApp] || ([app isEqual:lastApp] && ! [name isEqualToString:lastName]))) {
 		
 		// When we already have an lastApp and the activeApp has switched
 		// Stop logging the last app and start logging the new app
 		
-		[self.delegate didStopTrackingApp:lastApp];
+		[self.delegate didStopTrackingApp:lastApp windowName:name];
 		[self.delegate didStartTrackingApp:app];
 		
 		lastApp = app;
+		lastName = name;
 	}
 	else if (lastApp == nil) {
 		
 		// Log the first app since you've opened TimeLogger
 		
 		lastApp = app;
+		lastName = name;
+		
 		[self.delegate didStartTrackingApp:app];
 	}
 }

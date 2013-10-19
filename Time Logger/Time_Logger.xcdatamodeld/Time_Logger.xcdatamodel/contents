@@ -34,9 +34,9 @@
     </entity>
     <elements>
         <element name="App" positionX="135" positionY="387" width="128" height="90"/>
+        <element name="Client" positionX="135" positionY="504" width="128" height="90"/>
         <element name="Project" positionX="135" positionY="197" width="128" height="165"/>
         <element name="ProjectApp" positionX="340" positionY="234" width="128" height="90"/>
         <element name="TimeLog" positionX="340" positionY="384" width="128" height="120"/>
-        <element name="Client" positionX="234" positionY="324" width="128" height="90"/>
     </elements>
 </model>

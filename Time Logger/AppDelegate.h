@@ -14,7 +14,7 @@
 #import "ProjectConfigViewController.h"
 #import "ProjectTimelineViewController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, AppDispatcherDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, AppDispatcherDelegate, ProjectsSidebarDelegate> {
 	
 	NSArray *runningApplications;
 	NSTimer *timer;

@@ -7,6 +7,7 @@
 //
 
 #import "ProjectConfigViewController.h"
+#import "Project.h"
 
 @implementation ProjectConfigViewController
 
@@ -25,5 +26,79 @@
     return self;
 }
 
+- (void)loadView {
+    [super loadView];
+	
+	runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
+	
+}
+
+
+
+
+#pragma mark TableViewDatasource
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
+	
+	return runningApplications.count;
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+
+	//NSLog(@"populate row %li %@", rowIndex, [aTableColumn identifier]);
+
+	NSRunningApplication *app = [runningApplications objectAtIndex:rowIndex];
+
+	// icon
+	// localizedName
+	// bundleIdentifier
+
+	if ([[aTableColumn identifier] isEqualToString:@"icon"]) {
+        return app.icon;
+    }
+	if ([[aTableColumn identifier] isEqualToString:@"name"]) {
+        return app.localizedName;
+    }
+	if ([[aTableColumn identifier] isEqualToString:@"identifier"]) {
+        return app.bundleIdentifier;
+    }
+
+    return nil;
+}
+
+
+
+#pragma mark save data
+
+- (void)save {
+	
+	NSManagedObjectContext *context = self.managedObjectContext;
+	Project *project = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:context];
+	project.category = [NSNumber numberWithInt:0];
+	project.date_created = [NSDate date];
+	project.name = @"";
+	project.project_id = @"";
+	project.tracking = [NSNumber numberWithBool:YES];
+	project.client_id = @"";
+	project.descr = self.textDescription.stringValue;
+	project.apps = @[];
+	
+	NSError *error;
+	if (![context save:&error]) {
+		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+	}
+	
+	// Read the database
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:context];
+	[fetchRequest setEntity:entity];
+	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+	for (NSManagedObject *info in fetchedObjects) {
+		NSLog(@"app_identifier: %@", [info valueForKey:@"app_identifier"]);
+		NSLog(@"start_time: %@", [info valueForKey:@"start_time"]);
+		NSLog(@"end_time: %@", [info valueForKey:@"end_time"]);
+	}
+	//	NSLog(@"FIN TESTING \n");
+}
 
 @end

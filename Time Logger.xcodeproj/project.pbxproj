@@ -9,9 +9,16 @@
 /* Begin PBXBuildFile section */
 		280A807217A99239006ECD5C /* TimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280A807117A99239006ECD5C /* TimelineCell.m */; };
 		280A807317A9B106006ECD5C /* ProjectsSidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */; };
+		283C70C61802DF9100EB161E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283C70C51802DF9100EB161E /* CoreServices.framework */; };
+		283C70C81803067800EB161E /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C70C71803067800EB161E /* facebook.png */; };
+		283C70CA1803074B00EB161E /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C70C91803074B00EB161E /* photo.png */; };
+		283C70CC1803092500EB161E /* youtube.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C70CB1803092500EB161E /* youtube.png */; };
+		283C70CE1803099100EB161E /* book.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C70CD1803099100EB161E /* book.png */; };
 		2854C27117B6719B0090BD3E /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854C27017B6719B0090BD3E /* Client.m */; };
 		2854C27B17B691CC0090BD3E /* GetAppWindowName.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2854C27A17B691CC0090BD3E /* GetAppWindowName.txt */; };
 		2854C27D17B6970B0090BD3E /* GetBrowserUrl.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2854C27C17B6970B0090BD3E /* GetBrowserUrl.txt */; };
+		2854C28317B9B4110090BD3E /* PXSourceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854C28017B9B4110090BD3E /* PXSourceList.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2854C28F17BB95740090BD3E /* icons.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2854C28E17BB95740090BD3E /* icons.icns */; };
 		289737E717A07CAF003B18D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289737E617A07CAF003B18D3 /* Cocoa.framework */; };
 		289737F117A07CAF003B18D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 289737EF17A07CAF003B18D3 /* InfoPlist.strings */; };
 		289737F317A07CAF003B18D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 289737F217A07CAF003B18D3 /* main.m */; };
@@ -33,6 +40,13 @@
 		28CFCCFD17A63469001511EF /* ProjectReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCFB17A63468001511EF /* ProjectReportViewController.m */; };
 		28CFCCFE17A63469001511EF /* ProjectReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCFC17A63469001511EF /* ProjectReportViewController.xib */; };
 		28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCD0017A6466A001511EF /* NSDictionary+Color.m */; };
+		28D0559C18003D08002F5246 /* SourceListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D0559B18003D08002F5246 /* SourceListItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		28D055A418003D2B002F5246 /* audiobooks.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D0559E18003D2B002F5246 /* audiobooks.png */; };
+		28D055A518003D2B002F5246 /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D0559F18003D2B002F5246 /* movies.png */; };
+		28D055A618003D2B002F5246 /* music.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D055A018003D2B002F5246 /* music.png */; };
+		28D055A718003D2B002F5246 /* playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D055A118003D2B002F5246 /* playlist.png */; };
+		28D055A818003D2B002F5246 /* playlistFolder.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D055A218003D2B002F5246 /* playlistFolder.png */; };
+		28D055A918003D2B002F5246 /* podcasts.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D055A318003D2B002F5246 /* podcasts.png */; };
 		28D475E617ACE6F400C189AB /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D475E517ACE6F400C189AB /* App.m */; };
 		28D475EF17ACE71C00C189AB /* TimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D475EE17ACE71C00C189AB /* TimeLog.m */; };
 		28D475F217ACE72D00C189AB /* ProjectApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D475F117ACE72D00C189AB /* ProjectApp.m */; };
@@ -53,10 +67,20 @@
 /* Begin PBXFileReference section */
 		280A807017A99239006ECD5C /* TimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineCell.h; sourceTree = "<group>"; };
 		280A807117A99239006ECD5C /* TimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineCell.m; sourceTree = "<group>"; };
+		283C70C51802DF9100EB161E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		283C70C71803067800EB161E /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		283C70C91803074B00EB161E /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
+		283C70CB1803092500EB161E /* youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube.png; sourceTree = "<group>"; };
+		283C70CD1803099100EB161E /* book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = book.png; sourceTree = "<group>"; };
 		2854C26F17B6719B0090BD3E /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
 		2854C27017B6719B0090BD3E /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
 		2854C27A17B691CC0090BD3E /* GetAppWindowName.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GetAppWindowName.txt; path = AppleScripts/GetAppWindowName.txt; sourceTree = "<group>"; };
 		2854C27C17B6970B0090BD3E /* GetBrowserUrl.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GetBrowserUrl.txt; path = AppleScripts/GetBrowserUrl.txt; sourceTree = "<group>"; };
+		2854C27F17B9B4110090BD3E /* PXSourceList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSourceList.h; sourceTree = "<group>"; };
+		2854C28017B9B4110090BD3E /* PXSourceList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSourceList.m; sourceTree = "<group>"; };
+		2854C28117B9B4110090BD3E /* PXSourceListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSourceListDataSource.h; sourceTree = "<group>"; };
+		2854C28217B9B4110090BD3E /* PXSourceListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSourceListDelegate.h; sourceTree = "<group>"; };
+		2854C28E17BB95740090BD3E /* icons.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icons.icns; sourceTree = "<group>"; };
 		289737E317A07CAF003B18D3 /* Time Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		289737E617A07CAF003B18D3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		289737E917A07CAF003B18D3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -93,6 +117,14 @@
 		28CFCCFC17A63469001511EF /* ProjectReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectReportViewController.xib; sourceTree = "<group>"; };
 		28CFCCFF17A6466A001511EF /* NSDictionary+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Color.h"; sourceTree = "<group>"; };
 		28CFCD0017A6466A001511EF /* NSDictionary+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Color.m"; sourceTree = "<group>"; };
+		28D0559A18003D08002F5246 /* SourceListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceListItem.h; sourceTree = "<group>"; };
+		28D0559B18003D08002F5246 /* SourceListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceListItem.m; sourceTree = "<group>"; };
+		28D0559E18003D2B002F5246 /* audiobooks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audiobooks.png; sourceTree = "<group>"; };
+		28D0559F18003D2B002F5246 /* movies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movies.png; sourceTree = "<group>"; };
+		28D055A018003D2B002F5246 /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music.png; sourceTree = "<group>"; };
+		28D055A118003D2B002F5246 /* playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlist.png; sourceTree = "<group>"; };
+		28D055A218003D2B002F5246 /* playlistFolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlistFolder.png; sourceTree = "<group>"; };
+		28D055A318003D2B002F5246 /* podcasts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = podcasts.png; sourceTree = "<group>"; };
 		28D475E417ACE6F400C189AB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		28D475E517ACE6F400C189AB /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
 		28D475ED17ACE71C00C189AB /* TimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLog.h; sourceTree = "<group>"; };
@@ -111,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				283C70C61802DF9100EB161E /* CoreServices.framework in Frameworks */,
 				289737E717A07CAF003B18D3 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +160,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2854C27E17B6A55F0090BD3E /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				28CFCCE417A582F5001511EF /* ProjectsSidebarViewController.h */,
+				28CFCCE517A582F5001511EF /* ProjectsSidebarViewController.m */,
+				F27A456C17A8382C003E9543 /* ProjectsSidebarCell.h */,
+				F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */,
+				2854C27F17B9B4110090BD3E /* PXSourceList.h */,
+				2854C28017B9B4110090BD3E /* PXSourceList.m */,
+				28D0559A18003D08002F5246 /* SourceListItem.h */,
+				28D0559B18003D08002F5246 /* SourceListItem.m */,
+				2854C28117B9B4110090BD3E /* PXSourceListDataSource.h */,
+				2854C28217B9B4110090BD3E /* PXSourceListDelegate.h */,
+			);
+			name = Sidebar;
+			sourceTree = "<group>";
+		};
 		289737DA17A07CAF003B18D3 = {
 			isa = PBXGroup;
 			children = (
@@ -149,31 +199,24 @@
 		289737E517A07CAF003B18D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				289737E617A07CAF003B18D3 /* Cocoa.framework */,
-				2897380717A07CAF003B18D3 /* SenTestingKit.framework */,
-				289737E817A07CAF003B18D3 /* Other Frameworks */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		289737E817A07CAF003B18D3 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
+				283C70C51802DF9100EB161E /* CoreServices.framework */,
 				289737E917A07CAF003B18D3 /* AppKit.framework */,
 				289737EA17A07CAF003B18D3 /* CoreData.framework */,
 				289737EB17A07CAF003B18D3 /* Foundation.framework */,
+				289737E617A07CAF003B18D3 /* Cocoa.framework */,
+				2897380717A07CAF003B18D3 /* SenTestingKit.framework */,
 			);
-			name = "Other Frameworks";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		289737EC17A07CAF003B18D3 /* Time Logger */ = {
 			isa = PBXGroup;
 			children = (
-				28D475FA17AD3ACF00C189AB /* Apple scripts */,
 				289737F817A07CAF003B18D3 /* AppDelegate.h */,
 				289737F917A07CAF003B18D3 /* AppDelegate.m */,
 				28CFCCFF17A6466A001511EF /* NSDictionary+Color.h */,
 				28CFCD0017A6466A001511EF /* NSDictionary+Color.m */,
+				28D475FA17AD3ACF00C189AB /* Apple scripts */,
 				28CFCCE917A58467001511EF /* Logic */,
 				28CFCCE317A581BC001511EF /* Models */,
 				28CFCCE217A581B0001511EF /* Controllers */,
@@ -186,6 +229,8 @@
 		289737ED17A07CAF003B18D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28D0559D18003D2B002F5246 /* Images */,
+				2854C28E17BB95740090BD3E /* icons.icns */,
 				289737EE17A07CAF003B18D3 /* Time Logger-Info.plist */,
 				289737EF17A07CAF003B18D3 /* InfoPlist.strings */,
 				289737F217A07CAF003B18D3 /* main.m */,
@@ -231,10 +276,7 @@
 		28CFCCE217A581B0001511EF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				28CFCCE417A582F5001511EF /* ProjectsSidebarViewController.h */,
-				28CFCCE517A582F5001511EF /* ProjectsSidebarViewController.m */,
-				F27A456C17A8382C003E9543 /* ProjectsSidebarCell.h */,
-				F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */,
+				2854C27E17B6A55F0090BD3E /* Sidebar */,
 				28CFCCF517A63186001511EF /* ProjectConfigViewController.h */,
 				28CFCCF617A63187001511EF /* ProjectConfigViewController.m */,
 				28CFCCF017A61D11001511EF /* ProjectTimelineViewController.h */,
@@ -270,6 +312,23 @@
 				28CFCCEB17A58F40001511EF /* AppDispatcher.m */,
 			);
 			name = Logic;
+			sourceTree = "<group>";
+		};
+		28D0559D18003D2B002F5246 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				28D0559E18003D2B002F5246 /* audiobooks.png */,
+				28D0559F18003D2B002F5246 /* movies.png */,
+				28D055A018003D2B002F5246 /* music.png */,
+				28D055A118003D2B002F5246 /* playlist.png */,
+				28D055A218003D2B002F5246 /* playlistFolder.png */,
+				28D055A318003D2B002F5246 /* podcasts.png */,
+				283C70C71803067800EB161E /* facebook.png */,
+				283C70C91803074B00EB161E /* photo.png */,
+				283C70CB1803092500EB161E /* youtube.png */,
+				283C70CD1803099100EB161E /* book.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		28D475FA17AD3ACF00C189AB /* Apple scripts */ = {
@@ -363,6 +422,17 @@
 				28D475FC17AD3AE400C189AB /* GetSafariUrl.scpt in Resources */,
 				2854C27B17B691CC0090BD3E /* GetAppWindowName.txt in Resources */,
 				2854C27D17B6970B0090BD3E /* GetBrowserUrl.txt in Resources */,
+				2854C28F17BB95740090BD3E /* icons.icns in Resources */,
+				28D055A418003D2B002F5246 /* audiobooks.png in Resources */,
+				28D055A518003D2B002F5246 /* movies.png in Resources */,
+				28D055A618003D2B002F5246 /* music.png in Resources */,
+				28D055A718003D2B002F5246 /* playlist.png in Resources */,
+				28D055A818003D2B002F5246 /* playlistFolder.png in Resources */,
+				28D055A918003D2B002F5246 /* podcasts.png in Resources */,
+				283C70C81803067800EB161E /* facebook.png in Resources */,
+				283C70CA1803074B00EB161E /* photo.png in Resources */,
+				283C70CC1803092500EB161E /* youtube.png in Resources */,
+				283C70CE1803099100EB161E /* book.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +483,8 @@
 				28D475F217ACE72D00C189AB /* ProjectApp.m in Sources */,
 				28D475F517ACE73C00C189AB /* Project.m in Sources */,
 				2854C27117B6719B0090BD3E /* Client.m in Sources */,
+				2854C28317B9B4110090BD3E /* PXSourceList.m in Sources */,
+				28D0559C18003D08002F5246 /* SourceListItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
