@@ -11,6 +11,7 @@
 #import "App.h"
 #import "TimeLog.h"
 #import "Project.h"
+#import "ProjectApp.h"
 #import "ProjectsSidebarViewController.h"
 #import "ProjectConfigViewController.h"
 #import "ProjectTimelineViewController.h"

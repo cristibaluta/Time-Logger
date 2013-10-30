@@ -9,6 +9,7 @@
 #import "AppDbInitialization.h"
 #import "Client.h"
 #import "Project.h"
+#import "ProjectApp.h"
 
 @implementation AppDbInitialization
 
@@ -19,12 +20,12 @@
 	NSArray *projects_arr = @[
 	@{@"name":@"Facebook", @"apps":@[@"com.apple.Safari"], },
 	@{@"name":@"YouTube", @"apps":@[@"com.apple.Safari"], },
-	@{@"name":@"Movie Time", @"apps":@[@"com.apple.Safari"], },
-	@{@"name":@"Photography", @"apps":@[@"com.apple.Safari"], },
-	@{@"name":@"Reading Books", @"apps":@[@"com.apple.Safari"], },
-	@{@"name":@"Idle", @"apps":@[@"com.apple.Safari"], },
-	@{@"name":@"Sleep", @"apps":@[@"com.apple.Safari"], }
-							  ];
+	@{@"name":@"Movie Time", @"apps":@[@"org.videolan.vlc", @"com.apple.QuickTimePlayerX"], },
+	@{@"name":@"Photography", @"apps":@[@"com.adobe.Photoshop", @"com.adobe.bridge4.1"], },
+	@{@"name":@"Reading Books", @"apps":@[@"com.apple.iBooksX", @"com.apple.Preview"], },
+	@{@"name":@"Idle", @"apps":@[], },
+	@{@"name":@"Sleep", @"apps":@[], }
+	];
 	
 	
 	// Create a client, me
@@ -50,8 +51,18 @@
 		project.project_id = @"";
 		project.tracking = [NSNumber numberWithBool:YES];
 		project.time_spent = [NSNumber numberWithInt:0];
-		//project.apps = [[NSSet alloc] init];
 		project.client = client;
+		
+		NSMutableSet *apps = [[NSMutableSet alloc] init];
+		for (NSString *appIdentifier in dict[@"apps"]) {
+			
+			ProjectApp *app = [NSEntityDescription insertNewObjectForEntityForName:@"ProjectApp" inManagedObjectContext:context];
+			app.app_identifier = appIdentifier;
+			app.document_name = @"";
+			app.project_id = @"";
+			[apps addObject:app];
+		}
+		project.apps = apps;
 		
 		[projects addObject:project];
 	}

@@ -169,7 +169,7 @@
 
 - (void) didStopTrackingApp:(NSRunningApplication*)app windowName:(NSString*)name {
 	
-	RCLog(@"stop tracking and log %@ %@", app.localizedName, app.bundleIdentifier);
+	RCLog(@"stop tracking %@ - %@", app.localizedName, app.bundleIdentifier);
 	NSError *error;
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSManagedObjectContext *context = [self managedObjectContext];
@@ -183,27 +183,34 @@
 	timelog.start_time = lastDate;
 	timelog.document_name = name;
 	
-	// Get the project for this log
+	// Find the project for this app identifier and document name
 	
-//	NSPredicate *projectPredicate = [NSPredicate predicateWithFormat:@"app_identifier == %@", app.bundleIdentifier];
-//	[fetchRequest setPredicate:projectPredicate];
+	NSPredicate *activeProjects = [NSPredicate predicateWithFormat:@"tracking == %@", [NSNumber numberWithBool:YES]];
+	[fetchRequest setPredicate:activeProjects];
 	NSEntityDescription *projectEntity = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:context];
 	[fetchRequest setEntity:projectEntity];
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 	
-	if (fetchedObjects.count > 0) {
-		Project *p = fetchedObjects[0];
-		NSNumber *oldTime = p.time_spent;
-		p.time_spent = [NSNumber numberWithLongLong:[oldTime longLongValue] + [lastDate timeIntervalSinceNow]];
+	for (Project *project in fetchedObjects) {
+		RCLog(@"--- check against %@", project.name);
+		NSSet *apps = project.apps;
+		for (ProjectApp *pa in [apps allObjects]) {
+			RCLog(@"--------- check against %@", pa.app_identifier);
+			
+			if ([pa.app_identifier isEqualToString:app.bundleIdentifier]) {
+				RCLog(@"found");
+				NSNumber *oldTime = project.time_spent;
+				project.time_spent = [NSNumber numberWithLongLong:[oldTime longLongValue] + [lastDate timeIntervalSinceNow]];
+			}
+		}
 	}
-
 	
 	// Insert the app in database if does not exist
 	
-	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"app_identifier == %@", app.bundleIdentifier];
-	[fetchRequest setPredicate:todaysLogs];
-	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:[self managedObjectContext]];
-	[fetchRequest setEntity:a];
+//	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"app_identifier == %@", app.bundleIdentifier];
+//	[fetchRequest setPredicate:todaysLogs];
+//	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:[self managedObjectContext]];
+//	[fetchRequest setEntity:a];
 	
 	//NSUInteger nr = [context countForFetchRequest:fetchRequest error:&error];
 	
