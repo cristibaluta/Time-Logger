@@ -10,12 +10,14 @@
 #import "AppDispatcher.h"
 #import "App.h"
 #import "TimeLog.h"
+#import "Project.h"
 #import "ProjectsSidebarViewController.h"
 #import "ProjectConfigViewController.h"
 #import "ProjectTimelineViewController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, AppDispatcherDelegate, ProjectsSidebarDelegate> {
 	
+	BOOL firstRun;
 	NSArray *runningApplications;
 	NSTimer *timer;
 	AppDispatcher *dispatcher;

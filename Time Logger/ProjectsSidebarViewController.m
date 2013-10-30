@@ -49,23 +49,8 @@
 	
 	// Add default recreational projects
 	
-	SourceListItem *i1 = [SourceListItem itemWithTitle:@"Facebook" identifier:@"facebook"];
-	[i1 setIcon:[NSImage imageNamed:@"facebook.png"]];
-	SourceListItem *i2 = [SourceListItem itemWithTitle:@"YouTube" identifier:@"youtube"];
-	[i2 setIcon:[NSImage imageNamed:@"youtube.png"]];
-	SourceListItem *i3 = [SourceListItem itemWithTitle:@"Movie Time" identifier:@"movies"];
-	[i3 setIcon:[NSImage imageNamed:@"movies.png"]];
-	SourceListItem *i4 = [SourceListItem itemWithTitle:@"Photography" identifier:@"photo"];
-	[i4 setIcon:[NSImage imageNamed:@"photo.png"]];
-	SourceListItem *i5 = [SourceListItem itemWithTitle:@"Reading Books" identifier:@"books"];
-	[i5 setIcon:[NSImage imageNamed:@"book.png"]];
-	SourceListItem *i6 = [SourceListItem itemWithTitle:@"Idle" identifier:@"idle"];
-	[i6 setIcon:[NSImage imageNamed:@"podcasts.png"]];
-	SourceListItem *i7 = [SourceListItem itemWithTitle:@"Eating" identifier:@"eat"];
-	[i7 setIcon:[NSImage imageNamed:@"podcasts.png"]];
-	SourceListItem *i8 = [SourceListItem itemWithTitle:@"Sleep" identifier:@"sleep"];
-	[i8 setIcon:[NSImage imageNamed:@"podcasts.png"]];
-	recreationalItem.children = @[i1, i2, i3, i4, i5, i6, i7, i8];
+	
+	//recreationalItem.children = @[i1, i2, i3, i4, i5, i6, i7, i8];
 	
 	
 	// Read all the projects
@@ -80,15 +65,15 @@
 	
 	NSError *error;
 	NSArray *projects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	NSLog(@"Projects %@", projects);
+	//RCLog(@"Projects %@", projects);
 	
 	if (!error) {
 		for (Project *project in projects) {
-			NSLog(@"Project %@ %@", project.name, project.category);
+			RCLog(@"Project %@ %@", project.name, project.category);
 			
 			SourceListItem *item = [sourceListItems objectAtIndex:[project.category intValue]];
 			SourceListItem *newItem = [SourceListItem itemWithTitle:project.name identifier:project.project_id];
-			[item setIcon:[NSImage imageNamed:@"music.png"]];
+			[item setIcon:[NSImage imageNamed:[project.name stringByAppendingString:@".png"]]];
 			
 			NSArray *arr = item.children;
 			if (arr == nil) {
@@ -105,7 +90,6 @@
 
 - (void)loadView {
     [super loadView];
-	NSLog(@"loadView");
 }
 
 
@@ -162,7 +146,7 @@
 
 - (NSMenu*)sourceList:(PXSourceList*)aSourceList menuForEvent:(NSEvent*)theEvent item:(id)item
 {
-	NSLog(@"menuForEvent %@", theEvent);
+	RCLog(@"menuForEvent %@", theEvent);
 	if ([theEvent type] == NSRightMouseDown ||
 		([theEvent type] == NSLeftMouseDown && ([theEvent modifierFlags] & NSControlKeyMask) == NSControlKeyMask))
 	{
@@ -193,7 +177,7 @@
 - (void)sourceListSelectionDidChange:(NSNotification *)notification {
 	
 	NSIndexSet *selectedIndexes = [sourceList selectedRowIndexes];
-	NSLog(@"sourceListSelectionDidChange %@", selectedIndexes);
+	RCLog(@"sourceListSelectionDidChange %@", selectedIndexes);
 	
 	//Set the label text to represent the new selection
 	if ([selectedIndexes count] > 1) {
@@ -201,7 +185,7 @@
 	}
 	else if ([selectedIndexes count] == 1) {
 		NSString *identifier = [[sourceList itemAtRow:[selectedIndexes firstIndex]] identifier];
-		NSLog(@"identifier %@", identifier);
+		RCLog(@"identifier %@", identifier);
 		
 		[self.delegate projectDidSelect:identifier];
 	}
@@ -214,7 +198,7 @@
 - (void)sourceListDeleteKeyPressedOnRows:(NSNotification *)notification {
 	
 	NSIndexSet *rows = [[notification userInfo] objectForKey:@"rows"];
-	NSLog(@"Delete key pressed on rows %@", rows);
+	RCLog(@"Delete key pressed on rows %@", rows);
 	
 	//Do something here
 	
@@ -282,7 +266,7 @@
 
 - (IBAction)deleteProject:(id)sender
 {
-	NSLog(@"Delete object at index %li", (long)[sourceList selectedRow]);
+	RCLog(@"Delete object at index %li", (long)[sourceList selectedRow]);
     if ([sourceList selectedRow] >= 0) {
         [sourceListItems removeObjectAtIndex:[sourceList selectedRow]];
         [sourceList reloadData];
@@ -302,7 +286,7 @@
 
 - (void)controlTextDidEndEditing:(NSNotification *)notification {
 	
-	NSLog(@"controlTextDidEndEditing %@", notification);
+	RCLog(@"controlTextDidEndEditing %@", notification);
 	
 	if ([[notification object] isKindOfClass:[NSTextField class]]) {
 	NSTextField *textField = [notification object];

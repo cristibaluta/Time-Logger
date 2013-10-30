@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13A603" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="App" representedClassName="App" syncable="YES">
         <attribute name="app_identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="app_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" storedInTruthFile="YES" syncable="YES"/>
     </entity>
     <entity name="Client" representedClassName="Client" syncable="YES">
         <attribute name="client_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" syncable="YES"/>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="category" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -17,8 +18,11 @@
         <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time_spent" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="tracking" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
-        <relationship name="apps" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectApp" syncable="YES"/>
+        <relationship name="apps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProjectApp" syncable="YES"/>
+        <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" syncable="YES"/>
+        <relationship name="logs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TimeLog" syncable="YES"/>
     </entity>
     <entity name="ProjectApp" representedClassName="ProjectApp" syncable="YES">
         <attribute name="app_identifier" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,10 +37,10 @@
         <attribute name="start_time" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="App" positionX="135" positionY="387" width="128" height="90"/>
-        <element name="Client" positionX="135" positionY="504" width="128" height="90"/>
-        <element name="Project" positionX="135" positionY="197" width="128" height="165"/>
-        <element name="ProjectApp" positionX="340" positionY="234" width="128" height="90"/>
-        <element name="TimeLog" positionX="340" positionY="384" width="128" height="120"/>
+        <element name="App" positionX="144" positionY="99" width="128" height="88"/>
+        <element name="Client" positionX="70" positionY="423" width="128" height="103"/>
+        <element name="Project" positionX="-36" positionY="99" width="128" height="208"/>
+        <element name="ProjectApp" positionX="340" positionY="225" width="128" height="90"/>
+        <element name="TimeLog" positionX="340" positionY="402" width="128" height="120"/>
     </elements>
 </model>

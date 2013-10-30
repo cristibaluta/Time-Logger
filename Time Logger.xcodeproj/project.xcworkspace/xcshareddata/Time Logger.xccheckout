@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FB94FC95-C038-4604-88E2-9405922DF8B3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Time Logger</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0F4B9070-84E5-481F-A007-9112155589A7</key>
+		<string>https://github.com/ralcr/RCLog.git</string>
+		<key>20DC3678-6844-4361-94D6-8806EEEDC6B5</key>
+		<string>https://github.com/ralcr/Time-Logger.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Time Logger.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0F4B9070-84E5-481F-A007-9112155589A7</key>
+		<string>../../../../RCLog</string>
+		<key>20DC3678-6844-4361-94D6-8806EEEDC6B5</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ralcr/Time-Logger.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>20DC3678-6844-4361-94D6-8806EEEDC6B5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0F4B9070-84E5-481F-A007-9112155589A7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RCLog</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>20DC3678-6844-4361-94D6-8806EEEDC6B5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Time Logger</string>
+		</dict>
+	</array>
+</dict>
+</plist>

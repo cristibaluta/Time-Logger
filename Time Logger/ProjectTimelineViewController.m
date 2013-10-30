@@ -72,7 +72,7 @@
 
 //- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
 //	
-//	NSLog(@"populate row %li %@", rowIndex, [aTableColumn identifier]);
+//	RCLog(@"populate row %li %@", rowIndex, [aTableColumn identifier]);
 //	
 //	NSRunningApplication *app = [runningApplications objectAtIndex:rowIndex];
 //	
@@ -122,7 +122,7 @@
 	}
 	
 	TimeLog *log = [logs objectAtIndex:row];
-	//NSLog(@"adding data to cell %@", log);
+	//RCLog(@"adding data to cell %@", log);
 	NSDate *t1 = log.start_time;
 	NSDate *t2 = log.end_time;
 	NSString *t3 = log.caption;
@@ -154,7 +154,7 @@
 	NSArray *arr = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
 	
 	if (arr.count > 0) {
-		NSLog(@"%@", arr);
+		RCLog(@"%@", arr);
 		result.imageView.image = [[NSImage alloc] initWithData:((App*)[arr objectAtIndex:0]).icon];
 	}
 	

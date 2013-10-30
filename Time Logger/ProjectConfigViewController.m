@@ -45,7 +45,7 @@
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
 
-	//NSLog(@"populate row %li %@", rowIndex, [aTableColumn identifier]);
+	//RCLog(@"populate row %li %@", rowIndex, [aTableColumn identifier]);
 
 	NSRunningApplication *app = [runningApplications objectAtIndex:rowIndex];
 
@@ -85,7 +85,7 @@
 	
 	NSError *error;
 	if (![context save:&error]) {
-		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+		RCLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
 	}
 	
 	// Read the database
@@ -94,11 +94,11 @@
 	[fetchRequest setEntity:entity];
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 	for (NSManagedObject *info in fetchedObjects) {
-		NSLog(@"app_identifier: %@", [info valueForKey:@"app_identifier"]);
-		NSLog(@"start_time: %@", [info valueForKey:@"start_time"]);
-		NSLog(@"end_time: %@", [info valueForKey:@"end_time"]);
+		RCLog(@"app_identifier: %@", [info valueForKey:@"app_identifier"]);
+		RCLog(@"start_time: %@", [info valueForKey:@"start_time"]);
+		RCLog(@"end_time: %@", [info valueForKey:@"end_time"]);
 	}
-	//	NSLog(@"FIN TESTING \n");
+	//	RCLog(@"FIN TESTING \n");
 }
 
 @end

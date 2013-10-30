@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDbInitialization.h"
 
 @implementation AppDelegate
 
@@ -72,7 +73,7 @@
 //	
 	NSError *error;
 //	if (![context save:&error]) {
-//		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+//		RCLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
 //	}
 	
 	// Read the database
@@ -81,11 +82,11 @@
 //	[fetchRequest setEntity:entity];
 //	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 //	for (NSManagedObject *info in fetchedObjects) {
-//		NSLog(@"app_identifier: %@", [info valueForKey:@"app_identifier"]);
-//		NSLog(@"start_time: %@", [info valueForKey:@"start_time"]);
-//		NSLog(@"end_time: %@", [info valueForKey:@"end_time"]);
+//		RCLog(@"app_identifier: %@", [info valueForKey:@"app_identifier"]);
+//		RCLog(@"start_time: %@", [info valueForKey:@"start_time"]);
+//		RCLog(@"end_time: %@", [info valueForKey:@"end_time"]);
 //	}
-//	NSLog(@"FIN TESTING \n");
+//	RCLog(@"FIN TESTING \n");
 }
 
 
@@ -129,16 +130,16 @@
 	NSAppleEventDescriptor *descriptor = [ascr executeAndReturnError:&derr];
 	
 	if (derr != nil) {
-		NSLog(@"err2: %@", derr);
+		RCLog(@"err2: %@", derr);
 	}
 	else {
-		//NSLog(@"good2: %@", descriptor);
+		//RCLog(@"good2: %@", descriptor);
 		document_name = [descriptor stringValue];
 	}
 	
 	[dispatcher logApp:app windowName:document_name];
 	
-	//NSLog(@"Active application is: %@ %i", activeApp, pid);
+	//RCLog(@"Active application is: %@ %i", activeApp, pid);
 	
 	
 //	CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionAll, kCGNullWindowID);
@@ -146,10 +147,10 @@
 //	{
 //		NSString* winName = [entry objectForKey:(id)kCGWindowName];
 //		NSInteger ownerPID = [[entry objectForKey:(id)kCGWindowOwnerPID] integerValue];
-//		NSLog(@"%@ %li", winName, (long)ownerPID);
+//		RCLog(@"%@ %li", winName, (long)ownerPID);
 //		
 //		if (ownerPID == pid) {
-//			NSLog(@"-----------------------FOUND");
+//			RCLog(@"-----------------------FOUND");
 //		}
 //	}
 //	CFRelease(windowList);
@@ -161,38 +162,53 @@
 
 - (void) didStartTrackingApp:(NSRunningApplication*)app {
 	
-	NSLog(@"start tracking %@", app.localizedName);
+	RCLog(@"start tracking %@", app.localizedName);
 	lastDate = [NSDate date];
 	[projectTimeline fetch];
 }
 
 - (void) didStopTrackingApp:(NSRunningApplication*)app windowName:(NSString*)name {
 	
-	NSLog(@"stop tracking %@ %@", app.localizedName, app.bundleIdentifier);
+	RCLog(@"stop tracking and log %@ %@", app.localizedName, app.bundleIdentifier);
 	NSError *error;
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSManagedObjectContext *context = [self managedObjectContext];
 	
 	// Store in the database this app and its running time
 	
-	NSManagedObjectContext *context = [self managedObjectContext];
-	TimeLog *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"TimeLog" inManagedObjectContext:context];
+	TimeLog *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"TimeLog" inManagedObjectContext:[self managedObjectContext]];
 	timelog.app_identifier = app.bundleIdentifier;
 	timelog.caption = app.localizedName;
 	timelog.end_time = [NSDate date];
 	timelog.start_time = lastDate;
 	timelog.document_name = name;
 	
+	// Get the project for this log
+	
+//	NSPredicate *projectPredicate = [NSPredicate predicateWithFormat:@"app_identifier == %@", app.bundleIdentifier];
+//	[fetchRequest setPredicate:projectPredicate];
+	NSEntityDescription *projectEntity = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:context];
+	[fetchRequest setEntity:projectEntity];
+	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+	
+	if (fetchedObjects.count > 0) {
+		Project *p = fetchedObjects[0];
+		NSNumber *oldTime = p.time_spent;
+		p.time_spent = [NSNumber numberWithLongLong:[oldTime longLongValue] + [lastDate timeIntervalSinceNow]];
+	}
+
+	
 	// Insert the app in database if does not exist
 	
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"app_identifier == %@", app.bundleIdentifier];
 	[fetchRequest setPredicate:todaysLogs];
-	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:context];
+	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:[self managedObjectContext]];
 	[fetchRequest setEntity:a];
 	
 	//NSUInteger nr = [context countForFetchRequest:fetchRequest error:&error];
 	
 //	if (nr == 0) {
-//		NSLog(@"store app %@", app.bundleIdentifier);
+//		RCLog(@"store app %@", app.bundleIdentifier);
 //		App *aa = [NSEntityDescription insertNewObjectForEntityForName:@"App" inManagedObjectContext:context];
 //		aa.app_identifier = app.bundleIdentifier;
 //		aa.app_name = app.localizedName;
@@ -201,7 +217,7 @@
 	
 	
 	if (![context save:&error]) {
-		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+		RCLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
 	}
 }
 
@@ -222,18 +238,17 @@
 }
 
 
-// Returns the directory the application uses to store the Core Data store file.
-// This code uses a directory named "ralcr.com.Time_Logger" in the user's Application Support directory.
-- (NSURL *)applicationFilesDirectory
-{
+
+
+
+- (NSURL *)applicationFilesDirectory {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
     return [appSupportURL URLByAppendingPathComponent:@"com.ralcr.Time_Logger"];
 }
 
-// Creates if necessary and returns the managed object model for the application.
-- (NSManagedObjectModel *)managedObjectModel
-{
+- (NSManagedObjectModel *)managedObjectModel {
+	
     if (_managedObjectModel) {
         return _managedObjectModel;
     }
@@ -243,18 +258,15 @@
     return _managedObjectModel;
 }
 
-// Returns the persistent store coordinator for the application.
-// This implementation creates and return a coordinator, having added the store for the application to it.
-// (The directory for the store is created, if necessary.)
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+	
     if (_persistentStoreCoordinator) {
         return _persistentStoreCoordinator;
     }
     
     NSManagedObjectModel *mom = [self managedObjectModel];
     if (!mom) {
-        NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
+        RCLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
         return nil;
     }
     
@@ -262,6 +274,10 @@
     NSURL *applicationFilesDirectory = [self applicationFilesDirectory];
     NSError *error = nil;
     
+    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"Time_Logger.storedata"];
+	
+	firstRun = ![url checkResourceIsReachableAndReturnError:&error];
+	
     NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:@[NSURLIsDirectoryKey] error:&error];
     
     if (!properties) {
@@ -287,14 +303,13 @@
         }
     }
     
-    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"Time_Logger.storedata"];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }
     _persistentStoreCoordinator = coordinator;
-    
+	
     return _persistentStoreCoordinator;
 }
 
@@ -317,7 +332,16 @@
     }
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-
+	
+	if (firstRun) {
+		
+		// After you created the database for the first time add some default values
+		
+		[AppDbInitialization addDefaultProjects:_managedObjectContext];
+		[self saveAction:nil];
+		
+	}
+	
     return _managedObjectContext;
 }
 
@@ -336,7 +360,7 @@
     NSError *error = nil;
     
     if (![[self managedObjectContext] commitEditing]) {
-        NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
+        RCLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
     }
     
     if (![[self managedObjectContext] save:&error]) {
@@ -358,7 +382,7 @@
     }
     
     if (![[self managedObjectContext] commitEditing]) {
-        NSLog(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
+        RCLog(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
         return NSTerminateCancel;
     }
     
