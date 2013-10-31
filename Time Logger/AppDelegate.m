@@ -205,6 +205,8 @@
 		}
 	}
 	
+	// If every attempt to find a suitable project fails add it in the 'Others' project
+	
 	// Insert the app in database if does not exist
 	
 //	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"app_identifier == %@", app.bundleIdentifier];

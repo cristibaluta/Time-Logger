@@ -47,11 +47,6 @@
 	
 	[sourceListItems addObjectsFromArray:@[libraryItem, archiveItem, recreationalItem]];
 	
-	// Add default recreational projects
-	
-	
-	//recreationalItem.children = @[i1, i2, i3, i4, i5, i6, i7, i8];
-	
 	
 	// Read all the projects
 	
@@ -73,7 +68,7 @@
 			
 			SourceListItem *item = [sourceListItems objectAtIndex:[project.category intValue]];
 			SourceListItem *newItem = [SourceListItem itemWithTitle:project.name identifier:project.project_id];
-			[item setIcon:[NSImage imageNamed:[project.name stringByAppendingString:@".png"]]];
+			[newItem setIcon:[NSImage imageNamed:[project.name stringByAppendingString:@".png"]]];
 			
 			NSArray *arr = item.children;
 			if (arr == nil) {
