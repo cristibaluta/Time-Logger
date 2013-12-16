@@ -2,7 +2,7 @@
 //  ProjectApp.m
 //  Time Logger
 //
-//  Created by Baluta Cristian on 30/10/2013.
+//  Created by Baluta Cristian on 07/12/2013.
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
@@ -14,5 +14,6 @@
 @dynamic app_identifier;
 @dynamic document_name;
 @dynamic project_id;
+@dynamic time_spent;
 
 @end

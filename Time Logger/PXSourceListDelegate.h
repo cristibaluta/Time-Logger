@@ -48,6 +48,7 @@
 - (void)sourceListItemDidCollapse:(NSNotification *)notification;
 
 - (void)sourceListDeleteKeyPressedOnRows:(NSNotification *)notification;
+- (void)sourceListEnterKeyPressedOnRow:(NSNotification *)notification;
 
 
 @end
@@ -60,4 +61,5 @@ extern NSString * const PXSLItemDidExpandNotification;
 extern NSString * const PXSLItemWillCollapseNotification;
 extern NSString * const PXSLItemDidCollapseNotification;
 extern NSString * const PXSLDeleteKeyPressedOnRowsNotification;
+extern NSString * const PXSLEnterKeyPressedOnRowNotification;
 

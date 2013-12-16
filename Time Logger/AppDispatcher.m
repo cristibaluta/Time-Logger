@@ -15,8 +15,8 @@
 	
 	if (lastApp != nil && (! [app isEqual:lastApp] || ([app isEqual:lastApp] && ! [name isEqualToString:lastName]))) {
 		
-		// When we already have an lastApp and the activeApp has switched
-		// Stop logging the last app and start logging the new app
+		// When we already have an lastApp and the activeApp has changed
+		// Stop traking the last app and start traking the new app
 		
 		[self.delegate didStopTrackingApp:lastApp windowName:name];
 		[self.delegate didStartTrackingApp:app];

@@ -34,6 +34,7 @@ NSString * const PXSLItemDidExpandNotification = @"PXSourceListItemDidExpand";
 NSString * const PXSLItemWillCollapseNotification = @"PXSourceListItemWillCollapse";
 NSString * const PXSLItemDidCollapseNotification = @"PXSourceListItemDidCollapse";
 NSString * const PXSLDeleteKeyPressedOnRowsNotification = @"PXSourceListDeleteKeyPressedOnRows";
+NSString * const PXSLEnterKeyPressedOnRowNotification = @"PXSourceListEnterKeyPressedOnRow";
 
 #pragma mark -
 @interface PXSourceList ()
@@ -133,6 +134,8 @@ NSString * const PXSLDeleteKeyPressedOnRowsNotification = @"PXSourceListDeleteKe
 								   withSelector:@selector(sourceListItemDidCollapse:)];
 	[self registerDelegateToReceiveNotification:PXSLDeleteKeyPressedOnRowsNotification
 								   withSelector:@selector(sourceListDeleteKeyPressedOnRows:)];
+	[self registerDelegateToReceiveNotification:PXSLEnterKeyPressedOnRowNotification
+								   withSelector:@selector(sourceListEnterKeyPressedOnRow:)];
 }
 
 
@@ -615,6 +618,15 @@ NSString * const PXSLDeleteKeyPressedOnRowsNotification = @"PXSourceListDeleteKe
 				[[NSNotificationCenter defaultCenter] postNotificationName:PXSLDeleteKeyPressedOnRowsNotification
 																	object:self
 																  userInfo:[NSDictionary dictionaryWithObject:selectedIndexes forKey:@"rows"]];
+				
+				return;
+			}
+			else if(firstKey==NSEnterCharacter)
+			{
+				//Post the notification
+				[[NSNotificationCenter defaultCenter] postNotificationName:PXSLEnterKeyPressedOnRowNotification
+																	object:self
+																  userInfo:[NSDictionary dictionaryWithObject:selectedIndexes forKey:@"row"]];
 				
 				return;
 			}

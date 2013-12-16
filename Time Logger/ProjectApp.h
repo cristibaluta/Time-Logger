@@ -2,7 +2,7 @@
 //  ProjectApp.h
 //  Time Logger
 //
-//  Created by Baluta Cristian on 30/10/2013.
+//  Created by Baluta Cristian on 07/12/2013.
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
@@ -15,5 +15,6 @@
 @property (nonatomic, retain) NSString * app_identifier;
 @property (nonatomic, retain) NSString * document_name;
 @property (nonatomic, retain) NSString * project_id;
+@property (nonatomic, retain) NSNumber * time_spent;
 
 @end

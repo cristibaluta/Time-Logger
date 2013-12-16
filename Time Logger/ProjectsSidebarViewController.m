@@ -168,7 +168,6 @@
 	return YES;
 }
 
-
 - (void)sourceListSelectionDidChange:(NSNotification *)notification {
 	
 	NSIndexSet *selectedIndexes = [sourceList selectedRowIndexes];
@@ -188,7 +187,6 @@
 		
 	}
 }
-
 
 - (void)sourceListDeleteKeyPressedOnRows:(NSNotification *)notification {
 	
@@ -230,42 +228,68 @@
 //}
 
 
-- (IBAction)addProject:(id)sender
-{
+#pragma mark Actions
+
+- (IBAction)addProject:(id)sender {
+	
     NSWindow *w = [sourceList window];
 	BOOL endEdit = [w makeFirstResponder:w];
 	if (!endEdit)
 		return;
 	
-    // Create a new object to add to NSTableView
-	
-	SourceListItem *newItem = [SourceListItem itemWithTitle:@"Blank Project" identifier:@"blank"];
-	[newItem setIcon:[NSImage imageNamed:@"music.png"]];
-	
-    [sourceListItems addObject:newItem];
-	
-    [sourceList reloadData];
-	[sourceList editColumn:0 row:[sourceListItems indexOfObject:newItem] withEvent:nil select:YES];
-	
-	
+	NSError *error = nil;
 	Project *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
 	timelog.category = 0;
 	timelog.date_created = [NSDate date];
-	timelog.name = @"Project 2";
-	timelog.project_id = @"p2";
+	timelog.name = @"New Project";
+	timelog.project_id = @"new_project";
 	timelog.tracking = [NSNumber numberWithBool:YES];
 	timelog.client_id = @"clientid1";
 	timelog.descr = @"Some description for this project....";
-	//@property (nonatomic, retain) ProjectApp *apps;
+	
+    if (![self.managedObjectContext save:&error]) {
+		RCLog(@"Whoops, couldn't add a new project: %@", [error localizedDescription]);
+		return;
+	}
+	
+	// Create a new object to add to NSTableView
+	
+	SourceListItem *libraryItem = [sourceListItems firstObject];
+	SourceListItem *newItem = [SourceListItem itemWithTitle:@"New Project" identifier:@"new_project"];
+	[newItem setIcon:[NSImage imageNamed:@"Facebook.png"]];
+	
+	NSArray *arr = libraryItem.children;
+	if (arr == nil) {
+		arr = [NSArray array];
+	}
+	libraryItem.children = [arr arrayByAddingObject:newItem];
+	
+	[sourceList reloadData];
+	[sourceList editColumn:-1 row:[sourceListItems indexOfObject:newItem] withEvent:nil select:YES];
+	
+	// Animate the new item
+	
+//	[sourceList beginUpdates];
+//	[sourceList insertItemsAtIndexes:[NSIndexSet indexSetWithIndex:1]
+//							inParent:libraryItem
+//					   withAnimation:NSTableViewAnimationEffectFade];
+//	[sourceList endUpdates];
 }
 
-- (IBAction)deleteProject:(id)sender
-{
-	RCLog(@"Delete object at index %li", (long)[sourceList selectedRow]);
-    if ([sourceList selectedRow] >= 0) {
-        [sourceListItems removeObjectAtIndex:[sourceList selectedRow]];
-        [sourceList reloadData];
-    }
+- (IBAction)deleteProject:(id)sender {
+	RCLog(@"Delete object at index %li", (long)sourceList.selectedRow);
+	RCLogO([sourceList itemAtRow:sourceList.selectedRow]);
+	// failing, don't know why
+//	[sourceList beginUpdates];
+//	[sourceList removeItemsAtIndexes:[NSIndexSet indexSetWithIndex:sourceList.selectedRow]
+//							inParent:[sourceList parentForItem:[sourceList itemAtRow:sourceList.selectedRow]]
+//					   withAnimation:NSTableViewAnimationEffectFade];
+//	[sourceList endUpdates];
+	
+	//    if ([sourceList selectedRow] >= 0) {
+//        [sourceListItems removeObjectAtIndex:[sourceList selectedRow]];
+//        [sourceList reloadData];
+//    }
 }
 
 //- (IBAction)toggleTracking:(id)sender
@@ -284,8 +308,8 @@
 	RCLog(@"controlTextDidEndEditing %@", notification);
 	
 	if ([[notification object] isKindOfClass:[NSTextField class]]) {
-	NSTextField *textField = [notification object];
-         //[[[projectsArray arrangedObjects] objectAtIndex:[projectsTable selectedRow]] setValue:textField.stringValue forKey:@"name"];
+		NSTextField *textField = [notification object];
+		//[[[projectsArray arrangedObjects] objectAtIndex:[projectsTable selectedRow]] setValue:textField.stringValue forKey:@"name"];
 	}
 }
 

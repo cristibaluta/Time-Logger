@@ -12,6 +12,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class Project;
+
 @interface ProjectConfigViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 {
 	NSArray *runningApplications;
@@ -32,5 +34,6 @@
    managedObjectModel:(NSManagedObjectModel *)managedModel;
 
 - (void)save;
+- (void)setProject:(Project*)project;
 
 @end

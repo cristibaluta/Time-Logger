@@ -8,29 +8,30 @@
 
 #import "ProjectConfigViewController.h"
 #import "Project.h"
+#import "Client.h"
 
 @implementation ProjectConfigViewController
 
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext *) managedContext managedObjectModel:(NSManagedObjectModel *) managedModel
+- (id)initWithNibName:(NSString *)nibNameOrNil
+			   bundle:(NSBundle *)nibBundleOrNil
+ managedObjectContext:(NSManagedObjectContext *)managedContext
+   managedObjectModel:(NSManagedObjectModel *)managedModel
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
 		self.managedObjectContext = managedContext;
 		self.managedObjectModel = managedModel;
-		
 	}
     return self;
 }
 
 - (void)loadView {
     [super loadView];
-	
 	runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
-	
 }
 
 
@@ -39,7 +40,6 @@
 #pragma mark TableViewDatasource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-	
 	return runningApplications.count;
 }
 
@@ -72,27 +72,43 @@
 
 - (void)save {
 	
-	NSManagedObjectContext *context = self.managedObjectContext;
-	Project *project = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:context];
+	Client *client = nil;
+	Project *project = nil;
+	
+	// Check if the client email already exists
+	NSError *error;
+	NSFetchRequest *clientRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *clientEntity = [NSEntityDescription entityForName:@"Client" inManagedObjectContext:self.managedObjectContext];
+	[clientRequest setEntity:clientEntity];
+	NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:clientRequest error:&error];
+	for (Client *c in fetchedObjects) {
+		RCLogO(c);
+		if ([c.email isEqualToString:self.textClientEmail.stringValue]) {
+			client = c;
+		}
+	}
+	
+	
+	// Check if the project already exists
+	project = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
 	project.category = [NSNumber numberWithInt:0];
 	project.date_created = [NSDate date];
-	project.name = @"";
+	project.name = self.textDescription.stringValue;
 	project.project_id = @"";
 	project.tracking = [NSNumber numberWithBool:YES];
 	project.client_id = @"";
 	project.descr = self.textDescription.stringValue;
-	project.apps = @[];
+	project.apps = [[NSSet alloc] init];
 	
-	NSError *error;
-	if (![context save:&error]) {
+	if (![self.managedObjectContext save:&error]) {
 		RCLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
 	}
 	
 	// Read the database
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:context];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
 	[fetchRequest setEntity:entity];
-	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+	fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 	for (NSManagedObject *info in fetchedObjects) {
 		RCLog(@"app_identifier: %@", [info valueForKey:@"app_identifier"]);
 		RCLog(@"start_time: %@", [info valueForKey:@"start_time"]);
