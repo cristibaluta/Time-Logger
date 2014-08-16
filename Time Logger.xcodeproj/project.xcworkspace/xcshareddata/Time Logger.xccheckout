@@ -14,24 +14,40 @@
 		<string>https://github.com/ralcr/RCLog.git</string>
 		<key>20DC3678-6844-4361-94D6-8806EEEDC6B5</key>
 		<string>https://github.com/ralcr/Time-Logger.git</string>
+		<key>4CF5E9AE241DD8F34E55E09C933CAC7D64FE5301</key>
+		<string>https://github.com/ralcr/Time-Logger.git</string>
+		<key>D5DE4AB2A608D700DE6AC41A7F328B299F57392F</key>
+		<string>https://github.com/ralcr/RCLog.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Time Logger.xcodeproj/project.xcworkspace</string>
+	<string>Time Logger.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0F4B9070-84E5-481F-A007-9112155589A7</key>
-		<string>../../../../RCLog</string>
+		<string>../../../RCLog</string>
 		<key>20DC3678-6844-4361-94D6-8806EEEDC6B5</key>
+		<string>../../../Time Logger</string>
+		<key>4CF5E9AE241DD8F34E55E09C933CAC7D64FE5301</key>
 		<string>../..</string>
+		<key>D5DE4AB2A608D700DE6AC41A7F328B299F57392F</key>
+		<string>../../../../RCLog</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/ralcr/Time-Logger.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>20DC3678-6844-4361-94D6-8806EEEDC6B5</string>
+	<string>4CF5E9AE241DD8F34E55E09C933CAC7D64FE5301</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D5DE4AB2A608D700DE6AC41A7F328B299F57392F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RCLog</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
@@ -47,6 +63,14 @@
 			<string>20DC3678-6844-4361-94D6-8806EEEDC6B5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Time Logger</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4CF5E9AE241DD8F34E55E09C933CAC7D64FE5301</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Time%20Logger</string>
 		</dict>
 	</array>
 </dict>
