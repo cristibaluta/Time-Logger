@@ -30,7 +30,7 @@
 		<key>4CF5E9AE241DD8F34E55E09C933CAC7D64FE5301</key>
 		<string>../..</string>
 		<key>D5DE4AB2A608D700DE6AC41A7F328B299F57392F</key>
-		<string>../../../../RCLog</string>
+		<string>../../../RCLog</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/ralcr/Time-Logger.git</string>
@@ -44,7 +44,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D5DE4AB2A608D700DE6AC41A7F328B299F57392F</string>
+			<string>0F4B9070-84E5-481F-A007-9112155589A7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RCLog</string>
 		</dict>
@@ -52,7 +52,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>0F4B9070-84E5-481F-A007-9112155589A7</string>
+			<string>D5DE4AB2A608D700DE6AC41A7F328B299F57392F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RCLog</string>
 		</dict>

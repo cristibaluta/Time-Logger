@@ -9,9 +9,6 @@
 #import "ProjectsSidebarCell.h"
 
 @implementation ProjectsSidebarCell
-@synthesize name=_name;
-@synthesize time=_time;
-@synthesize tracking=_tracking;
 
 
 - (id)initWithFrame:(NSRect)frame

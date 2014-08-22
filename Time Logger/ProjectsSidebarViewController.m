@@ -64,7 +64,7 @@
 	
 	if (!error) {
 		for (Project *project in projects) {
-			RCLog(@"Project %@ %@", project.name, project.category);
+//			RCLog(@"List project: %@ -> %@", project.name, project.category);
 			
 			SourceListItem *item = [sourceListItems objectAtIndex:[project.category intValue]];
 			SourceListItem *newItem = [SourceListItem itemWithTitle:project.name identifier:project.project_id];
@@ -238,14 +238,14 @@
 		return;
 	
 	NSError *error = nil;
-	Project *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
-	timelog.category = 0;
-	timelog.date_created = [NSDate date];
-	timelog.name = @"New Project";
-	timelog.project_id = @"new_project";
-	timelog.tracking = [NSNumber numberWithBool:YES];
-	timelog.client_id = @"clientid1";
-	timelog.descr = @"Some description for this project....";
+	Project *project = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
+	project.category = 0;
+	project.date_created = [NSDate date];
+	project.name = @"New Project";
+	project.project_id = @"new_project";
+	project.tracking = [NSNumber numberWithBool:YES];
+	project.client_id = @"clientid1";
+	project.descr = @"Some description for this project....";
 	
     if (![self.managedObjectContext save:&error]) {
 		RCLog(@"Whoops, couldn't add a new project: %@", [error localizedDescription]);
@@ -255,7 +255,7 @@
 	// Create a new object to add to NSTableView
 	
 	SourceListItem *libraryItem = [sourceListItems firstObject];
-	SourceListItem *newItem = [SourceListItem itemWithTitle:@"New Project" identifier:@"new_project"];
+	SourceListItem *newItem = [SourceListItem itemWithTitle:project.name identifier:@"new_project"];
 	[newItem setIcon:[NSImage imageNamed:@"Facebook.png"]];
 	
 	NSArray *arr = libraryItem.children;
@@ -277,19 +277,20 @@
 }
 
 - (IBAction)deleteProject:(id)sender {
-	RCLog(@"Delete object at index %li", (long)sourceList.selectedRow);
+	RCLog(@"Delete Project at index %li", (long)sourceList.selectedRow);
+	RCLogI((int)[sourceList numberOfGroups]);
 	RCLogO([sourceList itemAtRow:sourceList.selectedRow]);
 	// failing, don't know why
-//	[sourceList beginUpdates];
-//	[sourceList removeItemsAtIndexes:[NSIndexSet indexSetWithIndex:sourceList.selectedRow]
-//							inParent:[sourceList parentForItem:[sourceList itemAtRow:sourceList.selectedRow]]
-//					   withAnimation:NSTableViewAnimationEffectFade];
-//	[sourceList endUpdates];
+	[sourceList beginUpdates];
+	[sourceList removeItemsAtIndexes:[NSIndexSet indexSetWithIndex:sourceList.selectedRow]
+							inParent:[sourceList parentForItem:[sourceList itemAtRow:sourceList.selectedRow]]
+					   withAnimation:NSTableViewAnimationEffectFade];
+	[sourceList endUpdates];
 	
-	//    if ([sourceList selectedRow] >= 0) {
-//        [sourceListItems removeObjectAtIndex:[sourceList selectedRow]];
-//        [sourceList reloadData];
-//    }
+	if ([sourceList selectedRow] >= 0) {
+        [sourceListItems removeObjectAtIndex:[sourceList selectedRow]];
+        [sourceList reloadData];
+    }
 }
 
 //- (IBAction)toggleTracking:(id)sender
@@ -308,8 +309,8 @@
 	RCLog(@"controlTextDidEndEditing %@", notification);
 	
 	if ([[notification object] isKindOfClass:[NSTextField class]]) {
-		NSTextField *textField = [notification object];
-		//[[[projectsArray arrangedObjects] objectAtIndex:[projectsTable selectedRow]] setValue:textField.stringValue forKey:@"name"];
+//		NSTextField *textField = [notification object];
+//		[[[projectsArray arrangedObjects] objectAtIndex:[projectsTable selectedRow]] setValue:textField.stringValue forKey:@"name"];
 	}
 }
 

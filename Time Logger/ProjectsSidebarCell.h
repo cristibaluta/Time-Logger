@@ -9,13 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ProjectsSidebarCell : NSTableCellView
-{
-    IBOutlet NSTextField *name;
-    IBOutlet NSTextField *time;
-    IBOutlet NSButton *tracking;
-}
 
-@property (assign) NSTextField *name;
-@property (assign) NSTextField *time;
-@property (assign) NSButton *tracking;
+@property (assign) IBOutlet NSTextField *name;
+@property (assign) IBOutlet NSTextField *time;
+@property (assign) IBOutlet NSButton *tracking;
+
 @end

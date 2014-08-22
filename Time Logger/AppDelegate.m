@@ -22,7 +22,7 @@
 	
 	// Add projects list
 	
-	projectsList = [[ProjectsSidebarViewController alloc] initWithNibName:@"ProjectsSidebarViewController"
+	projectsList = [[ProjectsSidebarViewController alloc] initWithNibName:@"ProjectsSidebar"
 																   bundle:[NSBundle mainBundle]
 													 managedObjectContext:self.managedObjectContext
 													   managedObjectModel:self.managedObjectModel];
@@ -31,12 +31,12 @@
 	[self.splitView replaceSubview:[[self.splitView subviews] objectAtIndex:0] with:projectsList.view];
 	
 	
-	projectConfig = [[ProjectConfigViewController alloc] initWithNibName:@"ProjectConfigViewController"
+	projectConfig = [[ProjectConfigViewController alloc] initWithNibName:@"ProjectConfig"
 																  bundle:[NSBundle mainBundle]
 													managedObjectContext:self.managedObjectContext
 													  managedObjectModel:self.managedObjectModel];
 	
-	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimelineViewController"
+	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimeline"
 																	  bundle:[NSBundle mainBundle]
 														managedObjectContext:self.managedObjectContext
 														  managedObjectModel:self.managedObjectModel];
@@ -51,8 +51,7 @@
 	NSTabViewItem *configTab = [self.tabView tabViewItemAtIndex:2];
 	[configTab setView:projectConfig.view];
 	
-	// Create the dispatcher
-	
+	// Create the dispatcher. Dispatcher decides when and where will the app be logged
 	dispatcher = [[AppDispatcher alloc] init];
 	dispatcher.delegate = self;
 	
@@ -63,7 +62,7 @@
 	
 	// Testing database
 	
-	NSManagedObjectContext *context = [self managedObjectContext];
+//	NSManagedObjectContext *context = [self managedObjectContext];
 //	TimeLog *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"TimeLog" inManagedObjectContext:context];
 //	timelog.app_identifier = @"Test app";
 //	timelog.caption = @"Test  caption";
@@ -71,7 +70,7 @@
 //	timelog.end_time = [NSDate date];
 //	timelog.start_time = lastDate;
 //	
-	NSError *error;
+//	NSError *error;
 //	if (![context save:&error]) {
 //		RCLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
 //	}
@@ -113,6 +112,7 @@
 	NSString *document_name = @"";
 	NSString *script;
 	NSString *browsers = @"com.apple.Safari,org.mozilla.firefox,com.google.Chrome,com.operasoftware.Opera";
+//	RCLogO(activeApp);
 	if ([browsers rangeOfString:app.bundleIdentifier].location != NSNotFound)
 	{
 		script = @"GetBrowserUrl";
@@ -170,6 +170,7 @@
 - (void) didStopTrackingApp:(NSRunningApplication*)app windowName:(NSString*)name {
 	
 	RCLog(@"stop tracking %@ - %@", app.localizedName, app.bundleIdentifier);
+	RCLogO(@"find the project it belongs to and add the time spent in this app to that project");
 	NSError *error;
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSManagedObjectContext *context = [self managedObjectContext];
@@ -185,44 +186,50 @@
 	
 	// Find the project for this app identifier and document name
 	
-	NSPredicate *activeProjects = [NSPredicate predicateWithFormat:@"tracking == %@", [NSNumber numberWithBool:YES]];
+	NSPredicate *activeProjects = [NSPredicate predicateWithFormat:@"tracking == %@", @YES];
 	[fetchRequest setPredicate:activeProjects];
 	NSEntityDescription *projectEntity = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:context];
 	[fetchRequest setEntity:projectEntity];
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+	BOOL found = NO;
 	
 	for (Project *project in fetchedObjects) {
-		RCLog(@"--- check against %@", project.name);
+		RCLog(@"-> check project named %@", project.name);
 		NSSet *apps = project.apps;
 		for (ProjectApp *pa in [apps allObjects]) {
-			RCLog(@"--------- check against %@", pa.app_identifier);
+			RCLog(@"---------> %@ == %@", pa.app_identifier, app.bundleIdentifier);
 			
 			if ([pa.app_identifier isEqualToString:app.bundleIdentifier]) {
 				RCLog(@"found");
 				NSNumber *oldTime = project.time_spent;
 				project.time_spent = [NSNumber numberWithLongLong:[oldTime longLongValue] + [lastDate timeIntervalSinceNow]];
+				found = YES;
 			}
 		}
 	}
 	
 	// If every attempt to find a suitable project fails add it in the 'Others' project
 	
+	if (!found) {
+		
+	}
+	
 	// Insert the app in database if does not exist
 	
-//	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"app_identifier == %@", app.bundleIdentifier];
-//	[fetchRequest setPredicate:todaysLogs];
-//	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:[self managedObjectContext]];
-//	[fetchRequest setEntity:a];
+	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"app_identifier == %@", app.bundleIdentifier];
+	[fetchRequest setPredicate:todaysLogs];
+	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:[self managedObjectContext]];
+	[fetchRequest setEntity:a];
 	
-	//NSUInteger nr = [context countForFetchRequest:fetchRequest error:&error];
+	NSUInteger nr = [context countForFetchRequest:fetchRequest error:&error];
 	
-//	if (nr == 0) {
-//		RCLog(@"store app %@", app.bundleIdentifier);
+	if (nr == 0) {
+		RCLog(@"create app with %@", app.bundleIdentifier);
 //		App *aa = [NSEntityDescription insertNewObjectForEntityForName:@"App" inManagedObjectContext:context];
 //		aa.app_identifier = app.bundleIdentifier;
 //		aa.app_name = app.localizedName;
 //		aa.icon = [app.icon TIFFRepresentation];
-//	}
+	}
 	
 	
 	if (![context save:&error]) {

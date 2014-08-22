@@ -17,13 +17,20 @@
 	
 	RCLog(@"addDefaultProjects");
 	
-	NSDictionary *app_fb = @{@"name":@"Facebook", @"apps":@[@{@"identifier":@"com.apple.Safari", @"documents":@[@"facebook.com"]}] };
-	NSDictionary *app_ytb = @{@"name":@"YouTube/Vimeo", @"apps":@[@{@"identifier":@"com.apple.Safari", @"documents":@[@"youtube.com", @"vimeo.com"]}] };
-	NSDictionary *app_movie = @{@"name":@"Movie Time", @"apps":@[@{@"identifier":@"org.videolan.vlc"}, @{@"identifier":@"com.apple.QuickTimePlayerX"}] };
-	NSDictionary *app_photo = @{@"name":@"Photography", @"apps":@[@{@"identifier":@"com.adobe.Photoshop"}, @{@"identifier":@"com.adobe.bridge4.1"}] };
-	NSDictionary *app_book = @{@"name":@"Reading Books", @"apps":@[@{@"identifier":@"com.apple.iBooksX"}, @{@"identifier":@"com.apple.Preview", @"documents":@[@".pdf"]}] };
-	NSDictionary *app_idle = @{@"name":@"Idle", @"apps":@[] };
-	NSDictionary *app_sleep = @{@"name":@"Sleep", @"apps":@[] };
+	NSDictionary *app_fb = @{@"name":@"Facebook",
+							 @"apps":@[@{@"identifier":@"com.apple.Safari", @"documents":@[@"facebook.com"]}] };
+	NSDictionary *app_ytb = @{@"name":@"YouTube/Vimeo",
+							  @"apps":@[@{@"identifier":@"com.apple.Safari", @"documents":@[@"youtube.com", @"vimeo.com"]}] };
+	NSDictionary *app_movie = @{@"name":@"Movie Time",
+								@"apps":@[@{@"identifier":@"org.videolan.vlc"}, @{@"identifier":@"com.apple.QuickTimePlayerX"}, @{@"identifier":@"com.intel.nw"}] };
+	NSDictionary *app_photo = @{@"name":@"Photography",
+								@"apps":@[@{@"identifier":@"com.adobe.Photoshop"}, @{@"identifier":@"com.adobe.bridge4.1"}] };
+	NSDictionary *app_book = @{@"name":@"Reading Books",
+							   @"apps":@[@{@"identifier":@"com.apple.iBooksX"}, @{@"identifier":@"com.apple.Preview", @"documents":@[@".pdf"]}] };
+	NSDictionary *app_idle = @{@"name":@"Idle",
+							   @"apps":@[] };
+	NSDictionary *app_sleep = @{@"name":@"Sleep",
+								@"apps":@[] };
 	
 	NSArray *projects_arr = @[app_fb, app_ytb, app_movie, app_photo, app_book, app_idle, app_sleep];
 	
