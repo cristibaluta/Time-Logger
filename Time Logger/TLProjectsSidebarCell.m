@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
-#import "ProjectsSidebarCell.h"
+#import "TLProjectsSidebarCell.h"
 
-@implementation ProjectsSidebarCell
+@implementation TLProjectsSidebarCell
 
 
 - (id)initWithFrame:(NSRect)frame

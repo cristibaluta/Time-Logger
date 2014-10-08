@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
-#import "TimelineCell.h"
+#import "TLTimelineCell.h"
 
-@implementation TimelineCell
+@implementation TLTimelineCell
 
 @end

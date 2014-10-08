@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface TimelineCell : NSTableCellView
+@interface TLTimelineCell : NSTableCellView
 
 @property (nonatomic, retain) IBOutlet NSTextField *timeBegin;
 @property (nonatomic, retain) IBOutlet NSTextField *timeEnd;

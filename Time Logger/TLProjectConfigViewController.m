@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
-#import "ProjectConfigViewController.h"
+#import "TLProjectConfigViewController.h"
 #import "Project.h"
 #import "Client.h"
 
-@implementation ProjectConfigViewController
+@implementation TLProjectConfigViewController
 
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;

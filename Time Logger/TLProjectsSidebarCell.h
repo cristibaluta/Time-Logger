@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ProjectsSidebarCell : NSTableCellView
+@interface TLProjectsSidebarCell : NSTableCellView
 
 @property (assign) IBOutlet NSTextField *name;
 @property (assign) IBOutlet NSTextField *time;

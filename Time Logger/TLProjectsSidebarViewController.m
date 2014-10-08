@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
-#import "ProjectsSidebarViewController.h"
-#import "ProjectsSidebarCell.h"
+#import "TLProjectsSidebarViewController.h"
+#import "TLProjectsSidebarCell.h"
 #import "SourceListItem.h"
 #import "Project.h"
 
-@implementation ProjectsSidebarViewController
+@implementation TLProjectsSidebarViewController
 
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;

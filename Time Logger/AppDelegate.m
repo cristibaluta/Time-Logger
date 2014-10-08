@@ -7,7 +7,23 @@
 //
 
 #import "AppDelegate.h"
-#import "AppDbInitialization.h"
+#import "TLAppDBInitialization.h"
+
+
+@interface AppDelegate () {
+	
+	BOOL _firstRun;
+	NSArray *_runningApplications;
+	NSTimer *_timer;
+	TLAppDispatcher *_dispatcher;
+	NSDate *_lastDate;
+	
+	TLProjectsSidebarViewController *_projectsListController;
+	TLProjectConfigViewController *_projectConfigController;
+	TLProjectTimelineViewController *_projectTimelineController;
+}
+@end
+
 
 @implementation AppDelegate
 
@@ -22,40 +38,40 @@
 	
 	// Add projects list
 	
-	projectsList = [[ProjectsSidebarViewController alloc] initWithNibName:@"ProjectsSidebar"
+	_projectsListController = [[TLProjectsSidebarViewController alloc] initWithNibName:@"ProjectsSidebar"
 																   bundle:[NSBundle mainBundle]
 													 managedObjectContext:self.managedObjectContext
 													   managedObjectModel:self.managedObjectModel];
-	projectsList.delegate = self;
+	_projectsListController.delegate = self;
 	// Add the projects sidebar in the left view of the splitview
-	[self.splitView replaceSubview:[[self.splitView subviews] objectAtIndex:0] with:projectsList.view];
+	[self.splitView replaceSubview:[[self.splitView subviews] objectAtIndex:0] with:_projectsListController.view];
 	
 	
-	projectConfig = [[ProjectConfigViewController alloc] initWithNibName:@"ProjectConfig"
+	_projectConfigController = [[TLProjectConfigViewController alloc] initWithNibName:@"ProjectConfig"
 																  bundle:[NSBundle mainBundle]
 													managedObjectContext:self.managedObjectContext
 													  managedObjectModel:self.managedObjectModel];
 	
-	projectTimeline = [[ProjectTimelineViewController alloc] initWithNibName:@"ProjectTimeline"
+	_projectTimelineController = [[TLProjectTimelineViewController alloc] initWithNibName:@"ProjectTimeline"
 																	  bundle:[NSBundle mainBundle]
 														managedObjectContext:self.managedObjectContext
 														  managedObjectModel:self.managedObjectModel];
 
 	
 	NSTabViewItem *timelineTab = [self.tabView tabViewItemAtIndex:0];
-	[timelineTab setView:projectTimeline.view];
+	[timelineTab setView:_projectTimelineController.view];
 	
 	NSTabViewItem *graphTab = [self.tabView tabViewItemAtIndex:1];
-	[graphTab setView:projectTimeline.view];
+	[graphTab setView:_projectTimelineController.view];
 	
 	NSTabViewItem *configTab = [self.tabView tabViewItemAtIndex:2];
-	[configTab setView:projectConfig.view];
+	[configTab setView:_projectConfigController.view];
 	
-	// Create the dispatcher. Dispatcher decides when and where will the app be logged
-	dispatcher = [[AppDispatcher alloc] init];
-	dispatcher.delegate = self;
+	// Create the _dispatcher. Dispatcher decides when and where will the app be logged
+	_dispatcher = [[TLAppDispatcher alloc] init];
+	_dispatcher.delegate = self;
 	
-	// Start the timer
+	// Start the _timer
 	
 	//[self startTimerWithInterval:1.0];
 	
@@ -68,7 +84,7 @@
 //	timelog.caption = @"Test  caption";
 //	timelog.document_name = @"document name";
 //	timelog.end_time = [NSDate date];
-//	timelog.start_time = lastDate;
+//	timelog.start_time = _lastDate;
 //	
 //	NSError *error;
 //	if (![context save:&error]) {
@@ -91,18 +107,18 @@
 
 #pragma mark Timer
 
-- (void) startTimerWithInterval:(float)interval {
+- (void)startTimerWithInterval:(float)interval {
 	
-	[timer invalidate];
+	[_timer invalidate];
 	
-	timer = [NSTimer scheduledTimerWithTimeInterval:interval
+	_timer = [NSTimer scheduledTimerWithTimeInterval:interval
 											 target:self
 										   selector:@selector(tick)
 										   userInfo:nil
 											repeats:YES];
 }
 
-- (void) tick {
+- (void)tick {
 	
 	// Get the current app
 	
@@ -137,7 +153,7 @@
 		document_name = [descriptor stringValue];
 	}
 	
-	[dispatcher logApp:app windowName:document_name];
+	[_dispatcher logApp:app windowName:document_name];
 	
 	//RCLog(@"Active application is: %@ %i", activeApp, pid);
 	
@@ -160,14 +176,14 @@
 
 #pragma mark AppDispatcher delegate
 
-- (void) didStartTrackingApp:(NSRunningApplication*)app {
+- (void)didStartTrackingApp:(NSRunningApplication*)app {
 	
 	RCLog(@"start tracking %@", app.localizedName);
-	lastDate = [NSDate date];
-	[projectTimeline fetch];
+	_lastDate = [NSDate date];
+	[_projectTimelineController fetch];
 }
 
-- (void) didStopTrackingApp:(NSRunningApplication*)app windowName:(NSString*)name {
+- (void)didStopTrackingApp:(NSRunningApplication*)app windowName:(NSString*)name {
 	
 	RCLog(@"stop tracking %@ - %@", app.localizedName, app.bundleIdentifier);
 	RCLogO(@"find the project it belongs to and add the time spent in this app to that project");
@@ -181,7 +197,7 @@
 	timelog.app_identifier = app.bundleIdentifier;
 	timelog.caption = app.localizedName;
 	timelog.end_time = [NSDate date];
-	timelog.start_time = lastDate;
+	timelog.start_time = _lastDate;
 	timelog.document_name = name;
 	
 	// Find the project for this app identifier and document name
@@ -202,7 +218,7 @@
 			if ([pa.app_identifier isEqualToString:app.bundleIdentifier]) {
 				RCLog(@"found");
 				NSNumber *oldTime = project.time_spent;
-				project.time_spent = [NSNumber numberWithLongLong:[oldTime longLongValue] + [lastDate timeIntervalSinceNow]];
+				project.time_spent = [NSNumber numberWithLongLong:[oldTime longLongValue] + [_lastDate timeIntervalSinceNow]];
 				found = YES;
 			}
 		}
@@ -237,7 +253,7 @@
 	}
 }
 
-- (void) didBecomeIdle {
+- (void)didBecomeIdle {
 	
 	
 }
@@ -250,7 +266,7 @@
 	
 	[self.tabView selectTabViewItemAtIndex:2];
 	
-	projectConfig.textDescription.stringValue = @"Description here...";
+	_projectConfigController.textDescription.stringValue = @"Description here...";
 }
 
 
@@ -292,7 +308,7 @@
     
     NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"Time_Logger.storedata"];
 	
-	firstRun = ![url checkResourceIsReachableAndReturnError:&error];
+	_firstRun = ![url checkResourceIsReachableAndReturnError:&error];
 	
     NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:@[NSURLIsDirectoryKey] error:&error];
     
@@ -349,11 +365,11 @@
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
 	
-	if (firstRun) {
+	if (_firstRun) {
 		
 		// After you created the database for the first time add some default values
 		
-		[AppDbInitialization addDefaultProjects:_managedObjectContext];
+		[TLAppDBInitialization addDefaultProjects:_managedObjectContext];
 		[self saveAction:nil];
 		
 	}

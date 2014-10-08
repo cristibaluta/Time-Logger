@@ -10,6 +10,6 @@
 
 @interface NSDictionary (Color)
 
--(NSColor*)colorForKey:(NSString*)appIdentifier;
+- (NSColor*)colorForKey:(NSString*)appIdentifier;
 
 @end

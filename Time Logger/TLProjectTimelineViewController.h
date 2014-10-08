@@ -7,11 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "TimelineCell.h"
+#import "TLTimelineCell.h"
 #import "TimeLog.h"
 #import "App.h"
 
-@interface ProjectTimelineViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
+@interface TLProjectTimelineViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
 	
 	NSArray *logs;
 }
@@ -20,7 +20,10 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) IBOutlet NSTableView *appsTable;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext *) managedContext managedObjectModel:(NSManagedObjectModel *) managedModel;
+- (id)initWithNibName:(NSString *)nibNameOrNil
+			   bundle:(NSBundle *)nibBundleOrNil
+ managedObjectContext:(NSManagedObjectContext *)managedContext
+   managedObjectModel:(NSManagedObjectModel *)managedModel;
 - (void)fetch;
 
 @end

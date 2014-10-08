@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		280A807217A99239006ECD5C /* TimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280A807117A99239006ECD5C /* TimelineCell.m */; };
-		280A807317A9B106006ECD5C /* ProjectsSidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */; };
+		280A807217A99239006ECD5C /* TLTimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280A807117A99239006ECD5C /* TLTimelineCell.m */; };
+		280A807317A9B106006ECD5C /* TLProjectsSidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F27A456D17A8382C003E9543 /* TLProjectsSidebarCell.m */; };
 		283C70C61802DF9100EB161E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283C70C51802DF9100EB161E /* CoreServices.framework */; };
 		283C70C81803067800EB161E /* Facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C70C71803067800EB161E /* Facebook.png */; };
 		283C70CA1803074B00EB161E /* Photography.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C70C91803074B00EB161E /* Photography.png */; };
@@ -34,15 +34,15 @@
 		28A27AAA1820717F0071B1E2 /* TimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AA91820717F0071B1E2 /* TimeLog.m */; };
 		28A27AAD1820717F0071B1E2 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AAC1820717F0071B1E2 /* Client.m */; };
 		28A27AB01820717F0071B1E2 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AAF1820717F0071B1E2 /* Project.m */; };
-		28A27AB318207C5B0071B1E2 /* AppDbInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AB218207C5B0071B1E2 /* AppDbInitialization.m */; };
-		28CFCCE717A582F5001511EF /* ProjectsSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCE517A582F5001511EF /* ProjectsSidebarViewController.m */; };
+		28A27AB318207C5B0071B1E2 /* TLAppDBInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AB218207C5B0071B1E2 /* TLAppDBInitialization.m */; };
+		28CFCCE717A582F5001511EF /* TLProjectsSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCE517A582F5001511EF /* TLProjectsSidebarViewController.m */; };
 		28CFCCE817A582F5001511EF /* ProjectsSidebar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCE617A582F5001511EF /* ProjectsSidebar.xib */; };
-		28CFCCEC17A58F40001511EF /* AppDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCEB17A58F40001511EF /* AppDispatcher.m */; };
-		28CFCCF317A61D11001511EF /* ProjectTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCF117A61D11001511EF /* ProjectTimelineViewController.m */; };
+		28CFCCEC17A58F40001511EF /* TLAppDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCEB17A58F40001511EF /* TLAppDispatcher.m */; };
+		28CFCCF317A61D11001511EF /* TLProjectTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCF117A61D11001511EF /* TLProjectTimelineViewController.m */; };
 		28CFCCF417A61D11001511EF /* ProjectTimeline.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCF217A61D11001511EF /* ProjectTimeline.xib */; };
-		28CFCCF817A63187001511EF /* ProjectConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCF617A63187001511EF /* ProjectConfigViewController.m */; };
+		28CFCCF817A63187001511EF /* TLProjectConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCF617A63187001511EF /* TLProjectConfigViewController.m */; };
 		28CFCCF917A63187001511EF /* ProjectConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCF717A63187001511EF /* ProjectConfig.xib */; };
-		28CFCCFD17A63469001511EF /* ProjectReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCFB17A63468001511EF /* ProjectReportViewController.m */; };
+		28CFCCFD17A63469001511EF /* TLProjectReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCFB17A63468001511EF /* TLProjectReportViewController.m */; };
 		28CFCCFE17A63469001511EF /* ProjectReport.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCFC17A63469001511EF /* ProjectReport.xib */; };
 		28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCD0017A6466A001511EF /* NSDictionary+Color.m */; };
 		28D0559C18003D08002F5246 /* SourceListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D0559B18003D08002F5246 /* SourceListItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -64,8 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		280A807017A99239006ECD5C /* TimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineCell.h; sourceTree = "<group>"; };
-		280A807117A99239006ECD5C /* TimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineCell.m; sourceTree = "<group>"; };
+		280A807017A99239006ECD5C /* TLTimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTimelineCell.h; sourceTree = "<group>"; };
+		280A807117A99239006ECD5C /* TLTimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTimelineCell.m; sourceTree = "<group>"; };
 		283C70C51802DF9100EB161E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		283C70C71803067800EB161E /* Facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Facebook.png; sourceTree = "<group>"; };
 		283C70C91803074B00EB161E /* Photography.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Photography.png; sourceTree = "<group>"; };
@@ -108,21 +108,21 @@
 		28A27AAC1820717F0071B1E2 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
 		28A27AAE1820717F0071B1E2 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		28A27AAF1820717F0071B1E2 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
-		28A27AB118207C5B0071B1E2 /* AppDbInitialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDbInitialization.h; sourceTree = "<group>"; };
-		28A27AB218207C5B0071B1E2 /* AppDbInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDbInitialization.m; sourceTree = "<group>"; };
-		28CFCCE417A582F5001511EF /* ProjectsSidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectsSidebarViewController.h; sourceTree = "<group>"; };
-		28CFCCE517A582F5001511EF /* ProjectsSidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectsSidebarViewController.m; sourceTree = "<group>"; };
+		28A27AB118207C5B0071B1E2 /* TLAppDBInitialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAppDBInitialization.h; sourceTree = "<group>"; };
+		28A27AB218207C5B0071B1E2 /* TLAppDBInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAppDBInitialization.m; sourceTree = "<group>"; };
+		28CFCCE417A582F5001511EF /* TLProjectsSidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLProjectsSidebarViewController.h; sourceTree = "<group>"; };
+		28CFCCE517A582F5001511EF /* TLProjectsSidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLProjectsSidebarViewController.m; sourceTree = "<group>"; };
 		28CFCCE617A582F5001511EF /* ProjectsSidebar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsSidebar.xib; sourceTree = "<group>"; };
-		28CFCCEA17A58F40001511EF /* AppDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDispatcher.h; sourceTree = "<group>"; };
-		28CFCCEB17A58F40001511EF /* AppDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDispatcher.m; sourceTree = "<group>"; };
-		28CFCCF017A61D11001511EF /* ProjectTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTimelineViewController.h; sourceTree = "<group>"; };
-		28CFCCF117A61D11001511EF /* ProjectTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectTimelineViewController.m; sourceTree = "<group>"; };
+		28CFCCEA17A58F40001511EF /* TLAppDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAppDispatcher.h; sourceTree = "<group>"; };
+		28CFCCEB17A58F40001511EF /* TLAppDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAppDispatcher.m; sourceTree = "<group>"; };
+		28CFCCF017A61D11001511EF /* TLProjectTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLProjectTimelineViewController.h; sourceTree = "<group>"; };
+		28CFCCF117A61D11001511EF /* TLProjectTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLProjectTimelineViewController.m; sourceTree = "<group>"; };
 		28CFCCF217A61D11001511EF /* ProjectTimeline.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectTimeline.xib; sourceTree = "<group>"; };
-		28CFCCF517A63186001511EF /* ProjectConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectConfigViewController.h; sourceTree = "<group>"; };
-		28CFCCF617A63187001511EF /* ProjectConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectConfigViewController.m; sourceTree = "<group>"; };
+		28CFCCF517A63186001511EF /* TLProjectConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLProjectConfigViewController.h; sourceTree = "<group>"; };
+		28CFCCF617A63187001511EF /* TLProjectConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLProjectConfigViewController.m; sourceTree = "<group>"; };
 		28CFCCF717A63187001511EF /* ProjectConfig.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectConfig.xib; sourceTree = "<group>"; };
-		28CFCCFA17A63468001511EF /* ProjectReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectReportViewController.h; sourceTree = "<group>"; };
-		28CFCCFB17A63468001511EF /* ProjectReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectReportViewController.m; sourceTree = "<group>"; };
+		28CFCCFA17A63468001511EF /* TLProjectReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLProjectReportViewController.h; sourceTree = "<group>"; };
+		28CFCCFB17A63468001511EF /* TLProjectReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLProjectReportViewController.m; sourceTree = "<group>"; };
 		28CFCCFC17A63469001511EF /* ProjectReport.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectReport.xib; sourceTree = "<group>"; };
 		28CFCCFF17A6466A001511EF /* NSDictionary+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Color.h"; sourceTree = "<group>"; };
 		28CFCD0017A6466A001511EF /* NSDictionary+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Color.m"; sourceTree = "<group>"; };
@@ -134,8 +134,8 @@
 		28D475E417ACE6F400C189AB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		28D475E517ACE6F400C189AB /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
 		28D475FB17AD3AE400C189AB /* GetSafariUrl.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = GetSafariUrl.scpt; path = AppleScripts/GetSafariUrl.scpt; sourceTree = "<group>"; };
-		F27A456C17A8382C003E9543 /* ProjectsSidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectsSidebarCell.h; sourceTree = "<group>"; };
-		F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectsSidebarCell.m; sourceTree = "<group>"; };
+		F27A456C17A8382C003E9543 /* TLProjectsSidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLProjectsSidebarCell.h; sourceTree = "<group>"; };
+		F27A456D17A8382C003E9543 /* TLProjectsSidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLProjectsSidebarCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,10 +163,10 @@
 		2854C27E17B6A55F0090BD3E /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
-				28CFCCE417A582F5001511EF /* ProjectsSidebarViewController.h */,
-				28CFCCE517A582F5001511EF /* ProjectsSidebarViewController.m */,
-				F27A456C17A8382C003E9543 /* ProjectsSidebarCell.h */,
-				F27A456D17A8382C003E9543 /* ProjectsSidebarCell.m */,
+				28CFCCE417A582F5001511EF /* TLProjectsSidebarViewController.h */,
+				28CFCCE517A582F5001511EF /* TLProjectsSidebarViewController.m */,
+				F27A456C17A8382C003E9543 /* TLProjectsSidebarCell.h */,
+				F27A456D17A8382C003E9543 /* TLProjectsSidebarCell.m */,
 				2854C27F17B9B4110090BD3E /* PXSourceList.h */,
 				2854C28017B9B4110090BD3E /* PXSourceList.m */,
 				28D0559A18003D08002F5246 /* SourceListItem.h */,
@@ -267,8 +267,8 @@
 				28CFCCE617A582F5001511EF /* ProjectsSidebar.xib */,
 				28CFCCF717A63187001511EF /* ProjectConfig.xib */,
 				28CFCCF217A61D11001511EF /* ProjectTimeline.xib */,
-				280A807017A99239006ECD5C /* TimelineCell.h */,
-				280A807117A99239006ECD5C /* TimelineCell.m */,
+				280A807017A99239006ECD5C /* TLTimelineCell.h */,
+				280A807117A99239006ECD5C /* TLTimelineCell.m */,
 				28CFCCFC17A63469001511EF /* ProjectReport.xib */,
 			);
 			name = Views;
@@ -278,12 +278,12 @@
 			isa = PBXGroup;
 			children = (
 				2854C27E17B6A55F0090BD3E /* Sidebar */,
-				28CFCCF517A63186001511EF /* ProjectConfigViewController.h */,
-				28CFCCF617A63187001511EF /* ProjectConfigViewController.m */,
-				28CFCCF017A61D11001511EF /* ProjectTimelineViewController.h */,
-				28CFCCF117A61D11001511EF /* ProjectTimelineViewController.m */,
-				28CFCCFA17A63468001511EF /* ProjectReportViewController.h */,
-				28CFCCFB17A63468001511EF /* ProjectReportViewController.m */,
+				28CFCCF517A63186001511EF /* TLProjectConfigViewController.h */,
+				28CFCCF617A63187001511EF /* TLProjectConfigViewController.m */,
+				28CFCCF017A61D11001511EF /* TLProjectTimelineViewController.h */,
+				28CFCCF117A61D11001511EF /* TLProjectTimelineViewController.m */,
+				28CFCCFA17A63468001511EF /* TLProjectReportViewController.h */,
+				28CFCCFB17A63468001511EF /* TLProjectReportViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -309,10 +309,10 @@
 		28CFCCE917A58467001511EF /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				28A27AB118207C5B0071B1E2 /* AppDbInitialization.h */,
-				28A27AB218207C5B0071B1E2 /* AppDbInitialization.m */,
-				28CFCCEA17A58F40001511EF /* AppDispatcher.h */,
-				28CFCCEB17A58F40001511EF /* AppDispatcher.m */,
+				28A27AB118207C5B0071B1E2 /* TLAppDBInitialization.h */,
+				28A27AB218207C5B0071B1E2 /* TLAppDBInitialization.m */,
+				28CFCCEA17A58F40001511EF /* TLAppDispatcher.h */,
+				28CFCCEB17A58F40001511EF /* TLAppDispatcher.m */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -387,7 +387,7 @@
 			name = "Time LoggerTests";
 			productName = "Time LoggerTests";
 			productReference = 2897380617A07CAF003B18D3 /* Time LoggerTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -478,21 +478,21 @@
 				28A27AB01820717F0071B1E2 /* Project.m in Sources */,
 				2897380017A07CAF003B18D3 /* Time_Logger.xcdatamodeld in Sources */,
 				28A27AA418206BCE0071B1E2 /* RCLog.m in Sources */,
-				28CFCCE717A582F5001511EF /* ProjectsSidebarViewController.m in Sources */,
-				28CFCCEC17A58F40001511EF /* AppDispatcher.m in Sources */,
-				28CFCCF317A61D11001511EF /* ProjectTimelineViewController.m in Sources */,
-				28CFCCF817A63187001511EF /* ProjectConfigViewController.m in Sources */,
-				28CFCCFD17A63469001511EF /* ProjectReportViewController.m in Sources */,
+				28CFCCE717A582F5001511EF /* TLProjectsSidebarViewController.m in Sources */,
+				28CFCCEC17A58F40001511EF /* TLAppDispatcher.m in Sources */,
+				28CFCCF317A61D11001511EF /* TLProjectTimelineViewController.m in Sources */,
+				28CFCCF817A63187001511EF /* TLProjectConfigViewController.m in Sources */,
+				28CFCCFD17A63469001511EF /* TLProjectReportViewController.m in Sources */,
 				28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */,
 				285C91781853BE73009C1F6C /* ProjectApp.m in Sources */,
 				28A27AAD1820717F0071B1E2 /* Client.m in Sources */,
 				28A27AAA1820717F0071B1E2 /* TimeLog.m in Sources */,
-				280A807217A99239006ECD5C /* TimelineCell.m in Sources */,
-				280A807317A9B106006ECD5C /* ProjectsSidebarCell.m in Sources */,
+				280A807217A99239006ECD5C /* TLTimelineCell.m in Sources */,
+				280A807317A9B106006ECD5C /* TLProjectsSidebarCell.m in Sources */,
 				28D475E617ACE6F400C189AB /* App.m in Sources */,
 				2854C28317B9B4110090BD3E /* PXSourceList.m in Sources */,
 				28D0559C18003D08002F5246 /* SourceListItem.m in Sources */,
-				28A27AB318207C5B0071B1E2 /* AppDbInitialization.m in Sources */,
+				28A27AB318207C5B0071B1E2 /* TLAppDBInitialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

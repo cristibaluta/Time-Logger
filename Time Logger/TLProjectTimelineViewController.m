@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
-#import "ProjectTimelineViewController.h"
+#import "TLProjectTimelineViewController.h"
 
 
-@implementation ProjectTimelineViewController
+@implementation TLProjectTimelineViewController
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext*)managedContext managedObjectModel:(NSManagedObjectModel*)managedModel {
@@ -114,10 +114,10 @@
    viewForTableColumn:(NSTableColumn *)tableColumn
 				  row:(NSInteger)row {
 	
-	TimelineCell *result = [tableView makeViewWithIdentifier:@"TimelineCell" owner:self];
+	TLTimelineCell *result = [tableView makeViewWithIdentifier:@"TimelineCell" owner:self];
 	
 	if (result == nil) {
-		result = [[TimelineCell alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
+		result = [[TLTimelineCell alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
 		result.identifier = @"TimelineCell";
 	}
 	

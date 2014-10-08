@@ -10,6 +10,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ProjectReportViewController : NSViewController
+@interface TLProjectReportViewController : NSViewController
 
 @end

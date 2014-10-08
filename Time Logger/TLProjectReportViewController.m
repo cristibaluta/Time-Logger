@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
-#import "ProjectReportViewController.h"
+#import "TLProjectReportViewController.h"
 
-@interface ProjectReportViewController ()
+@interface TLProjectReportViewController ()
 
 @end
 
-@implementation ProjectReportViewController
+@implementation TLProjectReportViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

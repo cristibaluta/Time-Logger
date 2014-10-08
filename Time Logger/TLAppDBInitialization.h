@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AppDbInitialization : NSObject
+@interface TLAppDBInitialization : NSObject
 
-+ (void) addDefaultProjects:(NSManagedObjectContext*)context;
++ (void)addDefaultProjects:(NSManagedObjectContext*)context;
+
 @end

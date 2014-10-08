@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Baluta Cristian. All rights reserved.
 //
 
-#import "AppDbInitialization.h"
+#import "TLAppDBInitialization.h"
 #import "Client.h"
 #import "Project.h"
 #import "ProjectApp.h"
 
-@implementation AppDbInitialization
+@implementation TLAppDBInitialization
 
-+ (void) addDefaultProjects:(NSManagedObjectContext*)context {
++ (void)addDefaultProjects:(NSManagedObjectContext*)context {
 	
 	RCLog(@"addDefaultProjects");
 	

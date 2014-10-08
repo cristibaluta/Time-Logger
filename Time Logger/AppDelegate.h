@@ -7,27 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AppDispatcher.h"
+#import "TLAppDispatcher.h"
 #import "App.h"
 #import "TimeLog.h"
 #import "Project.h"
 #import "ProjectApp.h"
-#import "ProjectsSidebarViewController.h"
-#import "ProjectConfigViewController.h"
-#import "ProjectTimelineViewController.h"
+#import "TLProjectsSidebarViewController.h"
+#import "TLProjectConfigViewController.h"
+#import "TLProjectTimelineViewController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, AppDispatcherDelegate, ProjectsSidebarDelegate> {
-	
-	BOOL firstRun;
-	NSArray *runningApplications;
-	NSTimer *timer;
-	AppDispatcher *dispatcher;
-	NSDate *lastDate;
-	
-	ProjectsSidebarViewController *projectsList;
-	ProjectConfigViewController *projectConfig;
-	ProjectTimelineViewController *projectTimeline;
-}
+@interface AppDelegate : NSObject <NSApplicationDelegate, TLAppDispatcherDelegate, TLProjectsSidebarDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSView *mainView;

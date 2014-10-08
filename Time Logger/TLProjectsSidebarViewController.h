@@ -12,7 +12,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PXSourceList.h"
 
-@protocol ProjectsSidebarDelegate <NSObject>
+@protocol TLProjectsSidebarDelegate <NSObject>
 
 @required
 - (void)projectDidSelect:(NSString*)project_id;
@@ -20,7 +20,7 @@
 @end
 
 
-@interface ProjectsSidebarViewController : NSViewController <PXSourceListDataSource, PXSourceListDelegate> {
+@interface TLProjectsSidebarViewController : NSViewController <PXSourceListDataSource, PXSourceListDelegate> {
 	
 	IBOutlet PXSourceList *sourceList;
 	NSMutableArray *sourceListItems;
@@ -29,7 +29,7 @@
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) id<ProjectsSidebarDelegate> delegate;
+@property (nonatomic, strong) id<TLProjectsSidebarDelegate> delegate;
 
 - (id)initWithNibName:(NSString*)nibNameOrNil
 			   bundle:(NSBundle*)nibBundleOrNil

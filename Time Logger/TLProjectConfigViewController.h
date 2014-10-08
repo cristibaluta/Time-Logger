@@ -14,8 +14,7 @@
 
 @class Project;
 
-@interface ProjectConfigViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
-{
+@interface TLProjectConfigViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
 	NSArray *runningApplications;
 }
 
