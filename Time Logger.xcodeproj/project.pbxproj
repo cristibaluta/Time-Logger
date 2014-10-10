@@ -18,7 +18,11 @@
 		2854C27D17B6970B0090BD3E /* GetBrowserUrl.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2854C27C17B6970B0090BD3E /* GetBrowserUrl.txt */; };
 		2854C28317B9B4110090BD3E /* PXSourceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854C28017B9B4110090BD3E /* PXSourceList.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2854C28F17BB95740090BD3E /* icons.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2854C28E17BB95740090BD3E /* icons.icns */; };
-		285C91781853BE73009C1F6C /* ProjectApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 285C91771853BE73009C1F6C /* ProjectApp.m */; };
+		288FCBAE19E6FD1F00D4C95F /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FCBAD19E6FD1F00D4C95F /* Project.m */; };
+		288FCBB119E6FD2000D4C95F /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FCBB019E6FD2000D4C95F /* App.m */; };
+		288FCBB419E6FD2000D4C95F /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FCBB319E6FD2000D4C95F /* Client.m */; };
+		288FCBB719E6FD2000D4C95F /* ProjectApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FCBB619E6FD2000D4C95F /* ProjectApp.m */; };
+		288FCBBA19E6FD2000D4C95F /* TimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FCBB919E6FD2000D4C95F /* TimeLog.m */; };
 		289737E717A07CAF003B18D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289737E617A07CAF003B18D3 /* Cocoa.framework */; };
 		289737F117A07CAF003B18D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 289737EF17A07CAF003B18D3 /* InfoPlist.strings */; };
 		289737F317A07CAF003B18D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 289737F217A07CAF003B18D3 /* main.m */; };
@@ -31,9 +35,6 @@
 		2897381117A07CAF003B18D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2897380F17A07CAF003B18D3 /* InfoPlist.strings */; };
 		2897381417A07CAF003B18D3 /* Time_LoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2897381317A07CAF003B18D3 /* Time_LoggerTests.m */; };
 		28A27AA418206BCE0071B1E2 /* RCLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AA318206BCE0071B1E2 /* RCLog.m */; };
-		28A27AAA1820717F0071B1E2 /* TimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AA91820717F0071B1E2 /* TimeLog.m */; };
-		28A27AAD1820717F0071B1E2 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AAC1820717F0071B1E2 /* Client.m */; };
-		28A27AB01820717F0071B1E2 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AAF1820717F0071B1E2 /* Project.m */; };
 		28A27AB318207C5B0071B1E2 /* TLAppDBInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A27AB218207C5B0071B1E2 /* TLAppDBInitialization.m */; };
 		28CFCCE717A582F5001511EF /* TLProjectsSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CFCCE517A582F5001511EF /* TLProjectsSidebarViewController.m */; };
 		28CFCCE817A582F5001511EF /* ProjectsSidebar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CFCCE617A582F5001511EF /* ProjectsSidebar.xib */; };
@@ -49,7 +50,6 @@
 		28D055A518003D2B002F5246 /* Movie Time.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D0559F18003D2B002F5246 /* Movie Time.png */; };
 		28D055A618003D2B002F5246 /* music.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D055A018003D2B002F5246 /* music.png */; };
 		28D055A818003D2B002F5246 /* playlistFolder.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D055A218003D2B002F5246 /* playlistFolder.png */; };
-		28D475E617ACE6F400C189AB /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D475E517ACE6F400C189AB /* App.m */; };
 		28D475FC17AD3AE400C189AB /* GetSafariUrl.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 28D475FB17AD3AE400C189AB /* GetSafariUrl.scpt */; };
 /* End PBXBuildFile section */
 
@@ -78,8 +78,16 @@
 		2854C28117B9B4110090BD3E /* PXSourceListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSourceListDataSource.h; sourceTree = "<group>"; };
 		2854C28217B9B4110090BD3E /* PXSourceListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSourceListDelegate.h; sourceTree = "<group>"; };
 		2854C28E17BB95740090BD3E /* icons.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icons.icns; sourceTree = "<group>"; };
-		285C91761853BE73009C1F6C /* ProjectApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectApp.h; sourceTree = "<group>"; };
-		285C91771853BE73009C1F6C /* ProjectApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectApp.m; sourceTree = "<group>"; };
+		288FCBAC19E6FD1F00D4C95F /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		288FCBAD19E6FD1F00D4C95F /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
+		288FCBAF19E6FD2000D4C95F /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		288FCBB019E6FD2000D4C95F /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
+		288FCBB219E6FD2000D4C95F /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		288FCBB319E6FD2000D4C95F /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
+		288FCBB519E6FD2000D4C95F /* ProjectApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectApp.h; sourceTree = "<group>"; };
+		288FCBB619E6FD2000D4C95F /* ProjectApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectApp.m; sourceTree = "<group>"; };
+		288FCBB819E6FD2000D4C95F /* TimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLog.h; sourceTree = "<group>"; };
+		288FCBB919E6FD2000D4C95F /* TimeLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLog.m; sourceTree = "<group>"; };
 		289737E317A07CAF003B18D3 /* Time Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		289737E617A07CAF003B18D3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		289737E917A07CAF003B18D3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -102,12 +110,6 @@
 		2897381317A07CAF003B18D3 /* Time_LoggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Time_LoggerTests.m; sourceTree = "<group>"; };
 		28A27AA218206BCE0071B1E2 /* RCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCLog.h; path = ../../../RCLog/src/RCLog.h; sourceTree = "<group>"; };
 		28A27AA318206BCE0071B1E2 /* RCLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCLog.m; path = ../../../RCLog/src/RCLog.m; sourceTree = "<group>"; };
-		28A27AA81820717E0071B1E2 /* TimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLog.h; sourceTree = "<group>"; };
-		28A27AA91820717F0071B1E2 /* TimeLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLog.m; sourceTree = "<group>"; };
-		28A27AAB1820717F0071B1E2 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
-		28A27AAC1820717F0071B1E2 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
-		28A27AAE1820717F0071B1E2 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
-		28A27AAF1820717F0071B1E2 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		28A27AB118207C5B0071B1E2 /* TLAppDBInitialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAppDBInitialization.h; sourceTree = "<group>"; };
 		28A27AB218207C5B0071B1E2 /* TLAppDBInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAppDBInitialization.m; sourceTree = "<group>"; };
 		28CFCCE417A582F5001511EF /* TLProjectsSidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLProjectsSidebarViewController.h; sourceTree = "<group>"; };
@@ -131,8 +133,6 @@
 		28D0559F18003D2B002F5246 /* Movie Time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Movie Time.png"; sourceTree = "<group>"; };
 		28D055A018003D2B002F5246 /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music.png; sourceTree = "<group>"; };
 		28D055A218003D2B002F5246 /* playlistFolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlistFolder.png; sourceTree = "<group>"; };
-		28D475E417ACE6F400C189AB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
-		28D475E517ACE6F400C189AB /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
 		28D475FB17AD3AE400C189AB /* GetSafariUrl.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = GetSafariUrl.scpt; path = AppleScripts/GetSafariUrl.scpt; sourceTree = "<group>"; };
 		F27A456C17A8382C003E9543 /* TLProjectsSidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLProjectsSidebarCell.h; sourceTree = "<group>"; };
 		F27A456D17A8382C003E9543 /* TLProjectsSidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLProjectsSidebarCell.m; sourceTree = "<group>"; };
@@ -167,6 +167,13 @@
 				28CFCCE517A582F5001511EF /* TLProjectsSidebarViewController.m */,
 				F27A456C17A8382C003E9543 /* TLProjectsSidebarCell.h */,
 				F27A456D17A8382C003E9543 /* TLProjectsSidebarCell.m */,
+			);
+			name = Sidebar;
+			sourceTree = "<group>";
+		};
+		288FCBA019E6FB2900D4C95F /* PXSourceList */ = {
+			isa = PBXGroup;
+			children = (
 				2854C27F17B9B4110090BD3E /* PXSourceList.h */,
 				2854C28017B9B4110090BD3E /* PXSourceList.m */,
 				28D0559A18003D08002F5246 /* SourceListItem.h */,
@@ -174,7 +181,7 @@
 				2854C28117B9B4110090BD3E /* PXSourceListDataSource.h */,
 				2854C28217B9B4110090BD3E /* PXSourceListDelegate.h */,
 			);
-			name = Sidebar;
+			name = PXSourceList;
 			sourceTree = "<group>";
 		};
 		289737DA17A07CAF003B18D3 = {
@@ -216,6 +223,7 @@
 				289737F917A07CAF003B18D3 /* AppDelegate.m */,
 				28CFCCE917A58467001511EF /* Logic */,
 				28CFCCE317A581BC001511EF /* Models */,
+				2854C27E17B6A55F0090BD3E /* Sidebar */,
 				28CFCCE217A581B0001511EF /* Controllers */,
 				28CFCCE117A581A4001511EF /* Views */,
 				289737ED17A07CAF003B18D3 /* Supporting Files */,
@@ -277,7 +285,6 @@
 		28CFCCE217A581B0001511EF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2854C27E17B6A55F0090BD3E /* Sidebar */,
 				28CFCCF517A63186001511EF /* TLProjectConfigViewController.h */,
 				28CFCCF617A63187001511EF /* TLProjectConfigViewController.m */,
 				28CFCCF017A61D11001511EF /* TLProjectTimelineViewController.h */,
@@ -292,16 +299,16 @@
 			isa = PBXGroup;
 			children = (
 				289737FE17A07CAF003B18D3 /* Time_Logger.xcdatamodeld */,
-				285C91761853BE73009C1F6C /* ProjectApp.h */,
-				285C91771853BE73009C1F6C /* ProjectApp.m */,
-				28A27AAE1820717F0071B1E2 /* Project.h */,
-				28A27AAF1820717F0071B1E2 /* Project.m */,
-				28A27AAB1820717F0071B1E2 /* Client.h */,
-				28A27AAC1820717F0071B1E2 /* Client.m */,
-				28A27AA81820717E0071B1E2 /* TimeLog.h */,
-				28A27AA91820717F0071B1E2 /* TimeLog.m */,
-				28D475E417ACE6F400C189AB /* App.h */,
-				28D475E517ACE6F400C189AB /* App.m */,
+				288FCBB819E6FD2000D4C95F /* TimeLog.h */,
+				288FCBB919E6FD2000D4C95F /* TimeLog.m */,
+				288FCBB519E6FD2000D4C95F /* ProjectApp.h */,
+				288FCBB619E6FD2000D4C95F /* ProjectApp.m */,
+				288FCBB219E6FD2000D4C95F /* Client.h */,
+				288FCBB319E6FD2000D4C95F /* Client.m */,
+				288FCBAF19E6FD2000D4C95F /* App.h */,
+				288FCBB019E6FD2000D4C95F /* App.m */,
+				288FCBAC19E6FD1F00D4C95F /* Project.h */,
+				288FCBAD19E6FD1F00D4C95F /* Project.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -346,6 +353,7 @@
 			children = (
 				28A27AA218206BCE0071B1E2 /* RCLog.h */,
 				28A27AA318206BCE0071B1E2 /* RCLog.m */,
+				288FCBA019E6FB2900D4C95F /* PXSourceList */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
@@ -475,7 +483,7 @@
 			files = (
 				289737F317A07CAF003B18D3 /* main.m in Sources */,
 				289737FA17A07CAF003B18D3 /* AppDelegate.m in Sources */,
-				28A27AB01820717F0071B1E2 /* Project.m in Sources */,
+				288FCBB119E6FD2000D4C95F /* App.m in Sources */,
 				2897380017A07CAF003B18D3 /* Time_Logger.xcdatamodeld in Sources */,
 				28A27AA418206BCE0071B1E2 /* RCLog.m in Sources */,
 				28CFCCE717A582F5001511EF /* TLProjectsSidebarViewController.m in Sources */,
@@ -483,14 +491,14 @@
 				28CFCCF317A61D11001511EF /* TLProjectTimelineViewController.m in Sources */,
 				28CFCCF817A63187001511EF /* TLProjectConfigViewController.m in Sources */,
 				28CFCCFD17A63469001511EF /* TLProjectReportViewController.m in Sources */,
+				288FCBB719E6FD2000D4C95F /* ProjectApp.m in Sources */,
 				28CFCD0117A6466B001511EF /* NSDictionary+Color.m in Sources */,
-				285C91781853BE73009C1F6C /* ProjectApp.m in Sources */,
-				28A27AAD1820717F0071B1E2 /* Client.m in Sources */,
-				28A27AAA1820717F0071B1E2 /* TimeLog.m in Sources */,
 				280A807217A99239006ECD5C /* TLTimelineCell.m in Sources */,
+				288FCBAE19E6FD1F00D4C95F /* Project.m in Sources */,
 				280A807317A9B106006ECD5C /* TLProjectsSidebarCell.m in Sources */,
-				28D475E617ACE6F400C189AB /* App.m in Sources */,
+				288FCBB419E6FD2000D4C95F /* Client.m in Sources */,
 				2854C28317B9B4110090BD3E /* PXSourceList.m in Sources */,
+				288FCBBA19E6FD2000D4C95F /* TimeLog.m in Sources */,
 				28D0559C18003D08002F5246 /* SourceListItem.m in Sources */,
 				28A27AB318207C5B0071B1E2 /* TLAppDBInitialization.m in Sources */,
 			);
@@ -612,11 +620,15 @@
 		2897381817A07CAF003B18D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Logger/Time Logger-Prefix.pch";
 				INFOPLIST_FILE = "Time Logger/Time Logger-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Time Logger/Time Logger-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -624,11 +636,14 @@
 		2897381917A07CAF003B18D3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Logger/Time Logger-Prefix.pch";
 				INFOPLIST_FILE = "Time Logger/Time Logger-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Time Logger/Time Logger-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

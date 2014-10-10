@@ -2,8 +2,8 @@
 //  Project.h
 //  Time Logger
 //
-//  Created by Baluta Cristian on 30/10/2013.
-//  Copyright (c) 2013 Baluta Cristian. All rights reserved.
+//  Created by Baluta Cristian on 09/10/14.
+//  Copyright (c) 2014 Baluta Cristian. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,13 +14,13 @@
 @interface Project : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * category;
-@property (nonatomic, retain) NSString * client_id;
-@property (nonatomic, retain) NSDate * date_created;
-@property (nonatomic, retain) NSString * descr;
+@property (nonatomic, retain) NSString * clientId;
+@property (nonatomic, retain) NSDate * dateCreated;
+@property (nonatomic, retain) NSString * projectDescription;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * project_id;
+@property (nonatomic, retain) NSString * projectId;
+@property (nonatomic, retain) NSNumber * timeSpent;
 @property (nonatomic, retain) NSNumber * tracking;
-@property (nonatomic, retain) NSNumber * time_spent;
 @property (nonatomic, retain) NSSet *apps;
 @property (nonatomic, retain) Client *client;
 @property (nonatomic, retain) NSOrderedSet *logs;

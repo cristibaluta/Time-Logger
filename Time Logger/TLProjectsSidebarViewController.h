@@ -20,16 +20,12 @@
 @end
 
 
-@interface TLProjectsSidebarViewController : NSViewController <PXSourceListDataSource, PXSourceListDelegate> {
-	
-	IBOutlet PXSourceList *sourceList;
-	NSMutableArray *sourceListItems;
-}
+@interface TLProjectsSidebarViewController : NSViewController <PXSourceListDataSource, PXSourceListDelegate>
 
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) id<TLProjectsSidebarDelegate> delegate;
+@property (strong, nonatomic) id<TLProjectsSidebarDelegate> delegate;
 
 - (id)initWithNibName:(NSString*)nibNameOrNil
 			   bundle:(NSBundle*)nibBundleOrNil

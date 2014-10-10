@@ -2,8 +2,8 @@
 //  Client.h
 //  Time Logger
 //
-//  Created by Baluta Cristian on 30/10/2013.
-//  Copyright (c) 2013 Baluta Cristian. All rights reserved.
+//  Created by Baluta Cristian on 09/10/14.
+//  Copyright (c) 2014 Baluta Cristian. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,7 +13,7 @@
 
 @interface Client : NSManagedObject
 
-@property (nonatomic, retain) NSString * client_id;
+@property (nonatomic, retain) NSString * clientId;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *projects;

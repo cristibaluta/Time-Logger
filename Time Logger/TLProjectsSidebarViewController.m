@@ -11,15 +11,16 @@
 #import "SourceListItem.h"
 #import "Project.h"
 
+@interface TLProjectsSidebarViewController () {
+	
+	IBOutlet PXSourceList *_sourceList;
+	NSMutableArray *_sourceListItems;
+}
+
+@end
+
+
 @implementation TLProjectsSidebarViewController
-
-@synthesize managedObjectModel;
-@synthesize managedObjectContext;
-
-
-#pragma mark -
-#pragma mark Init/Dealloc
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil
 			   bundle:(NSBundle *)nibBundleOrNil
@@ -34,10 +35,9 @@
     return self;
 }
 
-
 - (void)awakeFromNib {
 	
-	sourceListItems = [[NSMutableArray alloc] init];
+	_sourceListItems = [[NSMutableArray alloc] init];
 	
 	// Set up the categories
 	
@@ -45,7 +45,7 @@
 	SourceListItem *archiveItem = [SourceListItem itemWithTitle:@"ARCHIVED PROJECTS" identifier:@"archive"];
 	SourceListItem *recreationalItem = [SourceListItem itemWithTitle:@"RECREATIONAL" identifier:@"recreational"];
 	
-	[sourceListItems addObjectsFromArray:@[libraryItem, archiveItem, recreationalItem]];
+	[_sourceListItems addObjectsFromArray:@[libraryItem, archiveItem, recreationalItem]];
 	
 	
 	// Read all the projects
@@ -66,8 +66,8 @@
 		for (Project *project in projects) {
 //			RCLog(@"List project: %@ -> %@", project.name, project.category);
 			
-			SourceListItem *item = [sourceListItems objectAtIndex:[project.category intValue]];
-			SourceListItem *newItem = [SourceListItem itemWithTitle:project.name identifier:project.project_id];
+			SourceListItem *item = [_sourceListItems objectAtIndex:[project.category intValue]];
+			SourceListItem *newItem = [SourceListItem itemWithTitle:project.name identifier:project.projectId];
 			[newItem setIcon:[NSImage imageNamed:[project.name stringByAppendingString:@".png"]]];
 			
 			NSArray *arr = item.children;
@@ -78,13 +78,7 @@
 		}
 	}
 	
-	[sourceList reloadData];
-}
-
-
-
-- (void)loadView {
-    [super loadView];
+	[_sourceList reloadData];
 }
 
 
@@ -94,7 +88,7 @@
 - (NSUInteger)sourceList:(PXSourceList*)sourceList numberOfChildrenOfItem:(id)item {
 	// Works the same way as the NSOutlineView data source: `nil` means a parent item
 	if (item == nil) {
-		return [sourceListItems count];
+		return [_sourceListItems count];
 	}
 	else {
 		return [[item children] count];
@@ -104,7 +98,7 @@
 - (id)sourceList:(PXSourceList*)aSourceList child:(NSUInteger)index ofItem:(id)item {
 	//Works the same way as the NSOutlineView data source: `nil` means a parent item
 	if (item == nil) {
-		return [sourceListItems objectAtIndex:index];
+		return [_sourceListItems objectAtIndex:index];
 	}
 	else {
 		return [[item children] objectAtIndex:index];
@@ -139,8 +133,7 @@
 	return [item icon];
 }
 
-- (NSMenu*)sourceList:(PXSourceList*)aSourceList menuForEvent:(NSEvent*)theEvent item:(id)item
-{
+- (NSMenu*)sourceList:(PXSourceList*)aSourceList menuForEvent:(NSEvent*)theEvent item:(id)item {
 	RCLog(@"menuForEvent %@", theEvent);
 	if ([theEvent type] == NSRightMouseDown ||
 		([theEvent type] == NSLeftMouseDown && ([theEvent modifierFlags] & NSControlKeyMask) == NSControlKeyMask))
@@ -159,6 +152,7 @@
 	return nil;
 }
 
+
 #pragma mark -
 #pragma mark Source List Delegate Methods
 
@@ -170,7 +164,7 @@
 
 - (void)sourceListSelectionDidChange:(NSNotification *)notification {
 	
-	NSIndexSet *selectedIndexes = [sourceList selectedRowIndexes];
+	NSIndexSet *selectedIndexes = [_sourceList selectedRowIndexes];
 	RCLog(@"sourceListSelectionDidChange %@", selectedIndexes);
 	
 	//Set the label text to represent the new selection
@@ -178,7 +172,7 @@
 		
 	}
 	else if ([selectedIndexes count] == 1) {
-		NSString *identifier = [[sourceList itemAtRow:[selectedIndexes firstIndex]] identifier];
+		NSString *identifier = [[_sourceList itemAtRow:[selectedIndexes firstIndex]] identifier];
 		RCLog(@"identifier %@", identifier);
 		
 		[self.delegate projectDidSelect:identifier];
@@ -196,7 +190,6 @@
 	//Do something here
 	
 }
-
 
 //-(NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 //{
@@ -232,7 +225,7 @@
 
 - (IBAction)addProject:(id)sender {
 	
-    NSWindow *w = [sourceList window];
+    NSWindow *w = [_sourceList window];
 	BOOL endEdit = [w makeFirstResponder:w];
 	if (!endEdit)
 		return;
@@ -240,12 +233,12 @@
 	NSError *error = nil;
 	Project *project = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
 	project.category = 0;
-	project.date_created = [NSDate date];
+	project.dateCreated = [NSDate date];
 	project.name = @"New Project";
-	project.project_id = @"new_project";
+	project.projectId = @"new_project";
 	project.tracking = [NSNumber numberWithBool:YES];
-	project.client_id = @"clientid1";
-	project.descr = @"Some description for this project....";
+	project.clientId = @"clientid1";
+	project.projectDescription = @"Some description for this project....";
 	
     if (![self.managedObjectContext save:&error]) {
 		RCLog(@"Whoops, couldn't add a new project: %@", [error localizedDescription]);
@@ -254,7 +247,7 @@
 	
 	// Create a new object to add to NSTableView
 	
-	SourceListItem *libraryItem = [sourceListItems firstObject];
+	SourceListItem *libraryItem = [_sourceListItems firstObject];
 	SourceListItem *newItem = [SourceListItem itemWithTitle:project.name identifier:@"new_project"];
 	[newItem setIcon:[NSImage imageNamed:@"Facebook.png"]];
 	
@@ -264,8 +257,8 @@
 	}
 	libraryItem.children = [arr arrayByAddingObject:newItem];
 	
-	[sourceList reloadData];
-	[sourceList editColumn:-1 row:[sourceListItems indexOfObject:newItem] withEvent:nil select:YES];
+	[_sourceList reloadData];
+	[_sourceList editColumn:-1 row:[_sourceListItems indexOfObject:newItem] withEvent:nil select:YES];
 	
 	// Animate the new item
 	
@@ -277,19 +270,19 @@
 }
 
 - (IBAction)deleteProject:(id)sender {
-	RCLog(@"Delete Project at index %li", (long)sourceList.selectedRow);
-	RCLogI((int)[sourceList numberOfGroups]);
-	RCLogO([sourceList itemAtRow:sourceList.selectedRow]);
+	RCLog(@"Delete Project at index %li", (long)_sourceList.selectedRow);
+	RCLogI((int)[_sourceList numberOfGroups]);
+	RCLogO([_sourceList itemAtRow:_sourceList.selectedRow]);
 	// failing, don't know why
-	[sourceList beginUpdates];
-	[sourceList removeItemsAtIndexes:[NSIndexSet indexSetWithIndex:sourceList.selectedRow]
-							inParent:[sourceList parentForItem:[sourceList itemAtRow:sourceList.selectedRow]]
+	[_sourceList beginUpdates];
+	[_sourceList removeItemsAtIndexes:[NSIndexSet indexSetWithIndex:_sourceList.selectedRow]
+							inParent:[_sourceList parentForItem:[_sourceList itemAtRow:_sourceList.selectedRow]]
 					   withAnimation:NSTableViewAnimationEffectFade];
-	[sourceList endUpdates];
+	[_sourceList endUpdates];
 	
-	if ([sourceList selectedRow] >= 0) {
-        [sourceListItems removeObjectAtIndex:[sourceList selectedRow]];
-        [sourceList reloadData];
+	if ([_sourceList selectedRow] >= 0) {
+        [_sourceListItems removeObjectAtIndex:[_sourceList selectedRow]];
+        [_sourceList reloadData];
     }
 }
 

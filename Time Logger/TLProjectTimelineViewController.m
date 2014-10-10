@@ -123,10 +123,10 @@
 	
 	TimeLog *log = [logs objectAtIndex:row];
 	//RCLog(@"adding data to cell %@", log);
-	NSDate *t1 = log.start_time;
-	NSDate *t2 = log.end_time;
+	NSDate *t1 = log.startTime;
+	NSDate *t2 = log.endTime;
 	NSString *t3 = log.caption;
-	NSString *t4 = log.document_name;
+	NSString *t4 = log.documentName;
 	
 	if (t1 == nil) t1 = [NSDate date];
 	if (t2 == nil) t2 = [NSDate date];
@@ -145,7 +145,7 @@
 	
 	// Add app icon
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"app_identifier == %@", log.app_identifier];
+	NSPredicate *todaysLogs = [NSPredicate predicateWithFormat:@"appIdentifier == %@", log.appIdentifier];
 	[fetchRequest setPredicate:todaysLogs];
 	NSEntityDescription *a = [NSEntityDescription entityForName:@"App" inManagedObjectContext:[self managedObjectContext]];
 	[fetchRequest setEntity:a];
@@ -155,7 +155,7 @@
 	
 	if (arr.count > 0) {
 		RCLog(@"%@", arr);
-		result.imageView.image = [[NSImage alloc] initWithData:((App*)[arr objectAtIndex:0]).icon];
+		result.imageView.image = [[NSImage alloc] initWithData:((App*)[arr objectAtIndex:0]).iconData];
 	}
 	
 	return result;

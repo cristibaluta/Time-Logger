@@ -2,8 +2,8 @@
 //  TimeLog.m
 //  Time Logger
 //
-//  Created by Baluta Cristian on 30/10/2013.
-//  Copyright (c) 2013 Baluta Cristian. All rights reserved.
+//  Created by Baluta Cristian on 09/10/14.
+//  Copyright (c) 2014 Baluta Cristian. All rights reserved.
 //
 
 #import "TimeLog.h"
@@ -11,10 +11,10 @@
 
 @implementation TimeLog
 
-@dynamic app_identifier;
+@dynamic appIdentifier;
 @dynamic caption;
-@dynamic document_name;
-@dynamic end_time;
-@dynamic start_time;
+@dynamic documentName;
+@dynamic endTime;
+@dynamic startTime;
 
 @end

@@ -38,7 +38,7 @@
 	// Create a client, me
 	
 	Client *client = [NSEntityDescription insertNewObjectForEntityForName:@"Client" inManagedObjectContext:context];
-	client.client_id = @"0";
+	client.clientId = @"0";
 	client.email = @"";
 	client.name = @"Me, the owner";
 	
@@ -51,13 +51,13 @@
 		
 		Project *project = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:context];
 		project.category = [NSNumber numberWithInt:2];
-		project.client_id = client.client_id;
-		project.date_created = [NSDate date];
-		project.descr = @"Free time";
+		project.clientId = client.clientId;
+		project.dateCreated = [NSDate date];
+		project.projectDescription = @"Free time";
 		project.name = dict[@"name"];
-		project.project_id = @"";
+		project.projectId = @"";
 		project.tracking = [NSNumber numberWithBool:YES];
-		project.time_spent = [NSNumber numberWithInt:0];
+		project.timeSpent = [NSNumber numberWithInt:0];
 		project.client = client;
 		
 		NSMutableSet *apps = [[NSMutableSet alloc] init];
@@ -69,9 +69,9 @@
 			}
 			for (NSString *doc in documents) {
 				ProjectApp *papp = [NSEntityDescription insertNewObjectForEntityForName:@"ProjectApp" inManagedObjectContext:context];
-				papp.app_identifier = app[@"identifier"];
-				papp.document_name = doc;
-				papp.project_id = @"";
+				papp.appIdentifier = app[@"identifier"];
+				papp.documentName = doc;
+				papp.projectId = @"";
 				[apps addObject:papp];
 			}
 		}

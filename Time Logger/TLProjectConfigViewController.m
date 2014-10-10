@@ -92,12 +92,12 @@
 	// Check if the project already exists
 	project = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
 	project.category = [NSNumber numberWithInt:0];
-	project.date_created = [NSDate date];
+	project.dateCreated = [NSDate date];
 	project.name = self.textDescription.stringValue;
-	project.project_id = @"";
+	project.projectId = @"";
 	project.tracking = [NSNumber numberWithBool:YES];
-	project.client_id = @"";
-	project.descr = self.textDescription.stringValue;
+	project.clientId = @"";
+	project.projectDescription = self.textDescription.stringValue;
 	project.apps = [[NSSet alloc] init];
 	
 	if (![self.managedObjectContext save:&error]) {

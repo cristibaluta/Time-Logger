@@ -194,11 +194,11 @@
 	// Store in the database this app and its running time
 	
 	TimeLog *timelog = [NSEntityDescription insertNewObjectForEntityForName:@"TimeLog" inManagedObjectContext:[self managedObjectContext]];
-	timelog.app_identifier = app.bundleIdentifier;
+	timelog.appIdentifier = app.bundleIdentifier;
 	timelog.caption = app.localizedName;
-	timelog.end_time = [NSDate date];
-	timelog.start_time = _lastDate;
-	timelog.document_name = name;
+	timelog.endTime = [NSDate date];
+	timelog.startTime = _lastDate;
+	timelog.documentName = name;
 	
 	// Find the project for this app identifier and document name
 	
@@ -213,12 +213,12 @@
 		RCLog(@"-> check project named %@", project.name);
 		NSSet *apps = project.apps;
 		for (ProjectApp *pa in [apps allObjects]) {
-			RCLog(@"---------> %@ == %@", pa.app_identifier, app.bundleIdentifier);
+			RCLog(@"---------> %@ == %@", pa.appIdentifier, app.bundleIdentifier);
 			
-			if ([pa.app_identifier isEqualToString:app.bundleIdentifier]) {
+			if ([pa.appIdentifier isEqualToString:app.bundleIdentifier]) {
 				RCLog(@"found");
-				NSNumber *oldTime = project.time_spent;
-				project.time_spent = [NSNumber numberWithLongLong:[oldTime longLongValue] + [_lastDate timeIntervalSinceNow]];
+				NSNumber *oldTime = project.timeSpent;
+				project.timeSpent = [NSNumber numberWithLongLong:[oldTime longLongValue] + [_lastDate timeIntervalSinceNow]];
 				found = YES;
 			}
 		}

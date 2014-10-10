@@ -2,8 +2,8 @@
 //  ProjectApp.h
 //  Time Logger
 //
-//  Created by Baluta Cristian on 07/12/2013.
-//  Copyright (c) 2013 Baluta Cristian. All rights reserved.
+//  Created by Baluta Cristian on 09/10/14.
+//  Copyright (c) 2014 Baluta Cristian. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,9 +12,9 @@
 
 @interface ProjectApp : NSManagedObject
 
-@property (nonatomic, retain) NSString * app_identifier;
-@property (nonatomic, retain) NSString * document_name;
-@property (nonatomic, retain) NSString * project_id;
-@property (nonatomic, retain) NSNumber * time_spent;
+@property (nonatomic, retain) NSString * appIdentifier;
+@property (nonatomic, retain) NSString * documentName;
+@property (nonatomic, retain) NSString * projectId;
+@property (nonatomic, retain) NSNumber * timeSpent;
 
 @end
